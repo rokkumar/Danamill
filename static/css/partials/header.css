@@ -1,0 +1,130 @@
+     /* ========== RESET & VARIABLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a4a8a;
+            --primary-dark: #0e3a6e;
+            --secondary: #2c6e9e;
+            --accent: #e67e22;
+            --accent-dark: #d35400;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* ========== CONTAINER ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== TOP HEADER STYLES ========== */
+        .top-header {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 12px 0;
+            font-size: 14px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .top-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        /* Contact Info Styles */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .contact-info span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .contact-info span:hover {
+            color: var(--accent);
+            transform: translateX(3px);
+        }
+
+        .contact-info i {
+            font-size: 14px;
+            color: var(--accent);
+        }
+
+        /* Live Chat Button */
+        .live-chat {
+            background: var(--accent);
+            padding: 6px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .live-chat:hover {
+            background: var(--accent-dark);
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .live-chat i {
+            font-size: 14px;
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            .top-header {
+                padding: 10px 0;
+            }
+            
+            .top-header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-info {
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .contact-info span {
+                font-size: 12px;
+            }
+            
+            .live-chat {
+                padding: 5px 15px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .contact-info span {
+                justify-content: center;
+            }
+        }

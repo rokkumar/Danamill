@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Website</title>
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="{% static 'css/partials/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/partials/footer.css' %}">
+
+    <!-- Page Specific CSS -->
+    <!-- {% block css %}{% endblock %} -->
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    {% include 'partials/header.html' %}
+
+    <!-- Main Content -->
+    {% block content %}
+    
+
+    <h1>My Website</h1>
+
+
+    {% endblock %}
+
+    <!-- Footer -->
+    {% include 'partials/footer.html' %}
+
+    <!-- JS -->
+    <script src="{% static 'js/home.js' %}"></script>
+
+</body>
+</html>

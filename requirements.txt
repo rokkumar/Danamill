@@ -1,0 +1,31 @@
+danamill/
+│
+├── danamill/            ⚙️ (main project folder)
+│   ├── settings.py
+│   ├── urls.py
+│
+├── apps/                📦 (tumhara app - views, models yahan honge)
+│
+├── templates/           🖼️ (HTML files)
+│   ├── base.html
+│   ├── home.html
+│   └── partials/
+│       ├── header.html
+│       ├── footer.html
+│       ├── navbar.html
+│
+├── static/              🎨 (CSS, JS, Images)
+│   ├── css/
+│   │   ├── home.css
+│   │   └── partials/
+│   │       ├── header.css
+│   │       ├── footer.css
+│   │       ├── navbar.css
+│   │
+│   ├── js/
+│   │   ├── home.js
+│   │   └── footer.js
+│   │
+│   ├── images/
+│
+├── media/               📁 (uploaded files)
