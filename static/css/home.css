@@ -28,10 +28,15 @@ body {
 
 .bg-light {
     background-color: #f8f9fa;
+    
 }
 
+/* sakshi gupta */
 .highlight {
-    color: #2563eb;
+    /* color: #f97316;   /* orange */
+    font-weight: 700; 
+    color: #f59e0b;  /* balanced medium orange */
+    font-weight: 600;
 }
 
 /* ---------- BUTTONS ---------- */
@@ -136,20 +141,29 @@ body {
 }
 
 /* ---------- INTRO SECTION ---------- */
-.intro-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-}
-
+/* sakshi gupta */
 .intro-tag {
     display: inline-block;
+
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #2563eb;
     font-weight: 600;
+
+    color: #2563eb;
+
+    background: rgba(224, 242, 254, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    padding: 6px 14px;
+    border-radius: 999px;
+
+    white-space: nowrap;
+
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.10);
+
     margin-bottom: 15px;
 }
 
@@ -167,9 +181,8 @@ body {
 
 .intro-features {
     display: flex;
-    gap: 25px;
+    flex-direction: column;   
     margin-bottom: 30px;
-    flex-wrap: wrap;
 }
 
 .feature-item {
@@ -192,6 +205,30 @@ body {
 
 .image-wrapper:hover img {
     transform: scale(1.05);
+
+}
+
+/* FIX FOR TEXT LEFT + IMAGE RIGHT */
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.intro-text {
+    width: 100%;
+}
+
+.intro-image {
+    width: 100%;
+}
+
+/* sakshi gupta */
+@media (max-width: 768px) {
+    .intro-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ---------- PRODUCTS SECTION ---------- */
@@ -231,6 +268,48 @@ body {
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
+}
+
+/* sakshi gupta */
+.image-wrapper {
+    position: relative;
+}
+
+/* overlay box on image */
+.stats-box {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    display: flex;
+    gap: 30px;
+    
+    background: rgba(255, 255, 255, 0.9);
+    padding: 12px 18px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* each item */
+.stats-box > div {
+    text-align: center;
+    flex: 1;
+    min-width: 70px;
+}
+
+/* number */
+.stats-box h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #2563eb;
+}
+
+/* label */
+.stats-box p {
+    margin: 0;
+    font-size: 12px;
+    color: #333;
 }
 
 .product-card:hover .product-img-wrapper img {
@@ -416,4 +495,24 @@ body {
     .hero-content h1 {
         font-size: 1.8rem;
     }
+}
+
+/* ✅ sakshi gupta */
+.tick {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 22px;
+    height: 22px;
+    
+    background-color: #22c55e; /* green circle */
+    color: #fff;              /* white tick */
+    
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    
+    margin-right: 8px;
+    box-shadow: 0 2px 6px rgba(34, 197, 94, 0.4);
 }
