@@ -1,26 +1,90 @@
+<!-- Anisha -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Header</title>
+
     <link rel="stylesheet" href="{% static 'css/partials/header.css' %}">
-    
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-        <!-- Top Header -->
-    <div class="top-header">
-        <div class="container">
-            <div class="contact-info">
-                <span><i class="fas fa-phone"></i> +91 98765 43210</span>
-                <span><i class="fas fa-envelope"></i> info@plasticorp.com</span>
-                <span><i class="fas fa-map-marker-alt"></i> Mumbai, India</span>
-            </div>
-            <div class="live-chat">
-                <i class="fas fa-comment"></i> Live Chat
-            </div>
-        </div>
+<!-- Anisha -->
+<!-- TOP HEADER  -->
+<div class="top-header">
+    <div class="top-left">
+        <span>
+            <i class="fas fa-question-circle"></i>
+            Have a question? Call us now!
+        </span>
     </div>
+
+    <div class="top-right">
+
+        <span>
+            <i class="fas fa-phone"></i>
+            Toll Free: +91 9060345671
+        </span>
+
+        <span>
+            <i class="fas fa-envelope"></i>
+            Email: info@plasticorp.com
+        </span>
+
+        <span>
+            <i class="fas fa-comments"></i>
+            Live Chat
+        </span>
+
+    </div>
+</div>
+
+
+<!-- MAIN NAVBAR -->
+<header class="main-header">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            <i class="fas fa-industry"></i>
+        </div>
+
+        <div class="logo-text">
+            <h2>Plasti<span>Corp</span></h2>
+            <p>Since 1995</p>
+        </div>
+
+    </div>
+
+    <nav class="navbar">
+        <a href="#">Home</a>
+        <a href="#">Products <i class="fas fa-chevron-down small-icon"></i></a>
+        <a href="#">About</a>
+        <a href="#">Infrastructure</a>
+        <a href="#">Quality</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="header-icons">
+
+        <i class="fas fa-search"></i>
+
+        <div class="cart-box">
+            <i class="fas fa-shopping-cart"></i>
+            <span>0</span>
+        </div>
+
+        <i class="fas fa-moon"></i>
+
+    </div>
+
+</header>
+
 </body>
 </html>
