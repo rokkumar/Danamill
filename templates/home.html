@@ -1,107 +1,31 @@
-{% extends 'base.html' %}
+{% extends 'partials/header.html' %}
 {% load static %}
 
 {% block content %}
 
-<!-- CSS LINK -->
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
-
-<!-- Hero Section -->
+<!-- ========== HERO SECTION ========== -->
 <section class="hero">
     <video class="hero-video" autoplay loop muted playsinline poster="https://via.placeholder.com/1920x1080">
-        <source
-            src="https://assets.mixkit.co/videos/preview/mixkit-factory-machine-working-with-plastic-32846-large.mp4"
-            type="video/mp4">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-factory-machine-working-with-plastic-32846-large.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
         <h1>Premium <span class="highlight">Plastic Granules</span></h1>
         <p>Your trusted partner for high-quality HDPE, LDPE, and PP granules</p>
         <div class="hero-buttons">
-            <a href="#" class="btn btn-primary">Explore Products</a>
-            <a href="#" class="btn btn-outline">Get Quote</a>
-        </div>
-    </div>
-</section>
-
-<!--sakshi gupta-->
-<!-- Intro Section -->
-<section class="intro-section section-padding">
-    <div class="container">
-        <div class="intro-grid">
-
-            <!-- LEFT TEXT -->
-            <div class="intro-text">
-                <span class="intro-tag">Who We Are</span>
-
-                <h2>
-                    About <span class="highlight">PlastiCorp</span>
-                </h2>
-
-                <p>
-                    With over 25 years of experience, PlastiCorp is a leading manufacturer and supplier
-                    of high-quality plastic granules. We serve industries across automotive, packaging, 
-                    construction and consumer goods.
-                </p>
-
-                <p>
-                    Our commitment to quality and innovation has made us a trusted partner for
-                    bussinesses worldwide.
-                </p>
-
-                <div class="intro-features">
-                    <div class="feature-item">
-                        <span class="tick">✔</span> ISO 9001:2015 Certified
-                    </div><br>
-
-                    <div class="feature-item">
-                        <span class="tick">✔</span> 100% Quality Assured
-                    </div><br>
-
-                    <div class="feature-item">
-                        <span class="tick">✔</span> Eco-Friendly Manufacturing
-                    </div><br>
-                </div>
-            </div>
-
-            <!-- ✅ RIGHT IMAGE (yaha hona chahiye) -->
-            <div class="intro-image">
-                <div class="image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80"
-                        alt="Factory">
-
-                    <div class="stats-box">
-                        <div>
-                            <h3>25+</h3>
-                            <p>Years</p>
-                        </div>
-                        <div>
-                            <h3>500+</h3>
-                            <p>Clients</p>
-                        </div>
-                        <div>
-                            <h3>50+</h3>
-                            <p>Countries</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <a href="#products" class="btn btn-primary">Explore Products</a>
+            <a href="#contact" class="btn btn-outline">Get Quote</a>
         </div>
     </div>
 </section>
 
 
 
-
-<!-- Products -->
-<section class="featured section-padding bg-light">
+<!-- ========== PRODUCTS SECTION ========== -->
+<section class="featured section-padding bg-light" id="products">
     <div class="container">
-        <h2>Our Products</h2>
-
+        <h2>Our <span class="highlight">Products</span></h2>
         <div class="products-grid">
-
-            <!-- Product 1 -->
             <div class="product-card">
                 <div class="product-img-wrapper">
                     <img src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=400" alt="HDPE Granules">
@@ -112,8 +36,6 @@
                     <button class="btn btn-primary">Get Quote</button>
                 </div>
             </div>
-
-            <!-- Product 2 -->
             <div class="product-card">
                 <div class="product-img-wrapper">
                     <img src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=400" alt="LDPE Granules">
@@ -124,8 +46,6 @@
                     <button class="btn btn-primary">Get Quote</button>
                 </div>
             </div>
-
-            <!-- Product 3 -->
             <div class="product-card">
                 <div class="product-img-wrapper">
                     <img src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=400" alt="PP Granules">
@@ -136,28 +56,117 @@
                     <button class="btn btn-primary">Get Quote</button>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 
-<!-- Enquiry -->
-<section class="cta-enquiry section-padding">
+<!-- Why Choose Us Section -->
+<section class="why-choose section-padding">
     <div class="container">
-        <h2>Request a Quote</h2>
-
-        <form>
-            <input type="text" placeholder="Name"><br><br>
-            <input type="email" placeholder="Email"><br><br>
-            <input type="text" placeholder="Phone"><br><br>
-            <textarea placeholder="Message"></textarea><br><br>
-
-            <button class="btn btn-primary">Submit</button>
-        </form>
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-tag">Why Choose Us</span>
+            <h2>Why <span class="highlight">PlastiCorp</span>?</h2>
+            <p>What makes us the preferred choice for plastic granules</p>
+        </div>
+        
+        <div class="features-grid">
+            <!-- Feature 1 - ISO Certified -->
+            <div class="feature-card" data-aos="flip-left" data-aos-delay="100">
+                <div class="feature-inner">
+                    <div class="feature-front">
+                        <div class="feature-icon-wrapper">
+                            <div class="feature-icon-bg"></div>
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>ISO Certified</h3>
+                        <p>International quality standards</p>
+                    </div>
+                    <div class="feature-back">
+                        <i class="fas fa-certificate"></i>
+                        <h4>Certified Quality</h4>
+                        <p>ISO 9001:2015 certified manufacturing process ensuring consistent quality</p>
+                        <span class="feature-link">Learn More →</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature 2 - Lab Tested -->
+            <div class="feature-card" data-aos="flip-left" data-aos-delay="200">
+                <div class="feature-inner">
+                    <div class="feature-front">
+                        <div class="feature-icon-wrapper">
+                            <div class="feature-icon-bg"></div>
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3>Lab Tested</h3>
+                        <p>Rigorous quality testing</p>
+                    </div>
+                    <div class="feature-back">
+                        <i class="fas fa-flask"></i>
+                        <h4>Advanced Testing</h4>
+                        <p>In-house laboratory with state-of-the-art testing equipment</p>
+                        <span class="feature-link">Learn More →</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature 3 - Fast Delivery -->
+            <div class="feature-card" data-aos="flip-left" data-aos-delay="300">
+                <div class="feature-inner">
+                    <div class="feature-front">
+                        <div class="feature-icon-wrapper">
+                            <div class="feature-icon-bg"></div>
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>Fast Delivery</h3>
+                        <p>Pan-India supply network</p>
+                    </div>
+                    <div class="feature-back">
+                        <i class="fas fa-truck"></i>
+                        <h4>Quick Shipping</h4>
+                        <p>3-5 days delivery across India with real-time tracking</p>
+                        <span class="feature-link">Learn More →</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature 4 - 24/7 Support -->
+            <div class="feature-card" data-aos="flip-left" data-aos-delay="400">
+                <div class="feature-inner">
+                    <div class="feature-front">
+                        <div class="feature-icon-wrapper">
+                            <div class="feature-icon-bg"></div>
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>Technical assistance always</p>
+                    </div>
+                    <div class="feature-back">
+                        <i class="fas fa-headset"></i>
+                        <h4>Always Available</h4>
+                        <p>Dedicated support team available 24/7 for technical assistance</p>
+                        <span class="feature-link">Learn More →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+       
     </div>
 </section>
 
-<!-- WhatsApp Button -->
-<a href="#" class="whatsapp-float">💬</a>
-
+<!-- ========== CONTACT/ENQUIRY SECTION ========== -->
+<section class="cta-enquiry section-padding" id="contact">
+    <div class="container">
+        <h2>Request a <span class="highlight">Quote</span></h2>
+        <form id="enquiryForm">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <input type="tel" placeholder="Phone Number" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+        </form>
+    </div>
+</section>
+{% include 'partials/footer.html' %}
 {% endblock %}

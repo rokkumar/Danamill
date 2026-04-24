@@ -1,130 +1,260 @@
-     /* ========== RESET & VARIABLES ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        :root {
-            --primary: #1a4a8a;
-            --primary-dark: #0e3a6e;
-            --secondary: #2c6e9e;
-            --accent: #e67e22;
-            --accent-dark: #d35400;
-            --white: #ffffff;
-            --transition: all 0.3s ease;
-        }
+body {
+    font-family: 'Inter', sans-serif;
+}
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+/* Container */
+.container {
+    width: 96%;
+    max-width: 1400px;
+    margin: auto;
+}
 
-        /* ========== CONTAINER ========== */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+/* ========== TOP HEADER ========== */
+.top-header {
+    background: #115e59; /* teal */
+    color: #fff;
+    font-size: 14px;
+}
 
-        /* ========== TOP HEADER STYLES ========== */
-        .top-header {
-            background: var(--primary-dark);
-            color: var(--white);
-            padding: 12px 0;
-            font-size: 14px;
-            position: relative;
-            z-index: 100;
-        }
+.top-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
 
-        .top-header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+/* LEFT SIDE */
+.contact-info {
+    display: flex;
+    align-items: center;
+}
 
-        /* Contact Info Styles */
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-        }
+/* EACH ITEM */
+.contact-info span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 18px;
+    position: relative;
+    white-space: nowrap;
+}
 
-        .contact-info span {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-            cursor: pointer;
-        }
+/* REMOVE LEFT PADDING FOR FIRST ITEM */
+.contact-info span:first-child {
+    padding-left: 0;
+}
 
-        .contact-info span:hover {
-            color: var(--accent);
-            transform: translateX(3px);
-        }
+/* DIVIDER LINE */
+.contact-info span::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    height: 16px;
+    width: 1px;
+    background: rgba(255,255,255,0.4);
+}
 
-        .contact-info i {
-            font-size: 14px;
-            color: var(--accent);
-        }
+/* LAST ITEM NO DIVIDER */
+.contact-info span:last-child::after {
+    display: none;
+}
 
-        /* Live Chat Button */
-        .live-chat {
-            background: var(--accent);
-            padding: 6px 18px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-        }
+/* RIGHT SIDE (LIVE CHAT) */
+.live-chat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    cursor: pointer;
+}
 
-        .live-chat:hover {
-            background: var(--accent-dark);
-            transform: scale(1.05);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
+/* ========== MAIN HEADER ========== */
+.main-header {
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-        .live-chat i {
-            font-size: 14px;
-        }
+.main-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+}
 
-        /* ========== RESPONSIVE DESIGN ========== */
-        @media (max-width: 768px) {
-            .top-header {
-                padding: 10px 0;
-            }
-            
-            .top-header .container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .contact-info {
-                justify-content: center;
-                gap: 15px;
-            }
-            
-            .contact-info span {
-                font-size: 12px;
-            }
-            
-            .live-chat {
-                padding: 5px 15px;
-                font-size: 12px;
-            }
-        }
+/* LOGO */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        @media (max-width: 480px) {
-            .contact-info {
-                flex-direction: column;
-                gap: 8px;
-            }
-            
-            .contact-info span {
-                justify-content: center;
-            }
-        }
+.logo-icon {
+    font-size: 28px;
+    color: #2563eb;
+}
+
+.logo-text h2 {
+    font-size: 20px;
+}
+
+.logo-text span {
+    color: #2563eb;
+}
+
+.logo-text p {
+    font-size: 12px;
+    color: gray;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #1e293b;
+    font-weight: 500;
+    position: relative;
+    padding: 6px 4px;
+    transition: 0.3s;
+}
+
+/* HOVER EFFECT */
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: #2563eb;
+    transition: 0.3s;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+/* ACTIVE */
+.navbar a.active {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.navbar a.active::after {
+    width: 100%;
+}
+
+/* ICONS */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.header-icons i {
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.header-icons i:hover {
+    color: #2563eb;
+}
+
+/* CART */
+.cart-box {
+    position: relative;
+}
+
+.cart-box span {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 50%;
+}
+
+/* HAMBURGER */
+.menu-toggle {
+    display: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* MOBILE NAV */
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: white;
+    padding: 10px;
+}
+
+.mobile-nav a {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    color: #1e293b;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    .navbar {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .header-icons {
+        display: none;
+    }
+
+    .mobile-nav.active {
+        display: flex;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .contact-info span {
+        padding: 5px 0;
+    }
+
+    .contact-info span::after {
+        display: none;
+    }
+
+    .top-header .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
+ /* Header Padding */
+.top-header .container,
+.main-header .container {
+    padding-left: 5px;
+    padding-right: 5px;
+}
