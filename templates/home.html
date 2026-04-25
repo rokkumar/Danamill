@@ -1,7 +1,12 @@
-{% extends 'partials/header.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
+
+<!-- Ankush -->
+ 
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <!-- ========== HERO SECTION ========== -->
 <section class="hero">
@@ -187,5 +192,104 @@
 </section>
 
 
-{% include 'partials/footer.html' %}
+<!-- Ankush Patel (CTA + Enquiry Form Section) -->
+<section class="cta-enquiry section-padding">
+    <div class="container">
+        <div class="cta-enquiry-wrapper">
+            <!-- Left Side - CTA Content -->
+            <div class="cta-content-block" data-aos="fade-right">
+                <span class="cta-badge">Bulk Orders Welcome</span>
+                <h2>Need Bulk <span class="highlight">Quantity?</span></h2>
+                <p>Get competitive pricing for large orders and special requirements. We offer custom solutions tailored to your needs.</p>
+                
+                <div class="cta-features">
+                    <div class="cta-feature">
+                        <i class="fas fa-tags"></i>
+                        <div>
+                            <h4>Volume Discount</h4>
+                            <p>Up to 20% off on bulk orders</p>
+                        </div>
+                    </div>
+                    <div class="cta-feature">
+                        <i class="fas fa-truck-fast"></i>
+                        <div>
+                            <h4>Free Shipping</h4>
+                            <p>On orders above ₹50,000</p>
+                        </div>
+                    </div>
+                    <div class="cta-feature">
+                        <i class="fas fa-flask"></i>
+                        <div>
+                            <h4>Custom Grades</h4>
+                            <p>As per your specifications</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Side - Enquiry Form (FIXED - With action but JavaScript will handle) -->
+            <div class="enquiry-form-block" data-aos="fade-left">
+                <div class="enquiry-card">
+                    <h3>Request a Quote</h3>
+                    <p>Fill the form and our team will contact you within 24 hours</p>
+                    
+                    <!-- IMPORTANT: action is present but JavaScript will prevent page reload -->
+                    <form id="quickEnquiryForm" class="quick-enquiry-form" method="POST" action="/api/submit-enquiry/" novalidate aria-describedby="formMessage">
+                        {% csrf_token %}
+                        <div id="formMessage" class="form-message" role="status" aria-live="polite" aria-atomic="true"></div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label class="sr-only" for="enquiry_name">Full Name</label>
+                                <i class="fas fa-user input-icon" aria-hidden="true"></i>
+                                <input type="text" name="name" id="enquiry_name" placeholder="Your Name" required maxlength="100" aria-describedby="error_name" aria-label="Full Name" autocomplete="name">
+                                <span class="error-text" id="error_name" role="status" aria-live="polite"></span>
+                            </div>
+                            <div class="input-group">
+                                <label class="sr-only" for="enquiry_email">Email Address</label>
+                                <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
+                                <input type="email" name="email" id="enquiry_email" placeholder="Email Address" required maxlength="254" aria-describedby="error_email" aria-label="Email Address" autocomplete="email">
+                                <span class="error-text" id="error_email" role="status" aria-live="polite"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label class="sr-only" for="enquiry_phone">Phone Number</label>
+                                <i class="fas fa-phone input-icon" aria-hidden="true"></i>
+                                <input type="tel" name="phone" id="enquiry_phone" placeholder="Phone Number" required maxlength="15" pattern="[0-9+\-\s()]{10,15}" aria-describedby="error_phone" aria-label="Phone Number" autocomplete="tel">
+                                <span class="error-text" id="error_phone" role="status" aria-live="polite"></span>
+                            </div>
+                            <div class="input-group">
+                                <label class="sr-only" for="enquiry_product">Select Product</label>
+                                <i class="fas fa-box input-icon" aria-hidden="true"></i>
+                                <select name="product" id="enquiry_product" required aria-describedby="error_product" aria-label="Select Product">
+                                    <option value="">Select Product</option>
+                                    <option value="HDPE Granules">HDPE Granules</option>
+                                    <option value="LDPE Granules">LDPE Granules</option>
+                                    <option value="PP Granules">PP Granules</option>
+                                    <option value="Recycled Granules">Recycled Granules</option>
+                                </select>
+                                <span class="error-text" id="error_product" role="status" aria-live="polite"></span>
+                            </div>
+                        </div>
+                        <div class="input-group full-width">
+                            <label class="sr-only" for="enquiry_message">Message or Quantity Required</label>
+                            <i class="fas fa-comment input-icon textarea-icon" aria-hidden="true"></i>
+                            <textarea name="message" id="enquiry_message" rows="3" placeholder="Your Message / Quantity Required" maxlength="2000" aria-label="Message or Quantity Required"></textarea>
+                        </div>
+                        <button type="submit" class="submit-enquiry" id="submitBtn" aria-live="polite">
+                            Send Enquiry <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Toast Notification Container -->
+<div id="toastContainer" role="region" aria-live="polite" aria-label="Notifications"></div>
+
+
+
+
 {% endblock %}
