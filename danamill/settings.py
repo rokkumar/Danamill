@@ -4,7 +4,7 @@ Django settings for danamill project.
 
 from pathlib import Path
 import os
-from decouple import config
+
 
 # Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
