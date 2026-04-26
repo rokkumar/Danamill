@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/partials/footer.css' %}">
 
     <!-- Page Specific CSS -->
-    <!-- {% block css %}{% endblock %} -->
+    {% block css %}{% endblock %}
 
 </head>
 
@@ -32,10 +32,13 @@
     {% endblock %}
 
     <!-- Footer -->
+    {% block footer %}
     {% include 'partials/footer.html' %}
+    {% endblock %}
 
     <!-- JS -->
     <script src="{% static 'js/home.js' %}"></script>
+    
 
 </body>
 </html>

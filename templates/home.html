@@ -289,6 +289,62 @@
 <!-- Toast Notification Container -->
 <div id="toastContainer" role="region" aria-live="polite" aria-label="Notifications"></div>
 
+<!-- (Khushi Pal) -->
+<!-- Products -->
+<section class="featured section-padding bg-light">
+    <div class="container">
+        <h2>Our Products</h2>
+
+        <div class="products-grid">
+
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    
+                    <img src="/media/images/image1.jpeg" alt="LDPE Granules">
+                </div>
+                <div class="product-content">
+                    <h3>LDPE Granules</h3>
+                    <!-- <p>High quality industrial plastic</p> -->
+                    <p>₹130 per Kilogram(kg)</p>
+                    <a href="{% url 'order:create_order' %}?product=LDPE" class="btn btn-primary">Get Quote</a>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="/media/images/image2.jpeg" alt="LDPE Granules">
+                </div>
+                <div class="product-content">
+                    <h3>LDPE Granules</h3>
+                    <!-- <p>Flexible packaging material</p> -->
+                    <p>₹13,000 per quintal(100 kg)</p>
+                    <a href="{% url 'order:create_order' %}?product=LDPE" class="btn btn-primary">Get Quote</a>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="/media/images/image3.jpeg" alt="LDPE Granules">
+                </div>
+                <div class="product-content">
+                    <h3>LDPE Granules</h3>
+                    <P></P>
+                    <!-- <p>Used in automobile & goods</p> -->
+                     <p>₹1,30,000 per ton(1000 kg)</p>
+                    <a href="{% url 'order:create_order' %}?product=LDPE" class="btn btn-primary">Get Quote</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
 
 
 

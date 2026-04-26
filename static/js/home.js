@@ -623,3 +623,126 @@ trustItems.forEach(item => {
         boot();
     }
 })();
+
+
+
+// Khushi Pal...
+
+// Quote Buttons
+document.querySelectorAll('.btn-quote').forEach(btn => {
+    btn.addEventListener('click', function () {
+        const product = this.dataset.product || 'this product';
+        showToast(`Enquiry sent for ${product}!`);
+    });
+});
+
+
+
+
+/// ========================================
+// ORDER FORM INTERACTIONS - ENHANCED
+// ========================================
+
+```javascript
+// ========================================
+// PREMIUM ORDER FORM INTERACTIONS
+// ========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const orderForm = document.getElementById("orderForm");
+
+    if (!orderForm) return;
+
+    const inputs = orderForm.querySelectorAll("input, textarea, select");
+
+    // Smooth Focus Animation
+    inputs.forEach(input => {
+
+        input.addEventListener("focus", function () {
+            this.parentElement.classList.add("active");
+        });
+
+        input.addEventListener("blur", function () {
+            this.parentElement.classList.remove("active");
+        });
+
+    });
+
+    // Form Validation
+    orderForm.addEventListener("submit", function (e) {
+
+        let valid = true;
+
+        const requiredFields = [
+            "product",
+            "quantity",
+            "customer_name",
+            "email",
+            "phone"
+        ];
+
+        requiredFields.forEach(name => {
+            const field = orderForm.querySelector(`[name="${name}"]`);
+
+            if (field && !field.value.trim()) {
+                valid = false;
+                field.style.borderColor = "#dc2626";
+                field.style.animation = "shake 0.4s ease";
+
+                setTimeout(() => {
+                    field.style.animation = "";
+                }, 500);
+            } else if (field) {
+                field.style.borderColor = "#dbe2ea";
+            }
+        });
+
+        // Email Validation
+        const email = orderForm.querySelector('[name="email"]');
+
+        if (email && email.value.trim()) {
+            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!pattern.test(email.value.trim())) {
+                valid = false;
+                email.style.borderColor = "#dc2626";
+                showMessage("Please enter a valid email address");
+            }
+        }
+
+        if (!valid) {
+            e.preventDefault();
+            showMessage("Please fill all required fields correctly");
+        }
+
+    });
+
+    // Message Box
+    function showMessage(message) {
+        let box = document.querySelector(".form-message");
+
+        if (!box) {
+            box = document.createElement("div");
+            box.className = "form-message";
+            orderForm.prepend(box);
+        }
+
+        box.innerText = message;
+        box.style.display = "block";
+        box.style.background = "#fee2e2";
+        box.style.color = "#b91c1c";
+        box.style.padding = "14px";
+        box.style.marginBottom = "20px";
+        box.style.borderRadius = "12px";
+        box.style.textAlign = "center";
+        box.style.fontWeight = "500";
+
+        setTimeout(() => {
+            box.style.display = "none";
+        }, 3000);
+    }
+
+});
+```
+
