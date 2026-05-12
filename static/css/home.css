@@ -785,36 +785,6 @@ body {
     padding: 0 20px;
 }
 
-/* ========== CTA + ENQUIRY SECTION ========== */
-.cta-enquiry {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-.cta-enquiry::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(26, 74, 138, 0.05) 0%, transparent 70%);
-    animation: rotateBg 30s linear infinite;
-}
-
-@keyframes rotateBg {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.cta-enquiry-wrapper {
-    display: flex;
-    gap: 50px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-}
 
 /* ========== LEFT SIDE - CTA CONTENT ========== */
 .cta-content-block {
@@ -884,12 +854,13 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 1.3rem;
-    color: white;
+    color: white;  /* Icon color white */
     transition: all 0.3s ease;
 }
 
 .cta-feature:hover i {
     transform: scale(1.1) rotate(5deg);
+    background: linear-gradient(135deg, #e67e22, #f39c12);  /* Orange on hover */
 }
 
 .cta-feature h4 {
@@ -1876,37 +1847,9 @@ body {
     text-align: center;
 }
 
-/* ---------- ENQUIRY SECTION ---------- */
-.cta-enquiry {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    text-align: center;
-}
 
-.cta-enquiry h2 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    color: white;
-}
 
-.cta-enquiry form {
-    max-width: 600px;
-    margin: 0 auto;
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
 
-.cta-enquiry input,
-.cta-enquiry textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
 
 .cta-enquiry input:focus,
 .cta-enquiry textarea:focus {
@@ -2441,4 +2384,138 @@ body {
 textarea::placeholder {
     color: #94a3b8 !important;
     opacity: 1 !important;
+}
+
+
+
+/* ========== CTA + ENQUIRY SECTION ========== */
+.cta-enquiry {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Rotating Background Animation */
+.cta-enquiry::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(26, 74, 138, 0.05) 0%, transparent 70%);
+    animation: rotateBg 30s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes rotateBg {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Ensure content stays above animation */
+.cta-enquiry-wrapper,
+.cta-content-block,
+.enquiry-form-block {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* ========== EXTRA ANIMATIONS FOR ENQUIRY SECTION ========== */
+
+/* Fade In Up Animation for Cards */
+.cta-content-block,
+.enquiry-form-block {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+.cta-content-block {
+    animation-delay: 0.1s;
+}
+
+.enquiry-form-block {
+    animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover Animation for Feature Items */
+.cta-feature {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-feature:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 25px rgba(26, 74, 138, 0.15);
+}
+
+/* Pulse Animation for Badge */
+.cta-badge {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(230, 126, 34, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(230, 126, 34, 0);
+    }
+}
+
+/* Button Hover Effect */
+.submit-enquiry {
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-enquiry::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.submit-enquiry:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Glow Effect on Focus */
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    box-shadow: 0 0 0 4px rgba(26, 74, 138, 0.2);
+    border-color: #1a4a8a;
+}
+
+
+/* ========== CTA ENQUIRY WRAPPER - LAYOUT FIX ========== */
+.cta-enquiry-wrapper {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
 }
