@@ -1,0 +1,737 @@
+/* HERO IMAGE WITH OVERLAY */
+.about-hero {
+    position: relative;
+    background: url("/static/images/granules1.jpeg") no-repeat center;
+    background-size: cover;
+    height: 250px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
+/* DARK OVERLAY */
+.about-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+/* TEXT */
+.hero-content {
+    position: relative;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #e53935;
+}
+
+.hero-content p {
+    font-size: 16px;
+    color: #ffffff;
+}
+@media (max-width: 768px) {
+    .about-hero {
+        height: 180px;
+        padding-left: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 24px;
+    }
+}
+
+
+
+
+
+
+
+/* About Section */
+.about-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    gap: 40px;
+}
+
+/* Left Text */
+.about-text {
+    width: 50%;
+}
+
+.about-text h4 {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.about-text h1 {
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Right Image */
+.about-image {
+    width: 50%;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url("../images/factory.jpeg");
+    background-size: cover;
+}
+/* 🔥 SMOOTH */
+.about-text,
+.about-image img,
+.hero {
+    transition: all 0.4s ease;
+}
+
+/* 🚀 TEXT BOX HOVER */
+.about-text:hover {
+    transform: translateY(-10px);
+}
+
+/* ✨ HEADING EFFECT */
+.about-text:hover h1 {
+    letter-spacing: 1.5px;
+}
+
+/* ➡️ PARAGRAPH SLIDE */
+.about-text p {
+    transition: 0.3s;
+}
+
+.about-text:hover p {
+    transform: translateX(5px);
+}
+
+/* 💥 IMAGE HOVER (zoom + shadow) */
+.about-image:hover img {
+    transform: scale(1.08);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* 🔥 HERO EFFECT */
+.hero:hover {
+    transform: scale(1.02);
+}
+
+/* 🌟 HERO TEXT GLOW (optional) */
+.hero:hover {
+    filter: brightness(1.1);
+}
+
+
+
+
+
+/* STATS */
+.stats-section {
+    background: url("/static/images/granules.jpeg") no-repeat center;
+    background-size: cover;
+    padding: 40px;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    color: white;
+}
+
+/* overlay */
+.stats-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+.stat-box {
+    position: relative;
+    z-index: 1;
+}
+
+.stat-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.stat-content i {
+    font-size: 30px;
+}
+
+.stat-content h2 {
+    margin: 0;
+}
+
+.stat-content p {
+    margin: 0;
+}
+/* 🔥 smooth animation */
+.stat-box {
+    transition: all 0.4s ease;
+}
+
+/* 🚀 MAIN HOVER */
+.stat-box:hover {
+    transform: translateY(-10px) scale(1.08);
+}
+
+/* 💥 ICON ANIMATION */
+.stat-content i {
+    transition: 0.3s;
+}
+
+.stat-box:hover i {
+    transform: rotate(10deg) scale(1.3);
+    color: #ff416c;
+}
+
+/* 🔢 NUMBER ANIMATION */
+.stat-content h2 {
+    transition: 0.3s;
+}
+
+.stat-box:hover h2 {
+    transform: scale(1.2);
+    color: #ffd700;
+}
+
+/* ✨ TEXT EFFECT */
+.stat-content p {
+    transition: 0.3s;
+}
+
+.stat-box:hover p {
+    letter-spacing: 1px;
+}
+
+/* 🔥 EXTRA
+
+
+
+
+
+/* left side */
+.about-split {
+    display: flex;
+    width: 100%;
+    margin-top: 60px;
+}
+
+/* LEFT SIDE */
+.left-box {
+    width: 50%;
+    background:#e53935;    /* red color */
+    color: white;
+    padding: 50px;
+} 
+
+.left-box h4 {
+    font-size: 14px;
+    margin-bottom: 10px;
+
+}
+
+.left-box h2 {
+    margin-bottom: 20px;
+    
+}
+
+.left-box ul {
+    margin-top: 20px;
+}
+
+.left-box li {
+    margin-bottom: 10px;
+}
+
+/* RIGHT SIDE */
+.right-box {
+    width: 50%;
+    background: rgb(255, 255, 255);
+    padding: 50px;
+}
+
+.right-box h4 {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.right-box h2 {
+    margin-bottom: 20px;
+}
+
+.right-box p {
+    color: #555;
+    line-height: 1.6;
+}
+/* 🔥 SMOOTH ANIMATION */
+.left-box,
+.right-box {
+    transition: all 0.4s ease;
+}
+
+/* 🚀 MAIN HOVER EFFECT */
+.left-box:hover,
+.right-box:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* 🎨 LEFT (RED) BOX EFFECT */
+.left-box:hover {
+    background: linear-gradient(135deg, #ff416c, #e53935);
+}
+
+/* ✨ RIGHT (WHITE) BOX EFFECT */
+.right-box:hover {
+    background: #f9f9f9;
+}
+
+/* 📝 HEADING ANIMATION */
+.left-box:hover h2,
+.right-box:hover h2 {
+    letter-spacing: 1.5px;
+}
+
+/* ➡️ TEXT / LIST SLIDE */
+.left-box li,
+.right-box p {
+    transition: 0.3s;
+}
+
+.left-box:hover li,
+.right-box:hover p {
+    transform: translateX(6px);
+}
+
+/* 💥 EXTRA DEPTH */
+.left-box:hover,
+.right-box:hover {
+    border-radius: 15px;
+}
+
+
+
+
+
+.why-section {
+    display: flex;
+    padding: 60px;
+    gap: 40px;
+    align-items: center;
+}
+
+/* LEFT IMAGE */
+.why-image {
+    width: 50%;
+}
+
+.why-image img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* RIGHT TEXT */
+.why-content {
+    width: 50%;
+}
+
+.why-content h4 {
+    color: #e53935;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.why-content h2 {
+    margin-bottom: 15px;
+}
+
+.why-content p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* spacing */
+.mt {
+    margin-top: 30px;
+}
+/* 🔥 SMOOTH ANIMATION */
+.why-image img,
+.why-content {
+    transition: all 0.4s ease;
+}
+
+/* 🚀 IMAGE HOVER (zoom + tilt) */
+.why-image:hover img {
+    transform: scale(1.08) rotate(1deg);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* 🔥 TEXT BOX HOVER */
+.why-content:hover {
+    transform: translateY(-10px);
+}
+
+/* ✨ HEADING EFFECT */
+.why-content:hover h2 {
+    letter-spacing: 1.5px;
+}
+
+/* 🎯 SUBTITLE COLOR CHANGE */
+.why-content:hover h4 {
+    color: #ff416c;
+}
+
+/* ➡️ PARAGRAPH SLIDE EFFECT */
+.why-content p {
+    transition: 0.3s;
+}
+
+.why-content:hover p {
+    transform: translateX(5px);
+}
+
+/* 💥 IMAGE GLOW EFFECT */
+.why-image:hover img {
+    filter: brightness(1.1);
+}
+
+
+
+
+
+
+.info-section {
+    display: flex;
+    gap: 30px;
+    padding: 60px;
+}
+/* LEFT BOX (light color) */
+.left-boxx {
+    width: 50%;
+    background: #f5f5f5;   /* light grey */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+/* LEFT SIDE */
+.left-boxx {
+    width: 50%;
+}
+
+.left-boxx h2 {
+    margin-bottom: 15px;
+}
+
+.left-boxx ul {
+    padding-left: 20px;
+}
+
+.left-boxx li {
+    margin-bottom: 10px;
+}
+
+/* RIGHT SIDE BOX */
+.right-boxx {
+    width: 50%;
+    background: linear-gradient(135deg, #ff4b2b, #ff416c); /* 🔥 stylish color */
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.right-boxx h2 {
+    margin-bottom: 15px;
+}
+
+.right-boxx ul {
+    padding-left: 20px;
+}
+
+.right-boxx li {
+    margin-bottom: 10px;
+}
+/* 🔥 HOVER ANIMATION ADD */
+.left-boxx,
+.right-boxx {
+    transition: all 0.4s ease;
+}
+
+.left-boxx:hover,
+.right-boxx:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* 🎨 RIGHT BOX COLOR CHANGE */
+.right-boxx:hover {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
+/* ✨ LEFT BOX LIGHT EFFECT */
+.left-boxx:hover {
+    background: #ffffff;
+}
+
+/* 📝 TEXT EFFECT */
+.left-boxx:hover h2,
+.right-boxx:hover h2 {
+    letter-spacing: 1.5px;
+}
+
+/* ➡️ LIST SLIDE */
+.left-boxx li,
+.right-boxx li {
+    transition: 0.3s;
+}
+
+.left-boxx:hover li,
+.right-boxx:hover li {
+    transform: translateX(5px);
+}
+
+
+
+
+
+@media (max-width: 768px) {
+
+    /* 🔹 GLOBAL */
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* 🔹 ABOUT SECTION */
+    .about-section {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .about-text,
+    .about-image {
+        width: 100%;
+    }
+
+    .about-image img {
+        width: 100%;
+        border-radius: 10px;
+        margin-top: 15px;
+    }
+
+    /* 🔹 STATS SECTION */
+    .stats-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        text-align: center;
+        padding: 30px 15px;
+    }
+
+    .stat-content {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .stat-content i {
+        font-size: 24px;
+    }
+
+    .stat-content h2 {
+        font-size: 18px;
+    }
+
+    /* 🔹 RED + WHITE BOX (WHY / INFRA) */
+    .about-split {
+        flex-direction: column;
+        margin-top: 30px;
+    }
+
+    .left-box,
+    .right-box {
+        width: 100%;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .left-box {
+        margin-bottom: 15px;
+    }
+
+    /* 🔹 VISION / INDUSTRIES BOX */
+    .info-section {
+        flex-direction: column;
+        padding: 20px 15px;
+        gap: 20px;
+    }
+
+    .left-boxx,
+    .right-boxx {
+        width: 100%;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    /* 🔹 IMAGE SECTION (WHY CHOOSE US) */
+    .why-section {
+        flex-direction: column;
+        padding: 30px 15px;
+    }
+
+    .why-image,
+    .why-content {
+        width: 100%;
+    }
+
+    .why-image img {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    /* 🔹 NAVBAR FIX */
+    .nav-container {
+        padding: 10px 15px;
+    }
+
+    /* 🔹 TOP BAR */
+    .top-bar {
+        padding: 8px;
+        font-size: 12px;
+        text-align: center;
+    }
+}
+
+
+
+
+
+
+
+/* SECTION */
+.industries {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* TITLE */
+.section-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    position: relative;
+    margin-right: 15px;
+}
+
+.section-title::after {
+    content: "";
+    width: 60px;
+    height: 3px;
+    background: red;
+    display: block;
+    margin: 10px auto;
+}
+.section-subtitle {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    color:black;
+    font-size: 17px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+/* GRID */
+.industry-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+/* CARD */
+.industry-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+/* IMAGE */
+.industry-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+}
+
+/* TEXT */
+.industry-card p {
+    margin-top: 10px;
+    font-weight: 500;
+}
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+    .industry-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .industry-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.industry-card {
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.industry-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.industry-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.industry-card:hover img {
+    transform: scale(1.15);
+}

@@ -169,6 +169,7 @@ body {
     cursor: pointer;
     font-size: 18px;
     transition: 0.3s;
+    margin-left: 15px;
 }
 
 .header-icons i:hover {
@@ -196,6 +197,7 @@ body {
     display: none;
     font-size: 22px;
     cursor: pointer;
+    margin-left: auto;
 }
 
 /* MOBILE NAV */
