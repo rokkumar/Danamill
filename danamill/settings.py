@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Your app
     'Enquiry',
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -113,7 +114,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # 👇 IMPORTANT: Ye apni real email daalna
-EMAIL_HOST_USER = 'codeaurlyrics@gmail.com'  # Apna Gmail daalo
-EMAIL_HOST_PASSWORD = 'cdxu eolb stlc rnwm'  # Google App Password daalo
+EMAIL_HOST_USER = 'hackerrank445@gmail.com'  # Apna Gmail daalo
+EMAIL_HOST_PASSWORD = 'kwnk qqnh ztmd inwu'  # Google App Password daalo
 DEFAULT_FROM_EMAIL = f'DanaMill <your-email@gmail.com>'
-ADMIN_EMAIL = 'codeaurlyrics@gmail.com'  # Jahan enquiry jayegi
+ADMIN_EMAIL = 'hackerrank445@gmail.com'  # Jahan enquiry jayegi
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

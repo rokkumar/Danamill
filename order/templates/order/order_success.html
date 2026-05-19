@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/order_success.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="success-wrapper">
+    <div class="success-card">
+        <div class="checkmark-circle">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <h2>Thank You!</h2>
+        <div class="greeting">
+            {{ customer_name|default:"Valued Customer" }}
+        </div>
+        <div class="message">
+            Your quote request has been received.<br>
+            We will contact you shortly via email/phone.
+        </div>
+        <a href="{% url 'home' %}" class="btn-glow">← Back to Home</a>
+    </div>
+</div>
+
+<canvas id="confetti-canvas"></canvas>
+{% endblock %}
+
+
+
+{% block js %}
+    <script src="{% static 'js/order_success.js' %}"></script>
+{% endblock %}
+
+{% block footer %}{% endblock %}

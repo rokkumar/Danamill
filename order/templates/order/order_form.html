@@ -1,0 +1,117 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="order-page-wrapper">
+
+    <div class="order-container glass-card">
+
+        <!-- LEFT SIDE -->
+        <div class="order-left">
+            <div class="left-content">
+                <h1>Get Your Best Quote</h1>
+                <p>
+                    We provide premium quality plastic granules with trusted
+                    manufacturing standards and fast delivery service.
+                </p>
+
+                <div class="feature-box">
+                    <div class="feature-item">
+                        <i class="fas fa-truck"></i>
+                        <span>Fast Delivery</span>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Quality Assurance</span>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-headset"></i>
+                        <span>24/7 Support</span>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-industry"></i>
+                        <span>Industrial Grade Products</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE FORM -->
+        <div class="order-right">
+
+            <div class="order-header">
+                <h2>Request a Quote</h2>
+                <p>Fill your details and our team will contact you shortly</p>
+            </div>
+
+            <form method="post" id="orderForm" novalidate>
+                {% csrf_token %}
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <i class="fas fa-box"></i>
+                        {{ form.product }}
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fas fa-weight-hanging"></i>
+                        {{ form.quantity }}
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fas fa-user"></i>
+                        {{ form.customer_name }}
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        {{ form.email }}
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fas fa-phone"></i>
+                        {{ form.phone }}
+                    </div>
+
+                    <div class="form-group full-width">
+                        <i class="fas fa-location-dot"></i>
+                        {{ form.address }}
+                    </div>
+
+                    <div class="form-group full-width">
+                        <i class="fas fa-message"></i>
+                        {{ form.message }}
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <span>Submit Request</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+            </form>
+
+            <div class="form-footer">
+                <p>We respect your privacy • No spam guaranteed</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
