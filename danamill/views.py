@@ -8,3 +8,12 @@ def about(request):
 
 def quality(request):
      return render(request, 'quality.html')
+
+def products(request):
+     return render(request, 'products.html')
+
+def infrastructure(request):
+     return render(request, 'infrastructure.html')
+
+def contact(request):
+     return render(request, 'contact.html')

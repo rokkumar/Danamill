@@ -26,9 +26,12 @@ def home(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    path('home/', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('quality/',views.quality, name='quality'),
+    path("products/", views.products, name="products"),
+    path('infrastructure/', views.infrastructure, name='infrastructure'),
+    path('contact/', views.contact, name='contact'),
     path('', include('Enquiry.urls')),  #Ankush Enquiry
     path('', include('Enquiry.urls')),#Ankush Enquiry
     path('order/', include('order.urls')),#Khushi Pal order

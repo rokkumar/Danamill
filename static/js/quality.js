@@ -1,23 +1,16 @@
-const questions = document.querySelectorAll(".faq-question");
 
-questions.forEach(question => {
+// FAQ OPEN CLOSE
+
+const faqQuestions = document.querySelectorAll(".faq-question");
+
+faqQuestions.forEach((question) => {
 
     question.addEventListener("click", () => {
 
-        const answer = question.nextElementSibling;
+        const faqBox = question.parentElement;
 
-        if(answer.style.maxHeight){
-            answer.style.maxHeight = null;
-        } else {
-            answer.style.maxHeight = answer.scrollHeight + "px";
-        }
+        faqBox.classList.toggle("active");
 
     });
 
 });
-
-AOS.init({
-    duration: 1200,
-    once: true
-});
-
