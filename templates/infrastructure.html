@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+    .infra-hero {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        text-align: center;
+        padding: 80px 20px;
+    }
+    .infra-hero h1 { font-size: 3rem; margin-bottom: 10px; }
+    .infra-hero p { font-size: 1.2rem; opacity: 0.9; }
+    .infra-section { padding: 70px 0; background: var(--bg-gray); }
+    .infra-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    .infra-card {
+        background: var(--bg-light);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .infra-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+    .infra-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 18px; display: block; }
+    .infra-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--text-dark); }
+    .infra-card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.7; }
+    .infra-section-title { text-align: center; font-size: 2rem; margin-bottom: 10px; color: var(--text-dark); }
+    .infra-section-sub { text-align: center; color: var(--text-light); margin-bottom: 40px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="infra-hero">
+    <h1>Our Infrastructure</h1>
+    <p>State-of-the-art manufacturing facility built for excellence</p>
+</section>
+
+<section class="infra-section">
+    <h2 class="infra-section-title">Manufacturing Capabilities</h2>
+    <p class="infra-section-sub">Our plant is equipped with advanced machinery and a skilled team ensuring every batch meets international standards.</p>
+    <div class="infra-grid">
+        <div class="infra-card">
+            <i class="fas fa-industry"></i>
+            <h3>Modern Plant</h3>
+            <p>Our manufacturing unit is spread over a large area equipped with world-class extruders, granulators, and blending machines.</p>
+        </div>
+        <div class="infra-card">
+            <i class="fas fa-flask"></i>
+            <h3>Quality Lab</h3>
+            <p>In-house testing laboratory performs density, melt flow index, and chemical resistance tests on every production batch.</p>
+        </div>
+        <div class="infra-card">
+            <i class="fas fa-cogs"></i>
+            <h3>Advanced Machinery</h3>
+            <p>High-performance extrusion lines and precision cutting equipment ensure uniform granule size and superior finish.</p>
+        </div>
+        <div class="infra-card">
+            <i class="fas fa-boxes"></i>
+            <h3>Warehouse & Storage</h3>
+            <p>Large climate-controlled warehouse with proper segregation for raw materials and finished goods to ensure quality integrity.</p>
+        </div>
+        <div class="infra-card">
+            <i class="fas fa-truck"></i>
+            <h3>Logistics Network</h3>
+            <p>Well-organized dispatch department with dedicated vehicles for pan-India delivery within 3–5 business days.</p>
+        </div>
+        <div class="infra-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Safety Standards</h3>
+            <p>Stringent safety protocols and hygiene standards are followed throughout the production and packaging process.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

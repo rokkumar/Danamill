@@ -1,22 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
 
-
+{% block css %}
 <link rel="stylesheet" href="{% static 'css/quality.css' %}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+{% endblock %}
 
-
-
-
-
-{% include 'partials/header.html' %}
-
-
-
-
-
-
-
-
+{% block content %}
 <!-- 🔥 HERO / TOP IMAGE -->
 <section class="quality-hero">
     <div class="overlay">
@@ -47,7 +36,6 @@
 
             <ul>
                 <li>Flexible & Lightweight</li>
-                <li>Smooth Surface Finish</li>
                 <li>Moisture Resistant</li>
                 <li>Used in Packaging & Bags</li>
             </ul>
@@ -556,16 +544,8 @@
     </div>
 
 </section>
+{% endblock %}
 
-
-
-{% include 'partials/footer.html' %}
-
-
+{% block js %}
 <script src="{% static 'js/quality.js' %}"></script>
-
-
-
-
-
-
+{% endblock %}

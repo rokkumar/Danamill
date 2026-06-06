@@ -3,23 +3,23 @@
 
 {% block content %}
 
-<!-- Ankush -->
- 
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
 <!-- ========== HERO SECTION ========== -->
+<!-- Hero Section with Video Background -->
 <section class="hero">
-    <video class="hero-video" autoplay loop muted playsinline poster="https://via.placeholder.com/1920x1080">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-factory-machine-working-with-plastic-32846-large.mp4" type="video/mp4">
+    <!-- Video Background -->
+    <video class="hero-video" autoplay loop muted playsinline>
+        <source src="/media/videos/hero.mp4" type="video/mp4">
     </video>
+    <!-- Dark Overlay -->
     <div class="hero-overlay"></div>
+
+    <!-- Content -->
     <div class="hero-content">
         <h1>Premium <span class="highlight">Plastic Granules</span></h1>
         <p>Your trusted partner for high-quality HDPE, LDPE, and PP granules</p>
         <div class="hero-buttons">
-            <a href="#products" class="btn btn-primary">Explore Products</a>
-            <a href="#contact" class="btn btn-outline">Get Quote</a>
+            <a href="{% url 'products' %}" class="btn btn-primary">Explore Products <i class="fas fa-arrow-right"></i></a>
+            <a href="{% url 'contact' %}" class="btn btn-outline">Get Quote <i class="fas fa-download"></i></a>
         </div>
     </div>
 </section>
@@ -28,101 +28,59 @@
 
 
 
-<!-- INTRO SECTION -->
-<section class="intro-section">
+<!-- Company Intro Section -->
+<section class="intro-section section-padding">
+    <div class="container">
+        <div class="intro-grid">
+            <!-- Left Side - Text Content -->
+            <div class="intro-text" data-aos="fade-right">
+                <span class="intro-tag">Who We Are</span>
+                <h2>About <span class="highlight">Jai Durga Plastic</span></h2>
+                <p>With over 25 years of experience, Jai Durga Plastic is a leading manufacturer and supplier of high-quality plastic granules. We serve industries across automotive, packaging, construction, and consumer goods.</p>
+                <p>Our commitment to quality and innovation has made us a trusted partner for businesses worldwide.</p>
 
-                <h2>
-                    About <span class="highlight">JAI DURGA PLASTIC </span>
-                </h2>
-
-                <p>
-                    With over 25 years of experience, JAI DURGA PLASTIC  is a leading manufacturer and supplier
-                    of high-quality plastic granules. We serve industries across automotive, packaging, 
-                    construction and consumer goods.
-                </p>
-
-
-    <div class="intro-container">
-
-        <!-- LEFT SIDE -->
-        <div class="intro-content">
-
-            <span class="intro-tag">
-                Premium Plastic Granules Manufacturer
-            </span>
-
-            <h1>
-                High Quality <span>LDPE, HDPE & PP</span>
-                Plastic Granules
-            </h1>
-
-            <p>
-                We provide premium quality plastic granules with advanced
-                manufacturing technology, strict quality testing and trusted
-                industrial solutions for every business need.
-            </p>
-
-            <!-- FEATURES -->
-            <div class="intro-features">
-
-                <div class="feature-box">
-                    <i class="fas fa-certificate"></i>
-                    <div>
-                        <h3>ISO Certified</h3>
-                        <p>International Quality Standard</p>
+                <!-- Features List -->
+                <div class="intro-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>ISO 9001:2015 Certified</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>100% Quality Assured</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Eco-Friendly Manufacturing</span>
                     </div>
                 </div>
 
-                <div class="feature-box">
-                    <i class="fas fa-award"></i>
-                    <div>
-                        <h3>25+ Years</h3>
-                        <p>Industry Experience</p>
-                    </div>
-                </div>
-
-                <div class="feature-box">
-                    <i class="fas fa-users"></i>
-                    <div>
-                        <h3>500+ Clients</h3>
-                        <p>Trusted Worldwide</p>
-                    </div>
-                </div>
-
-                <div class="feature-box">
-                    <i class="fas fa-industry"></i>
-                    <div>
-                        <h3>Advanced Plant</h3>
-                        <p>Modern Machinery Setup</p>
-                    </div>
-                </div>
-
+                <a href="{% url 'about' %}" class="btn btn-primary">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <!-- BUTTONS -->
-            <div class="intro-btns">
-
-                <a href="#" class="intro-btn">
-                    Explore Products
-                </a>
-
-                <a href="#" class="intro-btn2">
-                    Contact Us
-                </a>
-
+            <!-- Right Side - Image with Stats Overlay -->
+            <div class="intro-image" data-aos="fade-left">
+                <div class="image-wrapper">
+                    <img src="/media/images/image.jpg" alt="Jai Durga Plastic Manufacturing">
+                    <div class="image-overlay"></div>
+                    <div class="stats-overlay">
+                        <div class="stat-item">
+                            <span class="stat-number">25+</span>
+                            <span class="stat-label">Years</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Clients</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Countries</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
-
-        <!-- RIGHT SIDE IMAGE -->
-        <div class="intro-img">
-
-            <img src="{% static 'images/factoryy.jpeg' %}" alt="">
-
-        </div>
-
     </div>
-
 </section>
 
          
@@ -147,7 +105,7 @@
                 <div class="product-content">
                     <h3>LDPE Granules</h3>
                     <!-- <p>High quality industrial plastic</p> -->
-                    <p>₹130 per Kilogram(kg)</p>
+                    <p>Rs. 130 per Kilogram (kg)</p>
                     <a href="{% url 'order:create_order' %}?product=LDPE" class="btn btn-primary">Get Quote</a>
                 </div>
             </div>
@@ -160,7 +118,7 @@
                 <div class="product-content">
                     <h3>LDPE Granules</h3>
                     <!-- <p>Flexible packaging material</p> -->
-                    <p>₹13,000 per quintal(100 kg)</p>
+                    <p>Rs. 13,000 per Quintal (100 kg)</p>
                     <a href="{% url 'order:create_order' %}?product=LDPE" class="btn btn-primary">Get Quote</a>
                 </div>
             </div>
@@ -172,9 +130,8 @@
                 </div>
                 <div class="product-content">
                     <h3>LDPE Granules</h3>
-                    <P></P>
                     <!-- <p>Used in automobile & goods</p> -->
-                     <p>₹1,30,000 per ton(1000 kg)</p>
+                    <p>Rs. 1,30,000 per Ton (1000 kg)</p>
                     <a href="{% url 'order:create_order' %}?product=LDPE" class="btn btn-primary">Get Quote</a>
                 </div>
             </div>
@@ -210,7 +167,7 @@
                         <i class="fas fa-certificate"></i>
                         <h4>Certified Quality</h4>
                         <p>ISO 9001:2015 certified manufacturing process ensuring consistent quality</p>
-                        <span class="feature-link">Learn More →</span>
+                        <span class="feature-link">Learn More -></span>
                     </div>
                 </div>
             </div>
@@ -230,7 +187,7 @@
                         <i class="fas fa-flask"></i>
                         <h4>Advanced Testing</h4>
                         <p>In-house laboratory with state-of-the-art testing equipment</p>
-                        <span class="feature-link">Learn More →</span>
+                        <span class="feature-link">Learn More -></span>
                     </div>
                 </div>
             </div>
@@ -250,7 +207,7 @@
                         <i class="fas fa-truck"></i>
                         <h4>Quick Shipping</h4>
                         <p>3-5 days delivery across India with real-time tracking</p>
-                        <span class="feature-link">Learn More →</span>
+                        <span class="feature-link">Learn More -></span>
                     </div>
                 </div>
             </div>
@@ -270,7 +227,7 @@
                         <i class="fas fa-headset"></i>
                         <h4>Always Available</h4>
                         <p>Dedicated support team available 24/7 for technical assistance</p>
-                        <span class="feature-link">Learn More →</span>
+                        <span class="feature-link">Learn More -></span>
                     </div>
                 </div>
             </div>
@@ -303,7 +260,7 @@
                         <i class="fas fa-truck-fast"></i>
                         <div>
                             <h4>Free Shipping</h4>
-                            <p>On orders above ₹50,000</p>
+                            <p>On orders above Rs. 50,000</p>
                         </div>
                     </div>
                     <div class="cta-feature">
@@ -386,4 +343,8 @@
 
 
 
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/home.js' %}"></script>
 {% endblock %}

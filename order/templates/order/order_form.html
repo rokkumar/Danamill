@@ -2,11 +2,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-{% endblock %}
-
 {% block content %}
 
 <div class="order-page-wrapper">
@@ -16,6 +11,7 @@
         <!-- LEFT SIDE -->
         <div class="order-left">
             <div class="left-content">
+                <span class="order-eyebrow">Order Request</span>
                 <h1>Get Your Best Quote</h1>
                 <p>
                     We provide premium quality plastic granules with trusted
@@ -57,43 +53,68 @@
             <form method="post" id="orderForm" novalidate>
                 {% csrf_token %}
 
+                {% if form.non_field_errors %}
+                    <div class="order-error-box">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
                 <div class="form-grid">
 
                     <div class="form-group">
+                        <label for="{{ form.product.id_for_label }}">Product</label>
                         <i class="fas fa-box"></i>
                         {{ form.product }}
+                        {{ form.product.errors }}
                     </div>
 
                     <div class="form-group">
+                        <label for="{{ form.quantity.id_for_label }}">Quantity</label>
                         <i class="fas fa-weight-hanging"></i>
                         {{ form.quantity }}
+                        {{ form.quantity.errors }}
                     </div>
 
                     <div class="form-group">
+                        <label for="{{ form.customer_name.id_for_label }}">Full Name</label>
                         <i class="fas fa-user"></i>
                         {{ form.customer_name }}
+                        {{ form.customer_name.errors }}
                     </div>
 
                     <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">Email Address</label>
                         <i class="fas fa-envelope"></i>
                         {{ form.email }}
+                        {{ form.email.errors }}
                     </div>
 
                     <div class="form-group">
+                        <label for="{{ form.phone.id_for_label }}">Phone Number</label>
                         <i class="fas fa-phone"></i>
                         {{ form.phone }}
+                        {{ form.phone.errors }}
                     </div>
 
                     <div class="form-group full-width">
+                        <label for="{{ form.address.id_for_label }}">Delivery Address</label>
                         <i class="fas fa-location-dot"></i>
                         {{ form.address }}
+                        {{ form.address.errors }}
                     </div>
 
                     <div class="form-group full-width">
+                        <label for="{{ form.message.id_for_label }}">Additional Requirement</label>
                         <i class="fas fa-message"></i>
                         {{ form.message }}
+                        {{ form.message.errors }}
                     </div>
 
+                </div>
+
+                <div class="order-form-note">
+                    <i class="fas fa-circle-check"></i>
+                    <span>No payment now. Our team confirms pricing and availability first.</span>
                 </div>
 
                 <button type="submit" class="btn-submit">
@@ -104,7 +125,7 @@
             </form>
 
             <div class="form-footer">
-                <p>We respect your privacy • No spam guaranteed</p>
+                <p>We respect your privacy. No spam guaranteed.</p>
             </div>
 
         </div>

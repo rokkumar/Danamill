@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+    .products-hero {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        text-align: center;
+        padding: 80px 20px;
+    }
+    .products-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+    }
+    .products-hero p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+    .products-list-section {
+        padding: 60px 0;
+        background: var(--bg-gray);
+    }
+    .products-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    .p-card {
+        background: var(--bg-light);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .p-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+    }
+    .p-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    .p-info {
+        padding: 24px;
+    }
+    .p-info h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+        color: var(--text-dark);
+    }
+    .p-info p {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+    .p-action {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .p-price {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.1rem;
+    }
+    .quote-btn {
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: background 0.2s;
+    }
+    .quote-btn:hover {
+        background: var(--accent-dark);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="products-hero">
+    <h1>Our Products</h1>
+    <p>High-quality plastic granules engineered for reliability and performance</p>
+</section>
+
+<section class="products-list-section">
+    <div class="products-container">
+        <!-- HDPE -->
+        <div class="p-card">
+            <img src="{% static 'images/granules2.jpeg' %}" alt="HDPE Granules" class="p-img">
+            <div class="p-info">
+                <h3>HDPE Granules</h3>
+                <p>High-Density Polyethylene granules offer exceptional strength, rigidity, and resistance to chemicals. Widely used for blow molding and manufacturing heavy-duty containers.</p>
+                <div class="p-action">
+                    <span class="p-price">Premium Grade</span>
+                    <a href="{% url 'order:create_order' %}?product=HDPE" class="quote-btn">Get Quote</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- LDPE -->
+        <div class="p-card">
+            <img src="{% static 'images/factory.jpeg' %}" alt="LDPE Granules" class="p-img">
+            <div class="p-info">
+                <h3>LDPE Granules</h3>
+                <p>Low-Density Polyethylene granules feature high flexibility, low-temperature toughness, and excellent moisture barrier properties. Ideal for film packaging and plastic bags.</p>
+                <div class="p-action">
+                    <span class="p-price">Flexible Grade</span>
+                    <a href="{% url 'order:create_order' %}?product=LDPE" class="quote-btn">Get Quote</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PP -->
+        <div class="p-card">
+            <img src="{% static 'images/pp.jpg' %}" alt="PP Granules" class="p-img">
+            <div class="p-info">
+                <h3>PP Granules</h3>
+                <p>Polypropylene granules are highly heat-resistant, rigid, and resistant to fatigue. Perfect for manufacturing household items, toys, automotive components, and food packaging.</p>
+                <div class="p-action">
+                    <span class="p-price">Rigid Grade</span>
+                    <a href="{% url 'order:create_order' %}?product=PP" class="quote-btn">Get Quote</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recycled -->
+        <div class="p-card">
+            <img src="{% static 'images/granules2.jpeg' %}" alt="Recycled Granules" class="p-img">
+            <div class="p-info">
+                <h3>Recycled Granules</h3>
+                <p>Eco-friendly and sustainable recycled plastic granules processed with high quality standards. Matches standard requirements while optimizing raw material expenses.</p>
+                <div class="p-action">
+                    <span class="p-price">Eco Grade</span>
+                    <a href="{% url 'order:create_order' %}?product=Recycled" class="quote-btn">Get Quote</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

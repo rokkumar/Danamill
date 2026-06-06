@@ -32,8 +32,10 @@ urlpatterns = [
     path("products/", views.products, name="products"),
     path('infrastructure/', views.infrastructure, name='infrastructure'),
     path('contact/', views.contact, name='contact'),
+    path('cart/', views.cart, name='cart'),
     path('', include('Enquiry.urls')),  #Ankush Enquiry
     path('', include('Enquiry.urls')),#Ankush Enquiry
+    path('cart/', include('cart.urls')), #Ankush Cart Page
     path('order/', include('order.urls')),#Khushi Pal order
 
 ]

@@ -6,6 +6,11 @@ from .models import Order
 
 
 class OrderForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['quantity'].min_value = 1
+        self.fields['quantity'].widget.attrs['min'] = 1
+
     class Meta:
         model = Order
         fields = [

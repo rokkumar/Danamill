@@ -27,7 +27,7 @@ def order_create(request):
             We will contact you shortly with a quote.
 
             Best regards,
-            PlastiCorp Team
+            Jai Durga Plastic Team
             """
             from_email = settings.DEFAULT_FROM_EMAIL
             recipient_list = [order.email]
