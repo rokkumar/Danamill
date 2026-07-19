@@ -6,7 +6,7 @@
     color: #e0e7ff;
     overflow: hidden;
     position: relative;
-    margin-top: 30px;   /* ✅ small gap from content */
+    margin-top: 10px;   /* ✅ small gap from content */
     transition: background 0.3s ease;
 }
 
@@ -18,7 +18,7 @@ body.dark-mode .animated-footer {
 .footer-wave-top svg {
     display: block;
     width: 100%;
-    height: auto;
+    height: 80px;
     margin-bottom: -5px;
 }
 body.dark-mode .footer-wave-top path {
