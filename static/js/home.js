@@ -1,4 +1,13 @@
+// ============================================================
+// JAI DURGA PLASTIC – HOME PAGE JAVASCRIPT
+// ============================================================
+
 document.addEventListener('DOMContentLoaded', function() {
+
+    // ============================================================
+    // 1. ENQUIRY FORM HANDLING (AJAX with CSRF)
+    // ============================================================
+
     const enquiryForm = document.getElementById('quickEnquiryForm');
     const formMessage = document.getElementById('formMessage');
     const submitButton = document.getElementById('submitBtn');
@@ -111,7 +120,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    const revealItems = document.querySelectorAll('.intro-grid, .product-card, .feature-card, .cta-content-block, .enquiry-form-block');
+    // ============================================================
+    // 2. SCROLL REVEAL ANIMATIONS (Intersection Observer)
+    // ============================================================
+
+    const revealItems = document.querySelectorAll(
+        '.intro-grid, .product-card, .feature-card, .cta-content-block, .enquiry-form-block'
+    );
     if ('IntersectionObserver' in window) {
         revealItems.forEach(item => item.classList.add('home-reveal'));
         const observer = new IntersectionObserver(entries => {
@@ -126,4 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         revealItems.forEach(item => item.classList.add('is-visible'));
     }
+
+    console.log('✅ Home page JS loaded – form ready.');
 });
