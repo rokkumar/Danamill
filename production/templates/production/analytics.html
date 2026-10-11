@@ -1,0 +1,68 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Production Analytics — Jai Durga Plastic{% endblock %}
+{% block page_title %}Production Analytics{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/production/analytics.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="analytics-wrapper">
+
+    <div class="analytics-top">
+        <h2>Production Analytics</h2>
+        <p>Real-time production performance metrics</p>
+    </div>
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card">
+            <h3>Output Performance</h3>
+            <div class="chart-container">
+                <canvas id="outputChart"></canvas>
+            </div>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Scrap Analysis</h3>
+            <div class="chart-container">
+                <canvas id="scrapChart"></canvas>
+            </div>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Machine Efficiency</h3>
+            <div class="chart-container">
+                <canvas id="efficiencyChart"></canvas>
+            </div>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Shift Performance</h3>
+            <div class="chart-container">
+                <canvas id="shiftAnalyticsChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{{ output_labels|json_script:"output-labels" }}
+{{ output_data|json_script:"output-data" }}
+{{ scrap_labels|json_script:"scrap-labels" }}
+{{ scrap_data|json_script:"scrap-data" }}
+{{ efficiency_labels|json_script:"efficiency-labels" }}
+{{ efficiency_data|json_script:"efficiency-data" }}
+{{ shift_labels|json_script:"shift-labels" }}
+{{ shift_data|json_script:"shift-data" }}
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/production/analytics.js' %}"></script>
+{% endblock %}

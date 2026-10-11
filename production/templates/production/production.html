@@ -1,0 +1,193 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Production — Jai Durga Plastic{% endblock %}
+{% block page_title %}Production Management{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/production/production.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="production-wrapper">
+
+    <!-- ==================== SUMMARY CARDS ==================== -->
+    <div class="summary-grid">
+
+        <div class="summary-card card-indigo">
+            <h4>Total Entries</h4>
+            <h2>{{ total_entries }}</h2>
+        </div>
+
+        <div class="summary-card card-green">
+            <h4>Total Output</h4>
+            <h2>{{ total_output }} <small>kg</small></h2>
+        </div>
+
+        <div class="summary-card card-red">
+            <h4>Total Scrap</h4>
+            <h2>{{ total_scrap }} <small>kg</small></h2>
+        </div>
+
+        <div class="summary-card card-amber">
+            <h4>Avg Output</h4>
+            <h2>{{ avg_output }} <small>kg</small></h2>
+        </div>
+
+        <div class="summary-card card-violet">
+            <h4>Avg Efficiency</h4>
+            <h2>{{ avg_efficiency }}<small>%</small></h2>
+        </div>
+
+    </div>
+
+    <!-- ==================== PRODUCTION FORM ==================== -->
+    <div class="production-card">
+
+        <div class="card-header">
+            <h3>Production Entry</h3>
+            <span class="card-hint">Record a new production run</span>
+        </div>
+
+        <form method="POST" class="production-form" autocomplete="off">
+            {% csrf_token %}
+
+            <div class="field">
+                <label for="{{ form.batch.id_for_label }}">Batch ID</label>
+                {{ form.batch }}
+                {% if form.batch.errors %}<span class="field-error">{{ form.batch.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.machine.id_for_label }}">Machine</label>
+                {{ form.machine }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.material.id_for_label }}">Material</label>
+                {{ form.material }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.shift.id_for_label }}">Shift</label>
+                {{ form.shift }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.output.id_for_label }}">Output (Kg)</label>
+                {{ form.output }}
+                {% if form.output.errors %}<span class="field-error">{{ form.output.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.scrap.id_for_label }}">Scrap (Kg)</label>
+                {{ form.scrap }}
+                {% if form.scrap.errors %}<span class="field-error">{{ form.scrap.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.status.id_for_label }}">Status</label>
+                {{ form.status }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.production_date.id_for_label }}">Production Date</label>
+                {{ form.production_date }}
+            </div>
+
+            <div class="field full-width">
+                <label for="{{ form.notes.id_for_label }}">Notes</label>
+                {{ form.notes }}
+            </div>
+
+            {% if form.non_field_errors %}
+            <div class="form-error-box full-width">
+                {{ form.non_field_errors.0 }}
+            </div>
+            {% endif %}
+
+            <div class="submit-row full-width">
+                <button type="submit" class="submit-btn">Save Production</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- ==================== CHARTS ==================== -->
+    <div class="chart-grid">
+
+        <div class="chart-card">
+            <h3>Machine Performance</h3>
+            <div class="chart-container">
+                <canvas id="machineChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <h3>Shift Distribution</h3>
+            <div class="chart-container">
+                <canvas id="shiftChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==================== RECENT TABLE ==================== -->
+    <div class="production-card">
+
+        <div class="card-header">
+            <h3>Recent Production Records</h3>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Batch</th>
+                        <th>Machine</th>
+                        <th>Material</th>
+                        <th>Shift</th>
+                        <th>Output</th>
+                        <th>Scrap</th>
+                        <th>Efficiency</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in recent_production %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="batch-id">{{ item.batch }}</td>
+                        <td>{{ item.machine }}</td>
+                        <td>{{ item.material }}</td>
+                        <td><span class="badge badge-shift">{{ item.shift }}</span></td>
+                        <td class="output-text">{{ item.output }} kg</td>
+                        <td class="scrap-text">{{ item.scrap }} kg</td>
+                        <td class="efficiency-text">{{ item.efficiency }}%</td>
+                        <td><span class="status-badge status-{{ item.status|lower }}">{{ item.status }}</span></td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="9" class="empty">No production records yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+{{ machine_labels|json_script:"machine-labels" }}
+{{ machine_data|json_script:"machine-data" }}
+{{ shift_labels|json_script:"shift-labels" }}
+{{ shift_data|json_script:"shift-data" }}
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/production/production.js' %}"></script>
+{% endblock %}

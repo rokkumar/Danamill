@@ -1,0 +1,67 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}{% if is_edit %}Edit Item{% else %}Add Item{% endif %}{% endblock %}
+{% block page_title %}{% if is_edit %}Edit Item{% else %}Add Item{% endif %}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/events/events.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="events-page">
+
+    <div class="events-header">
+        <div>
+            <h2>{% if is_edit %}Edit Item{% else %}Add Item{% endif %} — {{ event.name }}</h2>
+            <p>{% if is_edit %}Update item details{% else %}Add a new expense item{% endif %}</p>
+        </div>
+        <a href="{% url 'events:event_detail' event.id %}" class="btn btn-grey">← Back</a>
+    </div>
+
+    <div class="form-card">
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="form-error-box">{{ form.non_field_errors.0 }}</div>
+            {% endif %}
+
+            <div class="form-grid">
+                <div class="form-field full-width">
+                    <label for="{{ form.item_name.id_for_label }}">Item Name *</label>
+                    {{ form.item_name }}
+                    {% if form.item_name.errors %}<span class="field-error">{{ form.item_name.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-field">
+                    <label for="{{ form.total_cost.id_for_label }}">Total Cost (₹) *</label>
+                    {{ form.total_cost }}
+                    {% if form.total_cost.errors %}<span class="field-error">{{ form.total_cost.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-field">
+                    <label for="{{ form.paid_amount.id_for_label }}">Paid Amount (₹)</label>
+                    {{ form.paid_amount }}
+                    {% if form.paid_amount.errors %}<span class="field-error">{{ form.paid_amount.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-field full-width">
+                    <label for="{{ form.notes.id_for_label }}">Notes</label>
+                    {{ form.notes }}
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a href="{% url 'events:event_detail' event.id %}" class="btn btn-grey">Cancel</a>
+                <button type="submit" class="btn btn-green">
+                    {% if is_edit %}Update Item{% else %}Add Item{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

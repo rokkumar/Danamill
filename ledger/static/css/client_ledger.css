@@ -1,0 +1,526 @@
+/* ============================================================
+   Ledger — Single client view (Excel-style)
+   ============================================================ */
+
+.ledger-page {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* ---------- Top bar ---------- */
+.ledger-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    padding: 22px 26px;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.ledger-topbar h2 {
+    margin: 0 0 6px;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #f1f5f9;
+    letter-spacing: 0.4px;
+}
+
+.ledger-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.ledger-meta span {
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+.ledger-topbar-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn-green { background: #10b981; color: #fff; }
+.btn-blue  { background: #4f46e5; color: #fff; }
+.btn-grey  { background: #334155; color: #e2e8f0; }
+.btn-red   { background: #dc2626; color: #fff; }
+
+/* ---------- Summary cards ---------- */
+.ledger-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px;
+}
+
+.lcard {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    padding: 18px 20px;
+    border-radius: 14px;
+    border-left: 4px solid;
+}
+
+.lcard span {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #94a3b8;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.lcard strong {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #f1f5f9;
+}
+
+.lcard.green  { border-color: #10b981; } .lcard.green  strong { color: #86efac; }
+.lcard.blue   { border-color: #3b82f6; } .lcard.blue   strong { color: #93c5fd; }
+.lcard.purple { border-color: #8b5cf6; } .lcard.purple strong { color: #c4b5fd; }
+.lcard.orange { border-color: #f59e0b; } .lcard.orange strong { color: #fcd34d; }
+.lcard.red    { border-color: #ef4444; } .lcard.red    strong { color: #fca5a5; }
+
+/* ---------- Two-column grid: Sales | Payments ---------- */
+.ledger-main-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+@media (max-width: 1100px) {
+    .ledger-main-grid { grid-template-columns: 1fr; }
+}
+/* Tablet breakpoint — stack the panels */
+@media (max-width: 1280px) {
+    .ledger-main-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.panel-title {
+    margin: 0 0 12px;
+    font-size: 1rem;
+    color: #f1f5f9;
+    font-weight: 700;
+}
+/* Sales and payments panels — no overflow */
+.ledger-sales-panel,
+.ledger-payments-panel {
+    min-width: 0;   /* 🔥 Prevents grid overflow */
+    width: 100%;
+}
+
+/* ---------- Table wrapper ---------- */
+.ledger-table-box {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 14px;
+    overflow-x: auto;
+    width: 100%;
+}
+
+.ledger-table {
+    width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.ledger-table thead th {
+    background: #1e293b;
+    color: #cbd5e1;
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    border-bottom: 1px solid #334155;
+}
+
+.ledger-table tbody td {
+    padding: 11px 10px;
+    border-bottom: 1px solid #1e293b;
+    color: #cbd5e1;
+    white-space: nowrap;
+}
+
+.ledger-table tbody tr:hover { background: rgba(124, 58, 237, 0.05); }
+
+.ledger-table .amount  { font-weight: 600; color: #e2e8f0; }
+.ledger-table .balance { background: rgba(16, 185, 129, 0.06); color: #86efac; font-weight: 700; }
+.ledger-table .opening-row td { background: rgba(124, 58, 237, 0.10); color: #c4b5fd; }
+
+.ledger-table .empty-row {
+    text-align: center;
+    padding: 30px;
+    color: #64748b;
+}
+
+.ledger-table tfoot td {
+    padding: 12px 10px;
+    background: #1e293b;
+    font-weight: 800;
+    color: #fcd34d;
+    border-top: 2px solid #f59e0b;
+}
+
+/* ---------- Action buttons in table ---------- */
+.action-cell { white-space: nowrap; }
+
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background 0.2s, transform 0.15s;
+    margin-right: 4px;
+}
+
+.icon-btn:hover { transform: scale(1.1); }
+
+.edit-btn   { background: rgba(79, 70, 229, 0.15); }
+.edit-btn:hover { background: rgba(79, 70, 229, 0.3); }
+
+.delete-btn { background: rgba(239, 68, 68, 0.15); }
+.delete-btn:hover { background: rgba(239, 68, 68, 0.3); }
+
+/* ---------- Excel-style summary block ---------- */
+.ledger-summary-excel {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 14px;
+    padding: 22px 26px;
+}
+
+.ledger-summary-excel h3 {
+    margin: 0 0 16px;
+    font-size: 1rem;
+    color: #f1f5f9;
+    font-weight: 700;
+}
+
+.summary-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #1e293b;
+    border-radius: 10px;
+    border-left: 3px solid #64748b;
+}
+
+.summary-label {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    font-weight: 600;
+}
+
+.summary-value {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #f1f5f9;
+}
+
+.summary-row.grand {
+    border-left-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.08);
+}
+.summary-row.grand .summary-value { color: #fcd34d; }
+
+.summary-row.received {
+    border-left-color: #10b981;
+    background: rgba(16, 185, 129, 0.08);
+}
+.summary-row.received .summary-value { color: #86efac; }
+
+.summary-row.remaining {
+    border-left-color: #ef4444;
+    background: rgba(239, 68, 68, 0.08);
+}
+.summary-row.remaining .summary-value { color: #fca5a5; }
+
+/* ---------- Chart ---------- */
+.ledger-chart-box {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    padding: 22px 24px;
+    border-radius: 14px;
+}
+
+.ledger-chart-box h3 {
+    margin: 0 0 18px;
+    color: #f1f5f9;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.ledger-chart-container {
+    height: 320px;
+    position: relative;
+}
+
+/* ---------- Form styles ---------- */
+.ledger-form-card {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    padding: 28px 30px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-bottom: 16px;
+}
+
+.form-field { display: flex; flex-direction: column; }
+.form-field.full-width { grid-column: 1 / -1; }
+
+.form-field label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 8px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    padding: 11px 14px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    color: #f1f5f9;
+    font-family: inherit;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.form-field textarea { resize: vertical; min-height: 70px; }
+
+.form-field.checkbox-field label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: #cbd5e1;
+    cursor: pointer;
+    padding: 11px 14px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+}
+
+.form-field.checkbox-field input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #7c3aed;
+}
+
+.field-error {
+    margin-top: 6px;
+    color: #f87171;
+    font-size: 0.78rem;
+}
+
+.form-error-box {
+    padding: 12px 16px;
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    border-radius: 10px;
+    color: #fca5a5;
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+}
+
+.form-section {
+    padding: 20px;
+    background: #1e293b;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.form-section h3 {
+    margin: 0 0 16px;
+    font-size: 1rem;
+    color: #e2e8f0;
+    font-weight: 700;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #334155;
+}
+
+.amount-preview {
+    padding: 14px 16px;
+    background: #0f172a;
+    border: 1px dashed #7c3aed;
+    border-radius: 10px;
+    color: #c4b5fd;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-align: right;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid #1e293b;
+}
+
+.delete-summary {
+    padding: 16px;
+    background: #1e293b;
+    border-radius: 10px;
+    border-left: 3px solid #ef4444;
+}
+
+.delete-summary p {
+    margin: 6px 0;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+
+.delete-summary strong { color: #f1f5f9; }
+
+/* ---------- Light mode ---------- */
+.light-mode .ledger-topbar,
+.light-mode .ledger-table-box,
+.light-mode .lcard,
+.light-mode .ledger-chart-box,
+.light-mode .ledger-summary-excel,
+.light-mode .ledger-form-card {
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+
+.light-mode .ledger-topbar h2 { color: #0f172a; }
+.light-mode .ledger-meta span { color: #64748b; }
+.light-mode .btn-grey { background: #e2e8f0; color: #334155; }
+
+.light-mode .lcard span { color: #64748b; }
+.light-mode .lcard strong { color: #0f172a; }
+.light-mode .lcard.green strong { color: #10b981; }
+.light-mode .lcard.blue strong { color: #3b82f6; }
+.light-mode .lcard.purple strong { color: #8b5cf6; }
+.light-mode .lcard.orange strong { color: #f59e0b; }
+.light-mode .lcard.red strong { color: #ef4444; }
+
+.light-mode .panel-title { color: #0f172a; }
+
+.light-mode .ledger-table thead th {
+    background: #f1f5f9;
+    color: #475569;
+    border-bottom-color: #e2e8f0;
+}
+.light-mode .ledger-table tbody td {
+    color: #334155;
+    border-bottom-color: #f1f5f9;
+}
+.light-mode .ledger-table tbody tr:hover { background: #f8fafc; }
+.light-mode .ledger-table .amount { color: #1e293b; }
+.light-mode .ledger-table .balance { background: #f0fdf4; color: #166534; }
+.light-mode .ledger-table .opening-row td { background: #ede9fe; color: #6d28d9; }
+.light-mode .ledger-table tfoot td { background: #fef3c7; color: #78350f; }
+
+.light-mode .ledger-summary-excel h3 { color: #0f172a; }
+.light-mode .summary-row { background: #f8fafc; }
+.light-mode .summary-label { color: #475569; }
+.light-mode .summary-value { color: #0f172a; }
+.light-mode .summary-row.grand { background: #fef3c7; }
+.light-mode .summary-row.grand .summary-value { color: #78350f; }
+.light-mode .summary-row.received { background: #dcfce7; }
+.light-mode .summary-row.received .summary-value { color: #166534; }
+.light-mode .summary-row.remaining { background: #fee2e2; }
+.light-mode .summary-row.remaining .summary-value { color: #991b1b; }
+
+.light-mode .ledger-chart-box h3 { color: #0f172a; }
+
+.light-mode .form-field label { color: #475569; }
+.light-mode .form-field input,
+.light-mode .form-field select,
+.light-mode .form-field textarea {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: #0f172a;
+}
+.light-mode .form-section { background: #f8fafc; }
+.light-mode .form-section h3 { color: #0f172a; border-bottom-color: #e2e8f0; }
+.light-mode .amount-preview { background: #ede9fe; color: #6d28d9; }
+.light-mode .form-actions { border-top-color: #e2e8f0; }
+
+.light-mode .delete-summary { background: #fef2f2; }
+.light-mode .delete-summary p { color: #475569; }
+.light-mode .delete-summary strong { color: #0f172a; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .ledger-topbar { padding: 18px; }
+    .ledger-topbar h2 { font-size: 1.15rem; }
+    .ledger-topbar-actions { width: 100%; }
+    .btn { padding: 8px 12px; font-size: 0.78rem; }
+    .ledger-chart-container { height: 260px; }
+    .form-actions { flex-direction: column-reverse; }
+    .form-actions .btn { width: 100%; text-align: center; }
+}
+
+/* ---------- Print ---------- */
+@media print {
+    .ledger-topbar-actions,
+    .erp-sidebar,
+    .erp-topbar,
+    .navbar,
+    .action-cell {
+        display: none !important;
+    }
+    .ledger-page { gap: 12px; }
+}

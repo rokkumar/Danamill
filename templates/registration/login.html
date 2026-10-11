@@ -1,0 +1,247 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Jai Durga Plastic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Decorative glow */
+        body::before {
+            content: "";
+            position: absolute;
+            top: -150px;
+            left: -150px;
+            width: 450px;
+            height: 450px;
+            background: #38bdf8;
+            filter: blur(160px);
+            opacity: 0.18;
+            animation: float 12s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+            bottom: -150px;
+            right: -150px;
+            width: 450px;
+            height: 450px;
+            background: #a855f7;
+            filter: blur(160px);
+            opacity: 0.15;
+            animation: float 12s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes float {
+            from { transform: translate(0, 0); }
+            to   { transform: translate(40px, 40px); }
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 380px;
+            padding: 38px 32px 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .brand h1 {
+            margin: 0 0 6px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            letter-spacing: 0.3px;
+        }
+
+        .brand p {
+            margin: 0;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #94a3b8;
+            margin-bottom: 6px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 12px 42px 12px 14px;
+            background: #1e293b;
+            border: 1.5px solid #334155;
+            border-radius: 10px;
+            color: #f1f5f9;
+            font-size: 0.92rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .field input:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+        }
+
+        .field input::placeholder {
+            color: #475569;
+        }
+
+        .toggle-eye {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            cursor: pointer;
+            font-size: 1rem;
+            user-select: none;
+            transition: color 0.2s;
+        }
+
+        .toggle-eye:hover { color: #38bdf8; }
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: inherit;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.25s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(56, 189, 248, 0.35);
+        }
+
+        .login-btn:active { transform: translateY(0); }
+
+        .error-box {
+            margin-top: 16px;
+            padding: 11px 14px;
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.3);
+            border-radius: 8px;
+            color: #fca5a5;
+            font-size: 0.83rem;
+            text-align: center;
+        }
+
+        .footer-note {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #475569;
+        }
+
+        @media (max-width: 420px) {
+            .login-box { padding: 28px 22px; }
+            .brand h1 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <div class="brand">
+        <h1>Jai Durga Plastic</h1>
+        <p>Admin Panel Login</p>
+    </div>
+
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
+
+        <div class="field">
+            <label for="username">Username</label>
+            <div class="input-wrap">
+                <input type="text" name="username" id="username"
+                       placeholder="Enter username" required autofocus>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="password">Password</label>
+            <div class="input-wrap">
+                <input type="password" name="password" id="password"
+                       placeholder="Enter password" required>
+                <span class="toggle-eye" onclick="togglePassword()">&#128065;</span>
+            </div>
+        </div>
+
+        <button type="submit" class="login-btn">Sign In</button>
+
+        {% if form.errors %}
+            <div class="error-box">
+                Invalid username or password.
+            </div>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <div class="error-box">
+                    You don't have permission to view that page.
+                </div>
+            {% endif %}
+        {% endif %}
+    </form>
+
+    <p class="footer-note">&copy; Jai Durga Plastic</p>
+</div>
+
+<script>
+function togglePassword() {
+    var p = document.getElementById('password');
+    p.type = (p.type === 'password') ? 'text' : 'password';
+}
+</script>
+
+</body>
+</html>

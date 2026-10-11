@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us | Jai Durga Plastic{% endblock %}
+{% block meta_description %}Contact Jai Durga Plastic, Hyderabad for plastic granule enquiries, product details and bulk orders.{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="pg contact-page">
+
+  <!-- ================= HERO ================= -->
+  <section class="pg-hero pg-hero--plain pg-hero--center">
+    <div class="container">
+      <nav class="pg-crumbs" aria-label="Breadcrumb">
+        <a href="{% url 'home' %}">Home</a>
+        <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        <span aria-current="page">Contact</span>
+      </nav>
+      <h1>Get in <em>Touch</em></h1>
+      <p>We'd love to hear from you. Reach out to us for any inquiries, product details, or bulk orders.</p>
+    </div>
+  </section>
+
+  <!-- ================= INFO CARDS ================= -->
+  <section class="pg-section pg-section--alt">
+    <div class="container">
+      <header class="pg-head" data-rv>
+        <span class="pg-eyebrow">Contact Information</span>
+        <h2 class="pg-title">How to Reach Us</h2>
+        <p class="pg-sub">Multiple ways to connect with our team</p>
+      </header>
+
+      <div class="info-grid" data-stagger>
+
+        <article class="info-card">
+          <span class="info-ic"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></span>
+          <h3>Address</h3>
+          <address>8-12-600 T.N.G.O.S Colony<br>Kattedan, Mailardevpally<br>Rajendra Nagar, Hyderabad<br>Pin: 500077</address>
+          <a class="info-link" href="https://maps.google.com/?q=Kattedan+Rajendra+Nagar+Hyderabad+500077" target="_blank" rel="noopener noreferrer">
+            Get Directions <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </a>
+        </article>
+
+        <article class="info-card">
+          <span class="info-ic"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
+          <h3>Phone</h3>
+          <p class="info-main">+91 90329 38392</p>
+          <p class="info-sub">Mon - Sat, 9:00 AM - 6:00 PM</p>
+          <a class="info-link" href="tel:+919032938392" data-phone="+91 90329 38392">
+            Call Now <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </a>
+        </article>
+
+        <article class="info-card">
+          <span class="info-ic"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
+          <h3>Email</h3>
+          <p class="info-main">Kprashanth1887@gmail.com</p>
+          <p class="info-sub">We'll respond within 24 hours</p>
+          <a class="info-link" href="mailto:Kprashanth1887@gmail.com" data-email="Kprashanth1887@gmail.com">
+            Send Email <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </a>
+        </article>
+
+        <article class="info-card">
+          <span class="info-ic"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg></span>
+          <h3>Website</h3>
+          <p class="info-main">www.jaidurgaplastic.in</p>
+          <p class="info-sub">Explore our full product range</p>
+          <a class="info-link" href="http://www.jaidurgaplastic.in" target="_blank" rel="noopener noreferrer">
+            Visit Website <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FORM + MAP ================= -->
+  <section class="pg-section">
+    <div class="container contact-wrap">
+
+      <!-- Form -->
+      <div class="form-card" data-rv="l">
+        <h2>Send us a <em>Message</em></h2>
+        <p class="form-intro">Fill out the form below and our team will get back to you within 24 hours.</p>
+
+        <form id="contactForm" class="contact-form" method="POST" action="{% url 'contact' %}" novalidate>
+          {% csrf_token %}
+
+          <div id="contactMessage" class="form-message" role="status" aria-live="polite"></div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="contact_name">Full Name</label>
+              <div class="control">
+                <svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>
+                <input type="text" name="name" id="contact_name" placeholder="Your full name" required maxlength="100" autocomplete="name" aria-describedby="error_name">
+              </div>
+              <span class="error-text" id="error_name"></span>
+            </div>
+
+            <div class="field">
+              <label for="contact_email">Email Address</label>
+              <div class="control">
+                <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+                <input type="email" name="email" id="contact_email" placeholder="you@example.com" required maxlength="254" autocomplete="email" aria-describedby="error_email">
+              </div>
+              <span class="error-text" id="error_email"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="contact_phone">Phone Number</label>
+              <div class="control">
+                <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+                <input type="tel" name="phone" id="contact_phone" placeholder="+91 90000 00000" required maxlength="15" autocomplete="tel" inputmode="tel" aria-describedby="error_phone">
+              </div>
+              <span class="error-text" id="error_phone"></span>
+            </div>
+
+            <div class="field">
+              <label for="contact_subject">Subject</label>
+              <div class="control">
+                <svg class="icon" aria-hidden="true"><use href="#i-tag"/></svg>
+                <input type="text" name="subject" id="contact_subject" placeholder="e.g. HDPE granules enquiry" required maxlength="200" aria-describedby="error_subject">
+              </div>
+              <span class="error-text" id="error_subject"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="contact_message">Your Message</label>
+            <div class="control control--area">
+              <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
+              <textarea name="message" id="contact_message" rows="5" placeholder="Tell us about your requirement - material, quantity, location..." required maxlength="2000" aria-describedby="error_message"></textarea>
+            </div>
+            <div class="field-foot">
+              <span class="error-text" id="error_message"></span>
+              <span class="counter" id="messageCount">0 / 2000</span>
+            </div>
+          </div>
+
+          {# Honeypot: insaan ko dikhta nahi, bots bhar dete hain #}
+          <div class="hp" aria-hidden="true">
+            <label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitContactBtn">
+            <span class="btn-label">Send Message</span>
+            <svg class="icon btn-send" aria-hidden="true"><use href="#i-send"/></svg>
+            <svg class="icon btn-spin" aria-hidden="true"><use href="#i-loader"/></svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- Map + hours + support -->
+      <aside class="side-col" data-rv="r">
+
+        <div class="map-card">
+          <iframe
+            src="https://maps.google.com/maps?q=Kattedan%2C%20Rajendra%20Nagar%2C%20Hyderabad%20500077&output=embed"
+            title="Jai Durga Plastic location map"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+
+        <div class="side-card" id="hoursCard">
+          <h3>
+            <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> Business Hours
+            <span class="open-badge" id="openBadge" hidden></span>
+          </h3>
+          <ul class="hours-list">
+            <li data-days="1,2,3,4,5"><span class="day">Monday - Friday</span><span class="time">9:00 AM - 6:00 PM</span></li>
+            <li data-days="6"><span class="day">Saturday</span><span class="time">9:00 AM - 2:00 PM</span></li>
+            <li data-days="0"><span class="day">Sunday</span><span class="time closed">Closed</span></li>
+          </ul>
+        </div>
+
+        <div class="side-card">
+          <h3><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Quick Support</h3>
+          <p class="side-text">Need immediate assistance? Call or message us directly.</p>
+          <div class="side-actions">
+            <a class="pg-btn pg-btn--primary" href="tel:+919032938392" data-phone="+91 90329 38392">
+              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> +91 90329 38392
+            </a>
+            <a class="pg-btn pg-btn--wa" href="https://wa.me/919032938392" target="_blank" rel="noopener noreferrer">
+              <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp
+            </a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================= SOCIAL ================= -->
+  <section class="pg-section pg-section--alt social-sec">
+    <div class="container">
+      <header class="pg-head" data-rv>
+        <span class="pg-eyebrow">Stay Connected</span>
+        <h2 class="pg-title">Connect with Us</h2>
+        <p class="pg-sub">Follow us on social media for latest updates and product launches</p>
+      </header>
+
+      <div class="social-row" data-stagger>
+        <a class="soc soc--fb" href="#" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use href="#i-facebook"/></svg></a>
+        <a class="soc soc--tw" href="#" aria-label="Twitter"><svg class="icon" aria-hidden="true"><use href="#i-twitter"/></svg></a>
+        <a class="soc soc--in" href="#" aria-label="LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+        <a class="soc soc--ig" href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></a>
+        <a class="soc soc--wa" href="https://wa.me/919032938392" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/contact.js' %}" defer></script>
+{% endblock %}

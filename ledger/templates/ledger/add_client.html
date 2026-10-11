@@ -1,0 +1,78 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Add Client — Ledger{% endblock %}
+{% block page_title %}Add New Client{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/client_ledger.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="ledger-page">
+
+    <!-- Top bar -->
+    <div class="ledger-topbar">
+        <div>
+            <h2>Add New Client</h2>
+            <p>Fill the details to register a new customer</p>
+        </div>
+        <div class="ledger-topbar-actions">
+            <a href="{% url 'ledger:client_list' %}" class="btn btn-grey">← Back to List</a>
+        </div>
+    </div>
+
+    <!-- Form card -->
+    <div class="ledger-form-card">
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="form-error-box">
+                {{ form.non_field_errors.0 }}
+            </div>
+            {% endif %}
+
+            <div class="form-grid">
+                <div class="form-field">
+                    <label for="{{ form.name.id_for_label }}">Client Name *</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}<span class="field-error">{{ form.name.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-field">
+                    <label for="{{ form.phone.id_for_label }}">Phone</label>
+                    {{ form.phone }}
+                    {% if form.phone.errors %}<span class="field-error">{{ form.phone.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-field full-width">
+                    <label for="{{ form.address.id_for_label }}">Address</label>
+                    {{ form.address }}
+                </div>
+
+                <div class="form-field">
+                    <label for="{{ form.opening_balance.id_for_label }}">Opening Balance (₹)</label>
+                    {{ form.opening_balance }}
+                    {% if form.opening_balance.errors %}<span class="field-error">{{ form.opening_balance.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-field checkbox-field">
+                    <label for="{{ form.is_active.id_for_label }}">
+                        {{ form.is_active }}
+                        Active Client
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a href="{% url 'ledger:client_list' %}" class="btn btn-grey">Cancel</a>
+                <button type="submit" class="btn btn-green">Save Client</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,281 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Dashboard — Jai Durga Plastic{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/reports/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-wrapper">
+
+    <!-- ============================================================
+         WELCOME STRIP
+    ============================================================ -->
+    <div class="welcome-strip">
+        <div class="welcome-info">
+            <h2>Welcome back, {{ request.user.username }} 👋</h2>
+            <p>Here's what's happening with your business today</p>
+        </div>
+        <div class="welcome-date">
+            <span class="date-label">Today</span>
+            <span class="date-value" id="currentDate"></span>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         KPI CARDS
+    ============================================================ -->
+    <div class="kpi-grid">
+
+        <div class="kpi-card kpi-income">
+            <div class="kpi-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="1" x2="12" y2="23" />
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+            </div>
+            <div class="kpi-content">
+                <span class="kpi-label">Total Income</span>
+                <h3 class="kpi-value">₹ {{ total_income|floatformat:0 }}</h3>
+                <span class="kpi-meta">All-time earnings</span>
+            </div>
+        </div>
+
+        <div class="kpi-card kpi-expense">
+            <div class="kpi-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" />
+                    <polyline points="17 18 23 18 23 12" />
+                </svg>
+            </div>
+            <div class="kpi-content">
+                <span class="kpi-label">Total Expense</span>
+                <h3 class="kpi-value">₹ {{ total_expense|floatformat:0 }}</h3>
+                <span class="kpi-meta">All-time spending</span>
+            </div>
+        </div>
+
+        <div class="kpi-card kpi-profit">
+            <div class="kpi-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                    <polyline points="17 6 23 6 23 12" />
+                </svg>
+            </div>
+            <div class="kpi-content">
+                <span class="kpi-label">Total Profit</span>
+                <h3 class="kpi-value {% if total_profit < 0 %}text-danger{% endif %}">
+                    ₹ {{ total_profit|floatformat:0 }}
+                </h3>
+                <span class="kpi-meta">
+                    {% if total_profit >= 0 %}Business is profitable{% else %}Loss detected{% endif %}
+                </span>
+            </div>
+        </div>
+
+        <div class="kpi-card kpi-inventory">
+            <div class="kpi-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                </svg>
+            </div>
+            <div class="kpi-content">
+                <span class="kpi-label">Total Inventory</span>
+                <h3 class="kpi-value">{{ total_inventory }} <small>Kg</small></h3>
+                <span class="kpi-meta">In stock</span>
+            </div>
+        </div>
+
+        <div class="kpi-card kpi-workforce">
+            <div class="kpi-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+            </div>
+            <div class="kpi-content">
+                <span class="kpi-label">Workforce</span>
+                <h3 class="kpi-value">{{ total_workforce }}</h3>
+                <span class="kpi-meta">Active employees</span>
+            </div>
+        </div>
+
+        <div class="kpi-card kpi-clients">
+            <div class="kpi-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+            </div>
+            <div class="kpi-content">
+                <span class="kpi-label">Total Clients</span>
+                <h3 class="kpi-value">{{ total_clients }}</h3>
+                <span class="kpi-meta">Registered clients</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+     CHARTS ROW 1
+     ============================================================ -->
+    <div class="charts-row">
+
+        <div class="chart-block">
+            <div class="chart-header">
+                <h3>Workforce Productivity</h3>
+                <span class="chart-subtitle">Top 7 employees</span>
+            </div>
+            <div class="chart-body">
+                <canvas id="productivityChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-block">
+            <div class="chart-header">
+                <h3>Shift Distribution</h3>
+                <span class="chart-subtitle">Workforce by shift</span>
+            </div>
+            <div class="chart-body">
+                <canvas id="shiftChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+     CHARTS ROW 2
+     ============================================================ -->
+    <div class="charts-row">
+
+        <div class="chart-block">
+            <div class="chart-header">
+                <h3>Finance Analytics</h3>
+                <span class="chart-subtitle">Income vs Expense</span>
+            </div>
+            <div class="chart-body">
+                <canvas id="financeChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-block">
+            <div class="chart-header">
+                <h3>Expense Categories</h3>
+                <span class="chart-subtitle">Breakdown by category</span>
+            </div>
+            <div class="chart-body">
+                <canvas id="expenseChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+         TABLES ROW
+    ============================================================ -->
+    <div class="tables-row">
+
+        <div class="data-block">
+            <div class="data-header">
+                <h3>Recent Employees</h3>
+                <a href="/dashboard/workforce/" class="view-all">View all →</a>
+            </div>
+            <div class="data-table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Shift</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for emp in recent_employees %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td class="emp-name">{{ emp.name }}</td>
+                            <td>{{ emp.role|default:"—" }}</td>
+                            <td>
+                                <span class="badge badge-shift">{{ emp.shift }}</span>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="empty-row">No employees yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="data-block">
+            <div class="data-header">
+                <h3>Recent Inventory</h3>
+                <a href="/dashboard/inventory/" class="view-all">View all →</a>
+            </div>
+            <div class="inventory-list">
+                {% for item in recent_inventory %}
+                <div class="inventory-item">
+                    <div class="inv-icon">
+                        {% if item.material == 'HDPE' %}🔵{% elif item.material == 'LDPE' %}🟢{% else %}🟠{% endif %}
+                    </div>
+                    <div class="inv-details">
+                        <strong>{{ item.material }}</strong>
+                        <span>{{ item.quantity }} Kg added</span>
+                    </div>
+                    <div class="inv-date">{{ item.date|date:"d M" }}</div>
+                </div>
+                {% empty %}
+                <p class="empty-row">No inventory activity yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ============================================================
+     JSON DATA FOR JS — USE json_script FILTER
+     ============================================================ -->
+{{ productivity_labels|json_script:"productivity-labels" }}
+{{ productivity_data|json_script:"productivity-data" }}
+
+{{ shift_labels|json_script:"shift-labels" }}
+{{ shift_data|json_script:"shift-data" }}
+
+{{ finance_labels|json_script:"finance-labels" }}
+{{ finance_data|json_script:"finance-data" }}
+
+{{ expense_category_labels|json_script:"expense-category-labels" }}
+{{ expense_category_data|json_script:"expense-category-data" }}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        var el = document.getElementById('currentDate');
+        if (el) el.textContent = new Date().toLocaleDateString('en-IN', opts);
+    });
+</script>
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/reports/dashboard.js' %}"></script>
+{% endblock %}

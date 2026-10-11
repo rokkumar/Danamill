@@ -1,0 +1,202 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Dispatch — Jai Durga Plastic{% endblock %}
+{% block page_title %}Dispatch Management{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/dispatch/dispatch.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="dispatch-wrapper">
+
+    <!-- ================= SUMMARY ================= -->
+    <div class="summary-grid">
+
+        <div class="summary-card card-total">
+            <div class="summary-body">
+                <h4>Total Dispatch</h4>
+                <h2>{{ total_dispatch }}</h2>
+            </div>
+        </div>
+
+        <div class="summary-card card-pending">
+            <div class="summary-body">
+                <h4>Pending</h4>
+                <h2>{{ pending_count }}</h2>
+            </div>
+        </div>
+
+        <div class="summary-card card-transit">
+            <div class="summary-body">
+                <h4>In Transit</h4>
+                <h2>{{ transit_count }}</h2>
+            </div>
+        </div>
+
+        <div class="summary-card card-delivered">
+            <div class="summary-body">
+                <h4>Delivered</h4>
+                <h2>{{ delivered_count }}</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= FORM ================= -->
+    <div class="dispatch-card">
+
+        <div class="card-header">
+            <h3>Dispatch Entry</h3>
+            <span class="card-hint">Record a new dispatch</span>
+        </div>
+
+        <form method="POST" class="dispatch-form" autocomplete="off">
+            {% csrf_token %}
+
+            <div class="field">
+                <label for="{{ form.dispatch_id.id_for_label }}">Dispatch ID</label>
+                {{ form.dispatch_id }}
+                {% if form.dispatch_id.errors %}<span class="field-error">{{ form.dispatch_id.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.customer_name.id_for_label }}">Customer Name</label>
+                {{ form.customer_name }}
+                {% if form.customer_name.errors %}<span class="field-error">{{ form.customer_name.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.product_name.id_for_label }}">Product</label>
+                {{ form.product_name }}
+                {% if form.product_name.errors %}<span class="field-error">{{ form.product_name.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.quantity.id_for_label }}">Quantity (Kg)</label>
+                {{ form.quantity }}
+                {% if form.quantity.errors %}<span class="field-error">{{ form.quantity.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.vehicle_number.id_for_label }}">Vehicle Number</label>
+                {{ form.vehicle_number }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.driver_name.id_for_label }}">Driver Name</label>
+                {{ form.driver_name }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.dispatch_status.id_for_label }}">Status</label>
+                {{ form.dispatch_status }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.dispatch_date.id_for_label }}">Dispatch Date</label>
+                {{ form.dispatch_date }}
+                {% if form.dispatch_date.errors %}<span class="field-error">{{ form.dispatch_date.errors.0 }}</span>{% endif %}
+            </div>
+
+            {% if form.non_field_errors %}
+            <div class="form-error-box full-width">
+                {{ form.non_field_errors.0 }}
+            </div>
+            {% endif %}
+
+            <div class="submit-row full-width">
+                <button type="submit" class="submit-btn">Save Dispatch</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- ================= CHARTS ================= -->
+    <div class="chart-grid">
+
+        <div class="chart-card">
+            <h3>Status Distribution</h3>
+            <div class="chart-container">
+                <canvas id="statusChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <h3>Recent Dispatch Quantities</h3>
+            <div class="chart-container">
+                <canvas id="quantityChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= TABLE ================= -->
+    <div class="dispatch-card">
+
+        <div class="card-header">
+            <h3>Dispatch Records</h3>
+            <span class="card-hint">{{ total_dispatch }} total</span>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S. No.</th>
+                        <th>Dispatch ID</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Vehicle</th>
+                        <th>Driver</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in recent_dispatch %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="batch-id">{{ item.dispatch_id }}</td>
+                        <td>{{ item.customer_name }}</td>
+                        <td>{{ item.product_name }}</td>
+                        <td class="output-text">{{ item.quantity }} kg</td>
+                        <td>{{ item.vehicle_number|default:"—" }}</td>
+                        <td>{{ item.driver_name|default:"—" }}</td>
+                        <td>
+                            {% if item.dispatch_status == "Delivered" %}
+                                <span class="status-badge status-delivered">Delivered</span>
+                            {% elif item.dispatch_status == "In Transit" %}
+                                <span class="status-badge status-transit">In Transit</span>
+                            {% else %}
+                                <span class="status-badge status-pending">Pending</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ item.dispatch_date|date:"d M Y" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="9" class="empty">No dispatch records yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+{{ status_labels|json_script:"status-labels" }}
+{{ status_data|json_script:"status-data" }}
+{{ quantity_labels|json_script:"quantity-labels" }}
+{{ quantity_data|json_script:"quantity-data" }}
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/dispatch/dispatch.js' %}"></script>
+{% endblock %}

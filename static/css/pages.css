@@ -1,0 +1,82 @@
+/* pages.css — inner pages (Quality, Contact...) ke shared parts. Page ke wrapper par class="pg" lagao. */
+.pg { color: var(--text-dark); overflow-x: clip; }
+.pg h1, .pg h2, .pg h3, .pg h4, .pg p, .pg ul, .pg ol, .pg figure, .pg blockquote { margin: 0; padding: 0; }
+.pg ul, .pg ol { list-style: none; }
+.pg img { display: block; max-width: 100%; }
+
+.pg-section { padding: clamp(48px, 7vw, 92px) 0; }
+.pg-section--alt { background: var(--surface); }
+
+/* ---------- hero ---------- */
+.pg-hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; align-items: center; min-height: 260px; padding: 60px 0; color: #fff;
+  background: var(--hero-img, none) center / cover no-repeat, linear-gradient(135deg, #0b1e3a, #1e3a8a);
+}
+.pg-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(90deg, rgba(7,26,51,.93) 0%, rgba(7,26,51,.72) 48%, rgba(7,26,51,.35) 100%);
+}
+.pg-hero--plain::before { background: radial-gradient(circle at 85% 15%, rgba(244,162,97,.25), transparent 55%); }
+.pg-hero::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+  background: linear-gradient(90deg, var(--accent), transparent 55%);
+}
+.pg-hero .container > * { animation: aUp .8s cubic-bezier(.2,.7,.2,1) backwards; }
+.pg-hero .container > :nth-child(2) { animation-delay: .1s; }
+.pg-hero .container > :nth-child(3) { animation-delay: .2s; }
+
+.pg-crumbs { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; font-size: 13px; color: #b9cbea; }
+.pg-crumbs a { color: inherit; text-decoration: none; transition: color .2s; }
+.pg-crumbs a:hover { color: var(--accent); }
+.pg-crumbs .icon { width: 14px; height: 14px; }
+.pg-crumbs span { color: #fff; }
+
+.pg-hero h1 { font-size: clamp(34px, 5vw, 54px); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+.pg-hero h1::after { content: ''; display: block; width: 56px; height: 4px; margin-top: 14px; border-radius: 4px; background: var(--accent); }
+.pg-hero h1 em { font-style: normal; color: var(--accent); }
+.pg-hero p { max-width: 640px; margin-top: 14px; font-size: clamp(15px, 1.6vw, 18px); line-height: 1.6; color: #d6e2f5; }
+
+.pg-hero--center { text-align: center; }
+.pg-hero--center .pg-crumbs { justify-content: center; }
+.pg-hero--center h1::after { margin-inline: auto; }
+.pg-hero--center p { margin-inline: auto; }
+
+/* ---------- section heading ---------- */
+.pg-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px; margin-bottom: 12px;
+  font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--eyebrow);
+}
+.pg-eyebrow::before { content: ''; width: 28px; height: 2px; border-radius: 2px; background: currentColor; }
+.pg-head { max-width: 680px; margin: 0 auto clamp(30px, 4vw, 46px); text-align: center; }
+.pg-head .pg-eyebrow::after { content: ''; width: 28px; height: 2px; border-radius: 2px; background: currentColor; }
+.pg-title { font-size: clamp(26px, 3.2vw, 38px); line-height: 1.2; font-weight: 800; letter-spacing: -.02em; }
+.pg-sub { margin-top: 14px; font-size: 15.5px; line-height: 1.75; color: var(--text-light); }
+
+/* ---------- icon chip ---------- */
+.pg-ic {
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 48px; height: 48px; border-radius: 12px; font-size: 23px;
+  color: var(--eyebrow); background: rgba(244,162,97,.16);
+}
+
+/* ---------- buttons ---------- */
+.pg-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 22px; border-radius: 10px; border: 1px solid transparent;
+  font: inherit; font-size: 14.5px; font-weight: 600; text-decoration: none; cursor: pointer;
+  transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+}
+.pg-btn .icon { width: 17px; height: 17px; }
+.pg-btn:hover { transform: translateY(-2px); }
+.pg-btn--primary { background: var(--primary); color: #fff; box-shadow: 0 10px 22px -8px rgba(30,58,138,.6); }
+body.dark-mode .pg-btn--primary { background: var(--accent); color: #1a1a1a; }
+.pg-btn--wa { background: #25d366; color: #0b2e18; }
+.pg-btn--wa:hover { background: #2ee673; }
+
+.check-list li { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; font-size: 15.5px; }
+.check-list .icon { width: 18px; height: 18px; margin-top: 3px; padding: 3px; border-radius: 50%; background: var(--accent); color: #1a1a1a; stroke-width: 3; }
+
+@media (max-width: 768px) {
+  .pg-hero { min-height: 210px; padding: 44px 0; }
+}

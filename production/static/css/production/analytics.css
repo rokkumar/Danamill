@@ -1,0 +1,74 @@
+/* ============================================================
+   Production — Analytics page
+   ============================================================ */
+
+.analytics-wrapper { display: flex; flex-direction: column; gap: 22px; }
+
+.analytics-top h2 {
+    margin: 0 0 4px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #f1f5f9;
+}
+
+.analytics-top p { margin: 0; color: #94a3b8; font-size: 0.9rem; }
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.analytics-card {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 18px;
+    padding: 22px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+}
+
+.analytics-card h3 {
+    margin: 0 0 18px;
+    color: #f1f5f9;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.chart-container {
+    flex: 1;
+    position: relative;
+}
+
+/* Light mode */
+.light-mode .analytics-card { background: #ffffff; border-color: #e2e8f0; }
+.light-mode .analytics-top h2 { color: #0f172a; }
+.light-mode .analytics-top p { color: #64748b; }
+.light-mode .analytics-card h3 { color: #0f172a; }
+
+@media (max-width: 1100px) { .analytics-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+    .analytics-card { padding: 18px; height: 340px; }
+    .analytics-top h2 { font-size: 1.25rem; }
+}
+
+
+/* ============================================================
+   Chart Empty State
+   ============================================================ */
+.chart-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #64748b;
+    font-size: 0.88rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 0.3px;
+}
+
+.light-mode .chart-empty {
+    color: #94a3b8;
+}

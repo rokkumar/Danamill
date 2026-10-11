@@ -1,0 +1,408 @@
+/* ============================================================
+   Workforce module
+   ============================================================ */
+
+.workforce-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ---------- KPI cards ---------- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px 24px;
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 18px;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);
+}
+
+.stat-card .stat-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    font-size: 1.4rem;
+    background: #1e293b;
+    flex-shrink: 0;
+}
+
+.stat-card .stat-body h4 {
+    margin: 0 0 4px;
+    font-size: 0.78rem;
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.stat-card .stat-body h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #f1f5f9;
+}
+
+.stat-violet .stat-icon { background: #312e81; color: #c7d2fe; }
+.stat-green  .stat-icon { background: #14532d; color: #86efac; }
+.stat-red    .stat-icon { background: #7f1d1d; color: #fca5a5; }
+.stat-blue   .stat-icon { background: #1e3a8a; color: #93c5fd; }
+
+/* ---------- Cards ---------- */
+.workforce-card {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 18px;
+    padding: 26px 28px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    color: #f1f5f9;
+    font-weight: 700;
+}
+
+.card-hint {
+    font-size: 0.78rem;
+    color: #64748b;
+}
+
+/* ---------- Form ---------- */
+.employee-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+    align-items: end;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    padding: 12px 14px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    color: #f1f5f9;
+    font-family: inherit;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input::placeholder {
+    color: #64748b;
+}
+
+.field input:focus,
+.field select:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.field-error {
+    margin-top: 6px;
+    color: #f87171;
+    font-size: 0.78rem;
+}
+
+.submit-field {
+    align-self: end;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 13px 20px;
+    background: #7c3aed;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.submit-btn:hover {
+    background: #6d28d9;
+    transform: translateY(-1px);
+}
+
+/* ---------- Table ---------- */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #1e293b;
+}
+
+thead th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #334155;
+}
+
+tbody td {
+    padding: 16px;
+    color: #cbd5e1;
+    font-size: 0.88rem;
+    border-bottom: 1px solid #1e293b;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background: rgba(124, 58, 237, 0.05);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ---------- Employee cell ---------- */
+.employee-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #7c3aed;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.emp-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.emp-info strong {
+    color: #f1f5f9;
+    font-weight: 600;
+}
+
+.emp-info span {
+    color: #64748b;
+    font-size: 0.75rem;
+}
+
+/* ---------- Badges ---------- */
+.badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    border: none;
+    cursor: default;
+    font-family: inherit;
+}
+
+.badge-shift {
+    background: rgba(124, 58, 237, 0.15);
+    color: #c4b5fd;
+}
+
+button.badge {
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+button.badge:hover {
+    filter: brightness(1.15);
+}
+
+.badge-present {
+    background: #14532d;
+    color: #86efac;
+}
+
+.badge-absent {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+/* ---------- Progress bar ---------- */
+.progress-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress {
+    width: 120px;
+    height: 8px;
+    border-radius: 8px;
+    background: #1e293b;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #7c3aed, #6366f1);
+    border-radius: 8px;
+    transition: width 0.9s ease;
+}
+
+.progress-value {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    font-weight: 600;
+    min-width: 36px;
+}
+
+/* ---------- Buttons ---------- */
+.inline-form {
+    display: inline;
+    margin: 0;
+}
+
+.delete-btn {
+    padding: 8px 14px;
+    background: transparent;
+    color: #f87171;
+    border: 1px solid #7f1d1d;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.delete-btn:hover {
+    background: #7f1d1d;
+    color: #fecaca;
+}
+
+/* ---------- Empty ---------- */
+.empty {
+    text-align: center;
+    padding: 32px;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* ---------- Light mode ---------- */
+.light-mode .stat-card,
+.light-mode .workforce-card {
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+
+.light-mode .stat-card .stat-icon {
+    background: #f1f5f9;
+}
+
+.light-mode .stat-card .stat-body h4 { color: #64748b; }
+.light-mode .stat-card .stat-body h2 { color: #0f172a; }
+
+.light-mode .card-header h3 { color: #0f172a; }
+.light-mode .card-hint { color: #94a3b8; }
+
+.light-mode .field label { color: #475569; }
+
+.light-mode .field input,
+.light-mode .field select {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: #0f172a;
+}
+
+.light-mode thead {
+    background: #f1f5f9;
+}
+
+.light-mode thead th {
+    color: #475569;
+    border-bottom-color: #e2e8f0;
+}
+
+.light-mode tbody td {
+    color: #334155;
+    border-bottom-color: #f1f5f9;
+}
+
+.light-mode tbody tr:hover {
+    background: #f8fafc;
+}
+
+.light-mode .emp-info strong { color: #0f172a; }
+.light-mode .emp-info span { color: #94a3b8; }
+
+.light-mode .progress { background: #e2e8f0; }
+.light-mode .progress-value { color: #475569; }
+
+.light-mode .badge-shift {
+    background: rgba(124, 58, 237, 0.1);
+    color: #6d28d9;
+}
+
+.light-mode .empty { color: #94a3b8; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 768px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .employee-form { grid-template-columns: 1fr; }
+    .workforce-card { padding: 20px; }
+    .stat-card .stat-body h2 { font-size: 1.4rem; }
+    .stat-card .stat-icon { width: 44px; height: 44px; font-size: 1.15rem; }
+}

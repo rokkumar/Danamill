@@ -5,7 +5,6 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('api/submit-enquiry/', views.submit_quick_enquiry, name='submit_quick_enquiry'),
     path('api/enquiry-status/<int:enquiry_id>/', views.get_enquiry_status, name='enquiry_status'),

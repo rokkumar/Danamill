@@ -1,551 +1,315 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Quality | Jai Durga Plastic{% endblock %}
+{% block meta_description %}LDPE, HDPE and PP plastic granules with strict quality testing - density, colour, strength and final approval.{% endblock %}
+
 {% block css %}
+<link rel="stylesheet" href="{% static 'css/pages.css' %}">
 <link rel="stylesheet" href="{% static 'css/quality.css' %}">
 {% endblock %}
 
 {% block content %}
-<!-- 🔥 HERO / TOP IMAGE -->
-<section class="quality-hero">
-    <div class="overlay">
-        <h1>Quality</h1>
-        <p>High Quality Plastic Granules You Can Trust</p>
+<div class="pg quality-page">
+
+  <!-- ================= HERO ================= -->
+  <section class="pg-hero" style="--hero-img: url('{% static 'images/ooo.jpg' %}')">
+    <div class="container">
+      <nav class="pg-crumbs" aria-label="Breadcrumb">
+        <a href="{% url 'home' %}">Home</a>
+        <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        <span aria-current="page">Quality</span>
+      </nav>
+      <h1>Quality</h1>
+      <p>High Quality Plastic Granules You Can Trust</p>
     </div>
-</section>
+  </section>
 
+  <!-- ================= MATERIALS ================= -->
+  <section class="pg-section pg-section--alt">
+    <div class="container">
+      <header class="pg-head" data-rv>
+        <span class="pg-eyebrow">Our Materials</span>
+        <h2 class="pg-title">Quality You Can Count On</h2>
+        <p class="pg-sub">Three core granule grades, each made to a strict standard for its end use.</p>
+      </header>
 
-<!-- ========================================= -->
-<!-- MATERIAL SECTION -->
-<!-- ========================================= -->
+      <div class="mat-grid" data-stagger>
 
-<section class="material-section">
+        <article class="mat-card">
+          <div class="mat-top">
+            <span class="pg-ic"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg></span>
+            <span class="mat-tag">LDPE</span>
+          </div>
+          <h3>LDPE Quality</h3>
+          <p class="mat-desc">Flexible and lightweight plastic granules used in packaging. Provides smooth finish and durability.</p>
+          <ul class="check-list">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Flexible &amp; Lightweight</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Moisture Resistant</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Used in Packaging &amp; Bags</li>
+          </ul>
+        </article>
 
-    <!-- LDPE + HDPE SAME LINE -->
-    <div class="material-box">
+        <article class="mat-card mat-card--navy">
+          <div class="mat-top">
+            <span class="pg-ic"><svg class="icon" aria-hidden="true"><use href="#i-shield-check"/></svg></span>
+            <span class="mat-tag">HDPE</span>
+          </div>
+          <h3>HDPE Quality</h3>
+          <p class="mat-desc">Strong and durable plastic used in containers and industrial products. Offers high resistance to chemicals and impact.</p>
+          <ul class="check-list">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>High Strength Material</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Impact Resistant</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Chemical Resistant</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Used in Containers</li>
+          </ul>
+        </article>
 
-        <!-- LDPE -->
-        <div class="material-text">
+        <figure class="mat-media">
+          <img src="{% static 'images/pp.jpg' %}" alt="Polypropylene (PP) plastic granules" loading="lazy">
+          <figcaption>PP Granules</figcaption>
+        </figure>
 
-            <h2>LDPE Quality</h2>
+        <article class="mat-card">
+          <div class="mat-top">
+            <span class="pg-ic"><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg></span>
+            <span class="mat-tag">PP</span>
+          </div>
+          <h3>PP Quality</h3>
+          <p class="mat-desc">Lightweight and rigid plastic suitable for household use. Known for heat resistance and long life.</p>
+          <ul class="check-list">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Heat Resistant</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Lightweight &amp; Strong</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Long Lasting</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Eco Friendly Material</li>
+          </ul>
+        </article>
 
-            <p class="card-desc">
-                Flexible and lightweight plastic granules used in packaging.
-                Provides smooth finish and durability.
-            </p>
+      </div>
+    </div>
+  </section>
 
-            <ul>
-                <li>Flexible & Lightweight</li>
-                <li>Moisture Resistant</li>
-                <li>Used in Packaging & Bags</li>
-            </ul>
+  <!-- ================= TESTING ================= -->
+  <section class="pg-section">
+    <div class="container">
+      <header class="pg-head" data-rv>
+        <span class="pg-eyebrow">Lab &amp; Inspection</span>
+        <h2 class="pg-title">Quality Testing Process</h2>
+      </header>
 
-        </div>
+      <div class="test-grid" data-stagger>
+        <article class="test-card">
+          <span class="pg-ic"><svg class="icon" aria-hidden="true"><use href="#i-flask"/></svg></span>
+          <h3>Density Test</h3>
+          <p>Ensures proper material density and strength for durable plastic products.</p>
+        </article>
+        <article class="test-card">
+          <span class="pg-ic"><svg class="icon" aria-hidden="true"><use href="#i-droplet"/></svg></span>
+          <h3>Color Inspection</h3>
+          <p>Maintains consistent color quality and smooth appearance in granules.</p>
+        </article>
+        <article class="test-card">
+          <span class="pg-ic"><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg></span>
+          <h3>Strength Testing</h3>
+          <p>Checks flexibility and impact resistance for long-lasting performance.</p>
+        </article>
+        <article class="test-card">
+          <span class="pg-ic"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg></span>
+          <h3>Final Approval</h3>
+          <p>Final quality inspection before safe packaging and delivery process.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-        <!-- HDPE -->
-        <div class="material2-text">
+  <!-- ================= QUALITY PROCESS ================= -->
+  <section class="pg-section pg-section--alt">
+    <div class="container">
+      <header class="pg-head" data-rv>
+        <span class="pg-eyebrow">Step by Step</span>
+        <h2 class="pg-title">Our Quality Process</h2>
+      </header>
 
-            <h2>HDPE Quality</h2>
+      <ol class="proc-grid" data-stagger>
+        <li class="proc-card">
+          <span class="proc-no">01</span>
+          <span class="proc-ic"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span>
+          <h3>Raw Material Check</h3>
+          <ul>
+            <li>Density Test</li><li>Melt Flow Index</li><li>Moisture Check</li><li>Color Inspection</li>
+          </ul>
+        </li>
+        <li class="proc-card">
+          <span class="proc-no">02</span>
+          <span class="proc-ic"><svg class="icon" aria-hidden="true"><use href="#i-factory"/></svg></span>
+          <h3>Manufacturing</h3>
+          <ul>
+            <li>High Temperature Control</li><li>Advanced Machinery</li><li>Uniform Granule Size</li><li>Continuous Monitoring</li>
+          </ul>
+        </li>
+        <li class="proc-card">
+          <span class="proc-no">03</span>
+          <span class="proc-ic"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg></span>
+          <h3>Quality Testing</h3>
+          <ul>
+            <li>Strength Testing</li><li>Flexibility Check</li><li>Quality Approval</li><li>Final Inspection</li>
+          </ul>
+        </li>
+        <li class="proc-card">
+          <span class="proc-no">04</span>
+          <span class="proc-ic"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg></span>
+          <h3>Safe Packaging</h3>
+          <ul>
+            <li>Dust-Free Packing</li><li>Strong Sealing</li><li>Accurate Weight</li><li>Safe Transport</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
 
-            <p class="card-desc">
-                Strong and durable plastic used in containers and industrial products.
-                Offers high resistance to chemicals and impact.
-            </p>
+  <!-- ================= WHY US / STANDARDS / TRUST / HIGHLIGHTS ================= -->
+  <section class="pg-section">
+    <div class="container assure-grid">
 
-            <ul>
-                <li>High Strength Material</li>
-                <li>Impact Resistant</li>
-                <li>Chemical Resistant</li>
-                <li>Used in Containers</li>
-            </ul>
+      <div class="assure assure--navy" data-rv="l">
+        <h2>Why Choose Us</h2>
+        <ul class="assure-list">
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg></span><div><h3>Premium Quality</h3><p>We provide high-quality plastic granules with strict quality standards.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-factory"/></svg></span><div><h3>Advanced Machinery</h3><p>Modern manufacturing machines ensure precision and consistency.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg></span><div><h3>Timely Delivery</h3><p>Fast and secure delivery process for customer satisfaction.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span><div><h3>Experienced Team</h3><p>Skilled professionals maintain excellent production quality.</p></div></li>
+        </ul>
 
-        </div>
+        <h2 class="assure-second">Quality Standards</h2>
+        <ul class="assure-list">
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-shield-check"/></svg></span><div><h3>Certified Quality</h3><p>We follow strict manufacturing and quality control standards.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-flask"/></svg></span><div><h3>Advanced Testing</h3><p>Every batch undergoes detailed testing for consistency and strength.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg></span><div><h3>Reliable Material</h3><p>High-grade raw materials ensure durability and premium performance.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg></span><div><h3>Customer Satisfaction</h3><p>We focus on delivering trusted quality products to our clients.</p></div></li>
+        </ul>
+      </div>
+
+      <div class="assure assure--light" data-rv="r">
+        <h2>Certificates &amp; Trust</h2>
+        <ul class="assure-list">
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg></span><div><h3>Quality Assured</h3><p>Premium quality plastic granules with strict quality control process.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-shield-check"/></svg></span><div><h3>Trusted Supplier</h3><p>Trusted by customers for consistent quality and reliable service.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-factory"/></svg></span><div><h3>Safe Production</h3><p>Safe and secure manufacturing process with advanced technology.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg></span><div><h3>Premium Standard</h3><p>Maintaining high standards in every stage of production.</p></div></li>
+        </ul>
+
+        <h2 class="assure-second">Quality Highlights</h2>
+        <ul class="assure-list">
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg></span><div><h3>Premium Material</h3><p>High-quality raw materials for durable and reliable products.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg></span><div><h3>Advanced Machinery</h3><p>Modern machines ensure precision and consistency in production.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span><div><h3>Strict Inspection</h3><p>Every batch is tested carefully before packaging and delivery.</p></div></li>
+          <li><span class="ai"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></span><div><h3>Eco Friendly</h3><p>Sustainable and environmentally responsible production process.</p></div></li>
+        </ul>
+      </div>
 
     </div>
+  </section>
 
+  <!-- ================= REVIEWS ================= -->
+  <section class="pg-section pg-section--alt">
+    <div class="container">
+      <header class="pg-head" data-rv>
+        <span class="pg-eyebrow">Testimonials</span>
+        <h2 class="pg-title">Client Reviews</h2>
+      </header>
 
+      <div class="rev-grid" data-stagger>
+        <figure class="rev-card">
+          <svg class="icon rev-quote" aria-hidden="true"><use href="#i-quote"/></svg>
+          <div class="stars" role="img" aria-label="5 out of 5 stars">
+            <svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg>
+          </div>
+          <blockquote>Excellent quality plastic granules with smooth finish and timely delivery.</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true">RS</span><span><b>Rahul Sharma</b><small>Packaging Industry</small></span></figcaption>
+        </figure>
 
-    <!-- PP + IMAGE SAME LINE -->
-    <div class="material-box">
-          <!-- IMAGE -->
-        <div class="material-img">
+        <figure class="rev-card">
+          <svg class="icon rev-quote" aria-hidden="true"><use href="#i-quote"/></svg>
+          <div class="stars" role="img" aria-label="5 out of 5 stars">
+            <svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg>
+          </div>
+          <blockquote>Highly durable material and professional service. Very satisfied.</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true">AV</span><span><b>Amit Verma</b><small>Furniture Manufacturer</small></span></figcaption>
+        </figure>
 
-            <img src="{% static 'images/pp.jpg' %}" alt="PP Material">
-
-        </div>
-
-        <!-- PP -->
-        <div class="material3-text">
-
-            <h2>PP Quality</h2>
-
-            <p class="card-desc">
-                Lightweight and rigid plastic suitable for household use.
-                Known for heat resistance and long life.
-            </p>
-
-            <ul>
-                <li>Heat Resistant</li>
-                <li>Lightweight & Strong</li>
-                <li>Long Lasting</li>
-                <li>Eco Friendly Material</li>
-            </ul>
-
-        </div>
-
-      
-
+        <figure class="rev-card">
+          <svg class="icon rev-quote" aria-hidden="true"><use href="#i-quote"/></svg>
+          <div class="stars" role="img" aria-label="5 out of 5 stars">
+            <svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg><svg class="icon"><use href="#i-star"/></svg>
+          </div>
+          <blockquote>Premium quality products with consistent performance and safe packaging.</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true">SG</span><span><b>Sanjay Gupta</b><small>Industrial Supplier</small></span></figcaption>
+        </figure>
+      </div>
     </div>
+  </section>
 
-</section>
+  <!-- ================= FAQ ================= -->
+  <section class="pg-section">
+    <div class="container">
+      <header class="pg-head" data-rv>
+        <span class="pg-eyebrow">FAQ</span>
+        <h2 class="pg-title">Frequently Asked Questions</h2>
+      </header>
 
+      <div class="faq-list" id="faqList" data-stagger>
 
-
-
-<!-- TESTING SECTION -->
-<section class="testing-section">
-
-    <h2 class="testing-title">Quality Testing Process</h2>
-
-    <div class="testing-grid">
-
-        <!-- 1 -->
-        <div class="testing-box" >
-            <i class="fas fa-vial"></i>
-
-            <h3>Density Test</h3>
-
-            <p>
-                Ensures proper material density and strength for durable plastic products.
-            </p>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+            <span class="faq-no">01</span>
+            <span class="faq-text">What types of plastic granules do you provide?</span>
+            <svg class="icon faq-chev" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1">
+            <div class="faq-a-inner"><p>We provide LDPE, HDPE and PP plastic granules with premium quality standards.</p></div>
+          </div>
         </div>
 
-        <!-- 2 -->
-        <div class="testing-box">
-            <i class="fas fa-fill-drip"></i>
-
-            <h3>Color Inspection</h3>
-
-            <p>
-                Maintains consistent color quality and smooth appearance in granules.
-            </p>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+            <span class="faq-no">02</span>
+            <span class="faq-text">Do you ensure quality testing?</span>
+            <svg class="icon faq-chev" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2">
+            <div class="faq-a-inner"><p>Yes, every batch undergoes strict quality inspection and testing.</p></div>
+          </div>
         </div>
 
-        <!-- 3 -->
-        <div class="testing-box" >
-            <i class="fas fa-dumbbell"></i>
-
-            <h3>Strength Testing</h3>
-
-            <p>
-                Checks flexibility and impact resistance for long-lasting performance.
-            </p>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+            <span class="faq-no">03</span>
+            <span class="faq-text">Is your packaging safe?</span>
+            <svg class="icon faq-chev" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3">
+            <div class="faq-a-inner"><p>Yes, we use secure and strong packaging for safe transportation.</p></div>
+          </div>
         </div>
 
-        <!-- 4 -->
-        <div class="testing-box" >
-            <i class="fas fa-check-circle"></i>
-
-            <h3>Final Approval</h3>
-
-            <p>
-                Final quality inspection before safe packaging and delivery process.
-            </p>
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+            <span class="faq-no">04</span>
+            <span class="faq-text">How can I place a bulk order or get a quote?</span>
+            <svg class="icon faq-chev" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4">
+            <div class="faq-a-inner"><p>Call or WhatsApp us, or fill the form on our <a href="{% url 'contact' %}">Contact page</a>. Our team will get back to you within 24 hours.</p></div>
+          </div>
         </div>
 
+      </div>
     </div>
-
-</section>
-
-
-
-
-<!-- ========================================= -->
-<!-- QUALITY MAIN WRAPPER -->
-<!-- ========================================= -->
-
-<div class="quality-main-wrapper">
-
-    <!-- LEFT DARK BLUE BOX -->
-    <section class="quality-left-section">
-
-        <div class="quality-left-box">
-
-            <h2>Why Choose Us</h2>
-
-            <ul>
-
-                <li>
-                    <h3>Premium Quality</h3>
-
-                    <p>
-                        We provide high-quality plastic granules with strict quality standards.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Advanced Machinery</h3>
-
-                    <p>
-                        Modern manufacturing machines ensure precision and consistency.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Timely Delivery</h3>
-
-                    <p>
-                        Fast and secure delivery process for customer satisfaction.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Experienced Team</h3>
-
-                    <p>
-                        Skilled professionals maintain excellent production quality.
-                    </p>
-                </li>
-
-            </ul>
-
-            <h2 class="second-title">Quality Standards</h2>
-
-            <ul>
-
-                <li>
-                    <h3>Certified Quality</h3>
-
-                    <p>
-                        We follow strict manufacturing and quality control standards.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Advanced Testing</h3>
-
-                    <p>
-                        Every batch undergoes detailed testing for consistency and strength.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Reliable Material</h3>
-
-                    <p>
-                        High-grade raw materials ensure durability and premium performance.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Customer Satisfaction</h3>
-
-                    <p>
-                        We focus on delivering trusted quality products to our clients.
-                    </p>
-                </li>
-
-            </ul>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- RIGHT WHITE BOX -->
-    <section class="quality-right-section">
-
-        <div class="quality-right-box">
-
-            <h2>Certificates & Trust</h2>
-
-            <ul>
-
-                <li>
-                    <h3>Quality Assured</h3>
-
-                    <p>
-                        Premium quality plastic granules with strict quality control process.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Trusted Supplier</h3>
-
-                    <p>
-                        Trusted by customers for consistent quality and reliable service.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Safe Production</h3>
-
-                    <p>
-                        Safe and secure manufacturing process with advanced technology.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Premium Standard</h3>
-
-                    <p>
-                        Maintaining high standards in every stage of production.
-                    </p>
-                </li>
-
-            </ul>
-
-
-
-            <h2 class="second-title">Quality Highlights</h2>
-
-            <ul>
-
-                <li>
-                    <h3>Premium Material</h3>
-
-                    <p>
-                        High-quality raw materials for durable and reliable products.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Advanced Machinery</h3>
-
-                    <p>
-                        Modern machines ensure precision and consistency in production.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Strict Inspection</h3>
-
-                    <p>
-                        Every batch is tested carefully before packaging and delivery.
-                    </p>
-                </li>
-
-                <li>
-                    <h3>Eco Friendly</h3>
-
-                    <p>
-                        Sustainable and environmentally responsible production process.
-                    </p>
-                </li>
-
-            </ul>
-
-        </div>
-
-    </section>
+  </section>
 
 </div>
-
-
-
-
-
-
-<!-- CLIENT REVIEWS -->
-<section class="review-section" >
-
-    <h2 class="review-title">Client Reviews</h2>
-
-    <div class="review-grid">
-
-        <!-- 1 -->
-        <div class="review-box" >
-
-            <div class="stars">
-                ★★★★★
-            </div>
-
-            <p>
-                Excellent quality plastic granules with smooth finish and timely delivery.
-            </p>
-
-            <h3>Rahul Sharma</h3>
-
-            <span>Packaging Industry</span>
-        </div>
-
-        <!-- 2 -->
-        <div class="review-box" >
-
-            <div class="stars">
-                ★★★★★
-            </div>
-
-            <p>
-                Highly durable material and professional service. Very satisfied.
-            </p>
-
-            <h3>Amit Verma</h3>
-
-            <span>Furniture Manufacturer</span>
-        </div>
-
-        <!-- 3 -->
-        <div class="review-box" >
-
-            <div class="stars">
-                ★★★★★
-            </div>
-
-            <p>
-                Premium quality products with consistent performance and safe packaging.
-            </p>
-
-            <h3>Sanjay Gupta</h3>
-
-            <span>Industrial Supplier</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- FAQ SECTION -->
-
-<section class="faq-section">
-
-    <h2 class="faq-title" >Frequently Asked Questions</h2>
-
-    <div class="faq-container">
-
-        <!-- 1 -->
-        <div class="faq-box" >
-
-            <button class="faq-question">
-                <span class="faq-tag">01.</span>
-                What types of plastic granules do you provide?
-            </button>
-
-            <div class="faq-answer">
-                
-                <p>
-                    <span class="faq-tag">Ans.</span>
-                    We provide LDPE, HDPE and PP plastic granules with premium quality standards.
-                </p>
-            </div>
-
-        </div>
-
-        <!-- 2 -->
-        <div class="faq-box">
-
-            <button class="faq-question">
-                <span class="faq-tag">02.</span>
-                Do you ensure quality testing?
-            </button>
-
-            <div class="faq-answer">
-                
-                <p>
-                    <span class="faq-tag">Ans.</span>
-                    Yes, every batch undergoes strict quality inspection and testing.
-                </p>
-            </div>
-
-        </div>
-
-        <!-- 3 -->
-        <div class="faq-box" >
-
-            <button class="faq-question">
-                <span class="faq-tag">03.</span>
-                Is your packaging safe?
-            </button>
-
-            <div class="faq-answer">
-           
-                <p>
-                     <span class="faq-tag">Ans.</span>
-                    Yes, we use secure and strong packaging for safe transportation.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-
-
-
-<!-- QUALITY PROCESS -->
-<section class="process-section">
-
-    <h2 class="process-title" >Our Quality Process</h2>
-
-    <div class="process-grid">
-
-        <!-- 1 -->
-        <div class="process-box" >
-            <i class="fas fa-search"></i>
-            <h3>01</h3>
-            <p>Raw Material Check</p>
-
-            <div class="process-detail">
-                Density Test<br>
-                Melt Flow Index<br>
-                Moisture Check<br>
-                Color Inspection
-            </div>
-        </div>
-
-        <!-- 2 -->
-        <div class="process-box" >
-            <i class="fas fa-industry"></i>
-            <h3>02</h3>
-            <p>Manufacturing</p>
-
-            <div class="process-detail">
-                High Temperature Control<br>
-                Advanced Machinery<br>
-                Uniform Granule Size<br>
-                Continuous Monitoring
-            </div>
-        </div>
-
-        <!-- 3 -->
-        <div class="process-box" >
-            <i class="fas fa-check-circle"></i>
-            <h3>03</h3>
-            <p>Quality Testing</p>
-
-            <div class="process-detail">
-                Strength Testing<br>
-                Flexibility Check<br>
-                Quality Approval<br>
-                Final Inspection
-            </div>
-        </div>
-
-        <!-- 4 -->
-        <div class="process-box" >
-            <i class="fas fa-box"></i>
-            <h3>04</h3>
-            <p>Safe Packaging</p>
-
-            <div class="process-detail">
-                Dust-Free Packing<br>
-                Strong Sealing<br>
-                Accurate Weight<br>
-                Safe Transport
-            </div>
-        </div>
-
-    </div>
-
-</section>
 {% endblock %}
 
 {% block js %}
-<script src="{% static 'js/quality.js' %}"></script>
+<script src="{% static 'js/quality.js' %}" defer></script>
 {% endblock %}

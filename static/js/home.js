@@ -1,146 +1,135 @@
 // ============================================================
-// JAI DURGA PLASTIC – HOME PAGE JAVASCRIPT
+// JAI DURGA PLASTIC – HOME PAGE SCRIPT
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // ============================================================
-    // 1. ENQUIRY FORM HANDLING (AJAX with CSRF)
-    // ============================================================
-
-    const enquiryForm = document.getElementById('quickEnquiryForm');
-    const formMessage = document.getElementById('formMessage');
-    const submitButton = document.getElementById('submitBtn');
-    const toastContainer = document.getElementById('toastContainer');
+    // ---------------------------------------------------------
+    // Enquiry form (AJAX submit)
+    // ---------------------------------------------------------
+    var enquiryForm = document.getElementById('quickEnquiryForm');
+    var formMessage = document.getElementById('formMessage');
+    var submitBtn = document.getElementById('submitBtn');
+    var toastBox = document.getElementById('toastContainer');
 
     function getCookie(name) {
-        const cookies = document.cookie ? document.cookie.split(';') : [];
-        for (const cookie of cookies) {
-            const trimmedCookie = cookie.trim();
-            if (trimmedCookie.startsWith(name + '=')) {
-                return decodeURIComponent(trimmedCookie.slice(name.length + 1));
+        var cookies = document.cookie ? document.cookie.split(';') : [];
+        for (var i = 0; i < cookies.length; i++) {
+            var c = cookies[i].trim();
+            if (c.indexOf(name + '=') === 0) {
+                return decodeURIComponent(c.slice(name.length + 1));
             }
         }
         return '';
     }
 
-    function setMessage(type, text) {
-        if (!formMessage) return;
-        formMessage.textContent = text;
-        formMessage.className = `form-message ${type} is-visible`;
+    function showToast(type, text) {
+        if (!toastBox) return;
+        var el = document.createElement('div');
+        el.className = 'toast-notification toast-' + type;
+        el.innerHTML =
+            '<span class="toast-icon">' + (type === 'success' ? '✓' : '!') + '</span>' +
+            '<span class="toast-text">' + text + '</span>' +
+            '<button type="button" class="toast-close">&times;</button>';
+        toastBox.appendChild(el);
+
+        function remove() {
+            el.classList.add('is-leaving');
+            setTimeout(function() { el.remove(); }, 260);
+        }
+        el.querySelector('.toast-close').addEventListener('click', remove);
+        setTimeout(remove, 4500);
     }
 
     function clearErrors() {
         if (!enquiryForm) return;
-        enquiryForm.querySelectorAll('.input-group.has-error').forEach(group => {
-            group.classList.remove('has-error');
+        enquiryForm.querySelectorAll('.has-error').forEach(function(g) {
+            g.classList.remove('has-error');
         });
-        enquiryForm.querySelectorAll('.error-text').forEach(error => {
-            error.textContent = '';
-        });
-    }
-
-    function setFieldErrors(errors) {
-        if (!enquiryForm || !errors) return;
-        Object.entries(errors).forEach(([field, message]) => {
-            const input = enquiryForm.querySelector(`[name="${field}"]`);
-            const error = document.getElementById(`error_${field}`);
-            if (input) {
-                input.closest('.input-group')?.classList.add('has-error');
-            }
-            if (error) {
-                error.textContent = message;
-            }
+        enquiryForm.querySelectorAll('.error-text').forEach(function(e) {
+            e.textContent = '';
         });
     }
 
-    function showToast(type, text) {
-        if (!toastContainer) return;
-        const toast = document.createElement('div');
-        toast.className = `toast-notification toast-${type}`;
-        toast.innerHTML = `
-            <span class="toast-icon">${type === 'success' ? '✓' : '!'}</span>
-            <span class="toast-text">${text}</span>
-            <button type="button" class="toast-close" aria-label="Close notification">&times;</button>
-        `;
-        toastContainer.appendChild(toast);
-
-        const removeToast = () => {
-            toast.classList.add('is-leaving');
-            setTimeout(() => toast.remove(), 260);
-        };
-
-        toast.querySelector('.toast-close')?.addEventListener('click', removeToast);
-        setTimeout(removeToast, 4500);
+    function showFieldErrors(errors) {
+        if (!errors) return;
+        Object.keys(errors).forEach(function(field) {
+            var input = enquiryForm.querySelector('[name="' + field + '"]');
+            var errEl = document.getElementById('error_' + field);
+            if (input && input.closest('.input-group')) {
+                input.closest('.input-group').classList.add('has-error');
+            }
+            if (errEl) errEl.textContent = errors[field];
+        });
     }
 
     if (enquiryForm) {
-        enquiryForm.addEventListener('submit', async function(event) {
-            event.preventDefault();
+        enquiryForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             clearErrors();
-            setMessage('', '');
-
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.classList.add('is-loading');
-                submitButton.innerHTML = '<span class="btn-spinner"></span> Sending...';
+            if (formMessage) {
+                formMessage.textContent = '';
+                formMessage.className = 'form-message';
+            }
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Sending...';
             }
 
-            try {
-                const response = await fetch(enquiryForm.action, {
-                    method: 'POST',
-                    body: new FormData(enquiryForm),
-                    headers: {
-                        'X-CSRFToken': getCookie('csrftoken'),
-                        'X-Requested-With': 'XMLHttpRequest'
+            fetch(enquiryForm.action, {
+                method: 'POST',
+                body: new FormData(enquiryForm),
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (!data.success) {
+                    showFieldErrors(data.errors);
+                    if (formMessage) {
+                        formMessage.textContent = data.message || 'Please fix the errors.';
+                        formMessage.className = 'form-message error is-visible';
                     }
-                });
-                const data = await response.json();
-
-                if (!response.ok || !data.success) {
-                    setFieldErrors(data.errors);
-                    setMessage('error', data.message || 'Please check the form and try again.');
-                    showToast('error', data.message || 'Please check the form and try again.');
+                    showToast('error', data.message || 'Please check the form.');
                     return;
                 }
-
                 enquiryForm.reset();
-                setMessage('success', data.message || 'Enquiry submitted successfully.');
-                showToast('success', data.message || 'Enquiry submitted successfully.');
-            } catch (error) {
-                setMessage('error', 'Network issue. Please try again.');
-                showToast('error', 'Network issue. Please try again.');
-            } finally {
-                if (submitButton) {
-                    submitButton.disabled = false;
-                    submitButton.classList.remove('is-loading');
-                    submitButton.innerHTML = 'Send Enquiry <i class="fas fa-paper-plane"></i>';
+                if (formMessage) {
+                    formMessage.textContent = data.message || 'Enquiry submitted.';
+                    formMessage.className = 'form-message success is-visible';
                 }
-            }
+                showToast('success', data.message || 'Enquiry submitted.');
+            })
+            .catch(function() {
+                showToast('error', 'Network issue. Please try again.');
+            })
+            .finally(function() {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Send Enquiry <i class="fas fa-paper-plane"></i>';
+                }
+            });
         });
     }
 
-    // ============================================================
-    // 2. SCROLL REVEAL ANIMATIONS (Intersection Observer)
-    // ============================================================
-
-    const revealItems = document.querySelectorAll(
+    // ---------------------------------------------------------
+    // Scroll reveal
+    // ---------------------------------------------------------
+    var items = document.querySelectorAll(
         '.intro-grid, .product-card, .feature-card, .cta-content-block, .enquiry-form-block'
     );
-    if ('IntersectionObserver' in window) {
-        revealItems.forEach(item => item.classList.add('home-reveal'));
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
+    if ('IntersectionObserver' in window && items.length) {
+        items.forEach(function(i) { i.classList.add('home-reveal'); });
+        var obs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(en) {
+                if (en.isIntersecting) {
+                    en.target.classList.add('is-visible');
+                    obs.unobserve(en.target);
                 }
             });
         }, { threshold: 0.12 });
-        revealItems.forEach(item => observer.observe(item));
-    } else {
-        revealItems.forEach(item => item.classList.add('is-visible'));
+        items.forEach(function(i) { obs.observe(i); });
     }
-
-    console.log('✅ Home page JS loaded – form ready.');
 });

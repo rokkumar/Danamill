@@ -1,0 +1,209 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}{{ client.name }} — Ledger{% endblock %}
+{% block page_title %}Client Ledger{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/client_ledger.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="ledger-page">
+
+    <!-- ================= TOP BAR ================= -->
+    <div class="ledger-topbar">
+        <div>
+            <h2>{{ client.name|upper }}</h2>
+            <div class="ledger-meta">
+                {% if client.phone %}<span>📞 {{ client.phone }}</span>{% endif %}
+                {% if client.address %}<span>📍 {{ client.address }}</span>{% endif %}
+            </div>
+        </div>
+        <div class="ledger-topbar-actions">
+            <a href="{% url 'ledger:add_entry' client.id %}" class="btn btn-green">+ New Entry</a>
+            <button type="button" onclick="window.print()" class="btn btn-blue">🖨 Print</button>
+            <a href="{% url 'ledger:client_list' %}" class="btn btn-grey">← Back</a>
+        </div>
+    </div>
+
+    <!-- ================= SUMMARY CARDS ================= -->
+    <div class="ledger-cards">
+        <div class="lcard green">
+            <span>Opening Balance</span>
+            <strong>₹ {{ client.opening_balance }}</strong>
+        </div>
+        <div class="lcard blue">
+            <span>Total Sales</span>
+            <strong>₹ {{ total_sales }}</strong>
+        </div>
+        <div class="lcard purple">
+            <span>Total Payments</span>
+            <strong>₹ {{ total_payments }}</strong>
+        </div>
+        <div class="lcard orange">
+            <span>Grand Total</span>
+            <strong>₹ {{ grand_total }}</strong>
+        </div>
+        <div class="lcard red">
+            <span>Remaining</span>
+            <strong>₹ {{ remaining_balance }}</strong>
+        </div>
+    </div>
+
+    <!-- ================= MAIN LEDGER SECTION ================= -->
+    <div class="ledger-main-grid">
+
+        <!-- LEFT: SALE ENTRIES TABLE -->
+        <div class="ledger-sales-panel">
+            <h3 class="panel-title">Sale Entries</h3>
+            <div class="ledger-table-box">
+                <table class="ledger-table">
+                    <thead>
+                        <tr>
+                            <th>S. No.</th>
+                            <th>Date</th>
+                            <th>Bill No</th>
+                            <th>Description</th>
+                            <th>Qty</th>
+                            <th>Rate</th>
+                            <th>Amount</th>
+                            <th>Balance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="opening-row">
+                            <td colspan="6"><strong>OPENING BALANCE</strong></td>
+                            <td class="amount"><strong>₹{{ client.opening_balance }}</strong></td>
+                            <td class="balance"><strong>₹{{ client.opening_balance }}</strong></td>
+                            <td></td>
+                        </tr>
+
+                        {% for row in rows %}
+                        {% if row.entry.entry_type == 'SALE' %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ row.entry.date|date:"d-m-Y" }}</td>
+                            <td>{{ row.entry.bill_no|default:"—" }}</td>
+                            <td>{{ row.entry.description|default:"—" }}</td>
+                            <td>{{ row.entry.quantity }}</td>
+                            <td>₹{{ row.entry.rate }}</td>
+                            <td class="amount">₹{{ row.entry.amount }}</td>
+                            <td class="balance">₹{{ row.balance }}</td>
+                            <td class="action-cell">
+                                <a href="{% url 'ledger:edit_entry' row.entry.id %}"
+                                   class="icon-btn edit-btn" title="Edit">✏️</a>
+                                <a href="{% url 'ledger:delete_entry' row.entry.id %}"
+                                   class="icon-btn delete-btn" title="Delete">🗑️</a>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4"><strong>TOTAL</strong></td>
+                            <td><strong>{{ total_quantity }}</strong></td>
+                            <td></td>
+                            <td class="amount"><strong>₹{{ total_sales }}</strong></td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- RIGHT: PAYMENTS PANEL -->
+        <div class="ledger-payments-panel">
+            <h3 class="panel-title">Payments Received</h3>
+            <div class="ledger-table-box">
+                <table class="ledger-table payments-table">
+                    <thead>
+                        <tr>
+                            <th>S. No.</th>
+                            <th>Payment Date</th>
+                            <th>Amount</th>
+                            <th>Pay Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in payments_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ p.payment_date|date:"d-m-Y" }}</td>
+                            <td class="amount">₹{{ p.payment_amount }}</td>
+                            <td>{{ p.get_pay_type_display }}</td>
+                            <td class="action-cell">
+                                <a href="{% url 'ledger:edit_entry' p.id %}"
+                                   class="icon-btn edit-btn" title="Edit">✏️</a>
+                                <a href="{% url 'ledger:delete_entry' p.id %}"
+                                   class="icon-btn delete-btn" title="Delete">🗑️</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="5" class="empty-row">No payments yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2"><strong>TOTAL RECEIVED</strong></td>
+                            <td class="amount"><strong>₹{{ total_payments }}</strong></td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= EXCEL-STYLE SUMMARY BLOCK ================= -->
+    <div class="ledger-summary-excel">
+        <h3>Monthly Summary</h3>
+        <div class="summary-rows">
+            <div class="summary-row">
+                <span class="summary-label">Total Month Amount</span>
+                <span class="summary-value">₹ {{ current_month_amount }}</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Previous Month Balance</span>
+                <span class="summary-value">₹ {{ previous_month_balance }}</span>
+            </div>
+            <div class="summary-row grand">
+                <span class="summary-label">Grand Total</span>
+                <span class="summary-value">₹ {{ grand_total }}</span>
+            </div>
+            <div class="summary-row received">
+                <span class="summary-label">Received Payments</span>
+                <span class="summary-value">₹ {{ total_payments }}</span>
+            </div>
+            <div class="summary-row remaining">
+                <span class="summary-label">Remaining Balance</span>
+                <span class="summary-value">₹ {{ remaining_balance }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CHART ================= -->
+    <div class="ledger-chart-box">
+        <h3>Monthly Sales vs Payments (Last 6 Months)</h3>
+        <div class="ledger-chart-container">
+            <canvas id="ledgerChart"></canvas>
+        </div>
+    </div>
+
+</div>
+
+{{ chart_labels_json|json_script:"chart-labels" }}
+{{ chart_sales_json|json_script:"chart-sales" }}
+{{ chart_payments_json|json_script:"chart-payments" }}
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/ledger/client_ledger.js' %}"></script>
+{% endblock %}

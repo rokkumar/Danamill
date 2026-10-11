@@ -1,0 +1,121 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}{{ event.name }} — Statement{% endblock %}
+{% block page_title %}Event Statement{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/events/events.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="events-page">
+
+    <!-- ================ HERO BANNER ================ -->
+    <div class="statement-hero">
+        <div class="statement-hero-content">
+            <h1>{{ event.name }}</h1>
+            {% if event.description %}<p>{{ event.description }}</p>{% endif %}
+        </div>
+        <div class="statement-hero-actions">
+            <a href="{% url 'events:item_create' event.id %}" class="btn btn-green">+ Add Item</a>
+            <a href="{% url 'events:event_edit' event.id %}" class="btn btn-grey">Edit Event</a>
+            <button type="button" onclick="window.print()" class="btn btn-blue">Print</button>
+            <a href="{% url 'events:event_list' %}" class="btn btn-grey">← Back</a>
+        </div>
+    </div>
+
+    {% if messages %}
+    <div class="messages-block">
+        {% for msg in messages %}
+        <div class="alert alert-{{ msg.tags }}">{{ msg }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ================ SUMMARY CARDS ================ -->
+    <div class="summary-grid">
+        <div class="summary-card card-collection">
+            <span>TOTAL COLLECTION</span>
+            <strong>₹ {{ event.total_collection }}</strong>
+        </div>
+        <div class="summary-card card-expenses">
+            <span>TOTAL EXPENSES</span>
+            <strong>₹ {{ total_expenses }}</strong>
+        </div>
+        <div class="summary-card card-paid">
+            <span>PAID AMOUNT</span>
+            <strong>₹ {{ total_paid }}</strong>
+        </div>
+        <div class="summary-card card-pending">
+            <span>PENDING BALANCE</span>
+            <strong>₹ {{ total_pending }}</strong>
+        </div>
+        <div class="summary-card card-remaining">
+            <span>REMAINING FUNDS</span>
+            <strong>₹ {{ remaining_funds }}</strong>
+        </div>
+    </div>
+
+    <!-- ================ ITEMIZED TABLE ================ -->
+    <div class="items-section">
+        <h2 class="items-title">Itemized Expense Statement</h2>
+
+        <div class="table-wrapper">
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Item Details</th>
+                        <th>Total Cost (₹)</th>
+                        <th>Paid Amount (₹)</th>
+                        <th>Pending (₹)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in items %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="item-name">{{ row.item.item_name }}</td>
+                        <td class="num">{{ row.item.total_cost }}</td>
+                        <td class="num">{{ row.item.paid_amount }}</td>
+                        <td class="num">
+                            {% if row.pending > 0 %}
+                                <span class="pending-badge">{{ row.pending }}</span>
+                            {% else %}
+                                <span class="paid-badge">0</span>
+                            {% endif %}
+                        </td>
+                        <td class="action-cell">
+                            <a href="{% url 'events:item_edit' row.item.id %}"
+                               class="icon-btn edit-btn" title="Edit">✏️</a>
+                            <a href="{% url 'events:item_delete' row.item.id %}"
+                               class="icon-btn delete-btn" title="Delete">🗑️</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="empty-row">
+                            No items yet. Click "+ Add Item" to add one.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"><strong>TOTAL</strong></td>
+                        <td class="num"><strong>{{ total_expenses }}</strong></td>
+                        <td class="num"><strong>{{ total_paid }}</strong></td>
+                        <td class="num"><strong>{{ total_pending }}</strong></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
