@@ -1,0 +1,514 @@
+/* ============================================================
+   Ledger — Client List page
+   (Final merged version — compact, responsive, no duplicates)
+   ============================================================ */
+
+/* ---------- Wrapper ---------- */
+.ledger-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.ledger-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 14px;
+    padding: 20px 24px;
+}
+
+.ledger-list-header h2 {
+    margin: 0 0 4px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    line-height: 1.2;
+}
+
+.ledger-list-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+/* ============================================================
+   SUMMARY STATS
+   ============================================================ */
+.ledger-list-summary {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+.mini-stat {
+    text-align: right;
+    min-width: 110px;
+}
+
+.mini-stat span {
+    display: block;
+    font-size: 0.68rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.mini-stat strong {
+    font-size: 1rem;
+    color: #f1f5f9;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1;
+    white-space: nowrap;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-green {
+    background: #10b981;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+}
+
+.btn-green:hover {
+    background: #059669;
+    color: #ffffff !important;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+}
+
+/* ---------- Add Client button (compact) ---------- */
+.add-client-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 18px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff !important;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: auto;
+    max-width: fit-content;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.add-client-btn:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    color: #ffffff !important;
+    text-decoration: none;
+}
+
+.add-client-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+}
+
+/* ============================================================
+   SEARCH BAR
+   ============================================================ */
+.ledger-search-bar {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+
+.ledger-search-bar input {
+    width: 100%;
+    padding: 10px 14px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #f1f5f9;
+    font-family: inherit;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ledger-search-bar input:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.ledger-search-bar input::placeholder {
+    color: #64748b;
+}
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+.ledger-table-wrapper {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 14px;
+    overflow-x: auto;
+}
+
+.ledger-list-table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.ledger-list-table thead {
+    background: #1e293b;
+}
+
+.ledger-list-table thead th {
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border-bottom: 1px solid #334155;
+    white-space: nowrap;
+}
+
+/* Numeric columns — right aligned */
+.ledger-list-table thead th:nth-child(4),
+.ledger-list-table thead th:nth-child(5) {
+    text-align: right;
+}
+
+.ledger-list-table tbody td {
+    padding: 12px 14px;
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #1e293b;
+    vertical-align: middle;
+}
+
+.ledger-list-table tbody tr:hover {
+    background: rgba(124, 58, 237, 0.05);
+}
+
+.ledger-list-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Price/amount columns — normal size, right aligned */
+.ledger-list-table td:nth-child(4),
+.ledger-list-table td:nth-child(5) {
+    text-align: right;
+    font-size: 0.88rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.client-name {
+    color: #a5b4fc;
+    font-weight: 600;
+    font-size: 0.88rem;
+}
+
+.outstanding {
+    color: #86efac;
+    font-weight: 600;
+}
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.badge-active {
+    background: #14532d;
+    color: #86efac;
+}
+
+.badge-inactive {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+/* ============================================================
+   VIEW BUTTON
+   ============================================================ */
+.btn-view {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #7c3aed;
+    color: #ffffff !important;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.btn-view:hover {
+    background: #6d28d9;
+    color: #ffffff !important;
+    text-decoration: none;
+}
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+.empty {
+    text-align: center;
+    padding: 30px;
+    color: #64748b;
+    font-size: 0.88rem;
+}
+
+/* ============================================================
+   LIGHT MODE
+   ============================================================ */
+.light-mode .ledger-list-header,
+.light-mode .ledger-search-bar,
+.light-mode .ledger-table-wrapper {
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+
+.light-mode .ledger-list-header h2 { color: #0f172a; }
+.light-mode .ledger-list-header p { color: #94a3b8; }
+.light-mode .mini-stat span { color: #64748b; }
+.light-mode .mini-stat strong { color: #0f172a; }
+
+.light-mode .ledger-search-bar input {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: #0f172a;
+}
+
+.light-mode .ledger-list-table thead { background: #f1f5f9; }
+.light-mode .ledger-list-table thead th {
+    color: #475569;
+    border-bottom-color: #e2e8f0;
+}
+.light-mode .ledger-list-table tbody td {
+    color: #334155;
+    border-bottom-color: #f1f5f9;
+}
+.light-mode .ledger-list-table tbody tr:hover { background: #f8fafc; }
+
+.light-mode .client-name { color: #6d28d9; }
+.light-mode .outstanding { color: #166534; }
+
+.light-mode .badge-active   { background: #dcfce7; color: #166534; }
+.light-mode .badge-inactive { background: #fee2e2; color: #991b1b; }
+
+.light-mode .empty { color: #94a3b8; }
+
+/* ============================================================
+   RESPONSIVE — PHASE-BY-PHASE
+   ============================================================ */
+
+/* Large tablet (≤1100px) */
+@media (max-width: 1100px) {
+    .ledger-list-header {
+        padding: 16px 20px;
+    }
+    .ledger-list-summary {
+        gap: 16px;
+    }
+    .mini-stat {
+        min-width: 100px;
+    }
+    .mini-stat strong {
+        font-size: 0.95rem;
+    }
+}
+
+/* Small tablet / large mobile (≤768px) */
+@media (max-width: 768px) {
+    .ledger-list-wrapper {
+        gap: 16px;
+    }
+
+    .ledger-list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+        gap: 14px;
+    }
+
+    .ledger-list-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .ledger-list-summary {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .mini-stat {
+        text-align: left;
+        min-width: unset;
+    }
+
+    .mini-stat strong {
+        font-size: 1rem;
+    }
+
+    /* Add Client button — full width on its own row */
+    .add-client-btn {
+        grid-column: 1 / -1;
+        width: 100%;
+        justify-content: center;
+        padding: 11px 18px;
+        margin-top: 4px;
+    }
+
+    .ledger-search-bar {
+        padding: 10px 14px;
+    }
+
+    .ledger-list-table {
+        min-width: 700px;
+        font-size: 0.82rem;
+    }
+
+    .ledger-list-table thead th,
+    .ledger-list-table tbody td {
+        padding: 10px 12px;
+    }
+
+    .ledger-list-table td:nth-child(4),
+    .ledger-list-table td:nth-child(5) {
+        font-size: 0.82rem;
+    }
+}
+
+/* Mobile (≤600px) */
+@media (max-width: 600px) {
+    .ledger-list-summary {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .mini-stat {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        background: #1e293b;
+        border-radius: 8px;
+    }
+
+    .mini-stat span {
+        margin-bottom: 0;
+        font-size: 0.7rem;
+    }
+
+    .mini-stat strong {
+        font-size: 0.95rem;
+    }
+
+    .add-client-btn {
+        margin-top: 8px;
+    }
+}
+
+/* Small mobile (≤480px) */
+@media (max-width: 480px) {
+    .ledger-list-header {
+        padding: 14px;
+    }
+
+    .ledger-list-header h2 {
+        font-size: 1rem;
+    }
+
+    .ledger-list-header p {
+        font-size: 0.78rem;
+    }
+
+    .mini-stat {
+        padding: 8px 10px;
+    }
+
+    .mini-stat span {
+        font-size: 0.65rem;
+    }
+
+    .mini-stat strong {
+        font-size: 0.9rem;
+    }
+
+    .add-client-btn {
+        font-size: 0.78rem;
+        padding: 10px 16px;
+    }
+
+    .ledger-list-table {
+        min-width: 650px;
+        font-size: 0.78rem;
+    }
+
+    .ledger-list-table thead th,
+    .ledger-list-table tbody td {
+        padding: 9px 10px;
+    }
+
+    .btn-view {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+    }
+
+    .badge {
+        font-size: 0.62rem;
+        padding: 3px 8px;
+    }
+}

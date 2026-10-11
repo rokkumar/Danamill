@@ -1,44 +1,64 @@
 """
 URL configuration for danamill project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path,include
-from django.shortcuts import render
-from . import views
+from django.contrib.auth import views as auth_views
 
-def home(request):
-    return render(request, 'home.html')
+from . import views
+from accounts import views as account_views
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('home/', views.home, name='home'),
+    # Hidden Django admin (used rarely — custom dashboard is the main UI)
+    path(settings.ADMIN_URL, admin.site.urls),
+
+    # ---------------------------------------------------------
+    # Authentication
+    # ---------------------------------------------------------
+    path(
+        'login/',
+        auth_views.LoginView.as_view(template_name='registration/login.html'),
+        name='login',
+    ),
+    path('logout/', account_views.logout_view, name='logout'),
+
+    # ---------------------------------------------------------
+    # Public site
+    # ---------------------------------------------------------
+    path('', views.home, name='home'),
     path('about/', views.about, name='about'),
-    path('quality/',views.quality, name='quality'),
-    path("products/", views.products, name="products"),
+    path('products/', views.products, name='products'),
     path('infrastructure/', views.infrastructure, name='infrastructure'),
     path('contact/', views.contact, name='contact'),
-    path('cart/', views.cart, name='cart'),
-    path('', include('Enquiry.urls')),  #Ankush Enquiry
-    path('', include('Enquiry.urls')),#Ankush Enquiry
-    path('cart/', include('cart.urls')), #Ankush Cart Page
-    path('order/', include('order.urls')),#Khushi Pal order
+    path('quality/', views.quality, name='quality'),
 
+    path('', include('Enquiry.urls')),
+    path('cart/', include('cart.urls')),
+    path('order/', include('order.urls')),
+
+    # ---------------------------------------------------------
+    # Custom dashboard (ERP)
+    # ---------------------------------------------------------
+    # Main dashboard (Reports / Analytics)
+    path('dashboard/', include('reports.urls')),
+
+    # Sub-modules
+
+    path('dashboard/ledger/', include('ledger.urls')),
+    path('dashboard/inventory/', include('inventory.urls')),
+    path('dashboard/production/', include('production.urls')),
+    path('dashboard/machines/', include('machines.urls')),
+    path('dashboard/workforce/', include('workforce.urls')),
+    path('dashboard/quality/', include('quality.urls')),
+    path('dashboard/finance/', include('finance.urls')),
+    path('dashboard/dispatch/', include('dispatch.urls')),
+    # path('dashboard/reports/', include('reports.urls')),
+    path('dashboard/events/', include('events.urls')),
 ]
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

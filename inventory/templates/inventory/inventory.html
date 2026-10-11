@@ -1,0 +1,189 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Inventory — Jai Durga Plastic{% endblock %}
+{% block page_title %}Inventory Management{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/inventory/inventory.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="inventory-page">
+
+    <!-- ================= STOCK SUMMARY ================= -->
+    <div class="stock-grid">
+
+        <div class="stock-card stock-hdpe">
+            <div class="stock-icon">🧱</div>
+            <div class="stock-body">
+                <h4>HDPE</h4>
+                <p>{{ stock.HDPE|default:0 }} <small>Kg</small></p>
+            </div>
+        </div>
+
+        <div class="stock-card stock-ldpe">
+            <div class="stock-icon">🧊</div>
+            <div class="stock-body">
+                <h4>LDPE</h4>
+                <p>{{ stock.LDPE|default:0 }} <small>Kg</small></p>
+            </div>
+        </div>
+
+        <div class="stock-card stock-pp">
+            <div class="stock-icon">📦</div>
+            <div class="stock-body">
+                <h4>PP</h4>
+                <p>{{ stock.PP|default:0 }} <small>Kg</small></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= CHARTS ================= -->
+    <div class="chart-grid">
+
+        <div class="chart-card">
+            <h3>Stock Distribution</h3>
+            <div class="chart-container">
+                <canvas id="stockChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <h3>Monthly Additions (Last 6 Months)</h3>
+            <div class="chart-container">
+                <canvas id="monthlyChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= ADD RECORD ================= -->
+    <div class="inventory-card">
+
+        <div class="card-header">
+            <h3>Add Inventory Record</h3>
+            <span class="card-hint">All fields are required</span>
+        </div>
+
+        <form method="POST" class="inventory-form" autocomplete="off">
+            {% csrf_token %}
+
+            <div class="field">
+                <label for="{{ form.material.id_for_label }}">Material</label>
+                {{ form.material }}
+                {% if form.material.errors %}
+                <span class="field-error">{{ form.material.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.quantity.id_for_label }}">Quantity (Kg)</label>
+                {{ form.quantity }}
+                {% if form.quantity.errors %}
+                <span class="field-error">{{ form.quantity.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.supplier.id_for_label }}">Supplier</label>
+                {{ form.supplier }}
+                {% if form.supplier.errors %}
+                <span class="field-error">{{ form.supplier.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.date.id_for_label }}">Date</label>
+                {{ form.date }}
+                {% if form.date.errors %}
+                <span class="field-error">{{ form.date.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.scrap.id_for_label }}">Scrap (Kg)</label>
+                {{ form.scrap }}
+                {% if form.scrap.errors %}
+                <span class="field-error">{{ form.scrap.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <div class="field submit-field">
+                <button type="submit" class="submit-btn">Add Record</button>
+            </div>
+
+        </form>
+
+        {% if form.non_field_errors %}
+        <div class="form-error-box">
+            {{ form.non_field_errors.0 }}
+        </div>
+        {% endif %}
+
+    </div>
+
+    <!-- ================= RECORDS TABLE ================= -->
+    <div class="inventory-card">
+
+        <div class="card-header">
+            <h3>Inventory Records</h3>
+            <span class="card-hint">{{ data|length }} record{{ data|length|pluralize }}</span>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S. No.</th>
+                        <th>Material</th>
+                        <th>Quantity (Kg)</th>
+                        <th>Supplier</th>
+                        <th>Date</th>
+                        <th>Scrap (Kg)</th>
+                        <th>Net (Kg)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            <span class="material-tag material-{{ item.material|lower }}">
+                                {{ item.material }}
+                            </span>
+                        </td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.supplier }}</td>
+                        <td>{{ item.date|date:"d M Y" }}</td>
+                        <td>{{ item.scrap }}</td>
+                        <td class="net-qty">{{ item.net_quantity }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="empty">
+                            No inventory records yet.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+{{ stock_chart_labels|json_script:"stock-labels" }}
+{{ stock_chart_data|json_script:"stock-data" }}
+{{ monthly_labels|json_script:"monthly-labels" }}
+{{ monthly_data|json_script:"monthly-data" }}
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/inventory/inventory.js' %}"></script>
+{% endblock %}

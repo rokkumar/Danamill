@@ -1,0 +1,68 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Production Batches — Jai Durga Plastic{% endblock %}
+{% block page_title %}Batch Management{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/production/batches.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="batch-wrapper">
+
+    <div class="batch-top">
+        <div>
+            <h2>Production Batches</h2>
+            <p>All batches tracked across machines and shifts</p>
+        </div>
+        <span class="badge-count">{{ batches|length }} batch{{ batches|length|pluralize }}</span>
+    </div>
+
+    <div class="batch-card">
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Batch</th>
+                        <th>Machine</th>
+                        <th>Material</th>
+                        <th>Shift</th>
+                        <th>Output</th>
+                        <th>Scrap</th>
+                        <th>Efficiency</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in batches %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="batch-id">{{ item.batch }}</td>
+                        <td>{{ item.machine }}</td>
+                        <td>{{ item.material }}</td>
+                        <td><span class="badge badge-shift">{{ item.shift }}</span></td>
+                        <td class="output-text">{{ item.output }} kg</td>
+                        <td class="scrap-text">{{ item.scrap }} kg</td>
+                        <td class="efficiency-text">{{ item.efficiency }}%</td>
+                        <td><span class="status-badge status-{{ item.status|lower }}">{{ item.status }}</span></td>
+                        <td>{{ item.production_date|date:"d M Y" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="10" class="empty">No batch records found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/production/batches.js' %}"></script>
+{% endblock %}

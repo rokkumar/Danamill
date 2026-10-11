@@ -1,214 +1,176 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}About Us | Jai Durga Plastic{% endblock %}
+{% block meta_description %}Jai Durga Plastic - leading manufacturer of LDPE, HDPE and PP plastic granules since 1995.{% endblock %}
+
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/about.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="about-hero">
-    <div class="hero-content">
-        <h1>About Us</h1>
-        <p>Leading Manufacturer of Plastic Granules</p>
+<div class="about-page">
+
+  <!-- ================= HERO ================= -->
+  <section class="a-hero" style="--hero-img: url('{% static 'images/granules1.jpeg' %}')">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="{% url 'home' %}">Home</a>
+        <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        <span aria-current="page">About Us</span>
+      </nav>
+      <h1>About Us</h1>
+      <p>Leading Manufacturer of Plastic Granules</p>
     </div>
-</div>
+  </section>
 
+  <!-- ================= OUR STORY ================= -->
+  <section class="a-section">
+    <div class="container story-grid">
+      <div class="story-text" data-rv="l">
+        <span class="eyebrow">About Us</span>
+        <h2 class="a-h2">Our Story</h2>
+        <p class="a-lead">Our company provides high-quality plastic granules including LDPE, HDPE, and PP for various industries.</p>
+        <p class="a-text">From small beginnings, we have grown into a trusted supplier, delivering durable and flexible raw materials across India.</p>
+        <p class="a-text">We focus on quality, innovation, and customer satisfaction, ensuring the best products for our clients.</p>
+      </div>
 
-<!-- 🔥 About Section -->
-<div class="about-section">
-
-    <!-- Left Text -->
-    <div class="about-text">
-        <h4>ABOUT US</h4>
-        <h1>Our Story</h1>
-
-        <p>
-            Our company provides high-quality plastic granules including
-            LDPE, HDPE, and PP for various industries.
-        </p>
-
-        <p>
-            From small beginnings, we have grown into a trusted supplier,
-            delivering durable and flexible raw materials across India.
-        </p>
-
-        <p>
-            We focus on quality, innovation, and customer satisfaction,
-            ensuring the best products for our clients.
-        </p>
+      <div class="story-media" data-rv="r">
+        <div class="img-clip">
+          <img src="{% static 'images/granules2.jpeg' %}" alt="Plastic granules manufactured by Jai Durga Plastic" loading="lazy">
+        </div>
+        <div class="story-badge"><small>Since</small><b>1995</b></div>
+      </div>
     </div>
+  </section>
 
-    <!-- Right Image -->
-    <div class="about-image">
-        <img src="{% static 'images/granules2.jpeg' %}" alt="Granules">
+  <!-- ================= STATS ================= -->
+  <section class="a-stats" aria-label="Company at a glance">
+    <div class="container stats-grid" data-stagger>
+      <div class="stat"><b data-count="1995">1995</b><span>Established</span></div>
+      <div class="stat"><b data-count="3">3</b><span>Core Granule Types</span></div>
+      <div class="stat"><b data-count="10">10</b><span>Industries Served</span></div>
+      <div class="stat"><b data-count="5">5</b><span>In-house Process Stages</span></div>
     </div>
+  </section>
 
-</div>
+  <!-- ================= WHY US + INFRASTRUCTURE ================= -->
+  <section class="a-split">
+    <div class="split-panel panel-navy">
+      <div class="inner" data-rv>
+        <span class="eyebrow">Why Us</span>
+        <h2 class="a-h2">Why Clients Trust Us</h2>
+        <p class="a-text">Our company is recognized as a leading manufacturer of plastic products and granules.</p>
 
-
-
-<div class="about-split">
-
-    <!-- LEFT SIDE (RED) -->
-    <div class="left-box">
-        <h4>WHY US</h4>
-        <h2>Feedback From Clients</h2>
-
-        <p>
-            Our company is recognized as a leading manufacturer of plastic products and granules.
-        </p>
-
-        <ul>
-            <li>International quality standard range</li>
-            <li>Well equipped manufacturing facility</li>
-            <li>Expert team of engineers</li>
-            <li>Customized packaging</li>
-            <li>Competitive prices</li>
+        <ul class="feature-list" data-stagger>
+          <li><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg></span>International quality standard range</li>
+          <li><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-factory"/></svg></span>Well equipped manufacturing facility</li>
+          <li><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span>Expert team of engineers</li>
+          <li><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg></span>Customized packaging</li>
+          <li><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-tag"/></svg></span>Competitive prices</li>
         </ul>
+      </div>
     </div>
 
-    <!-- RIGHT SIDE (WHITE) -->
-    <div class="right-box">
-        <h4>OUR INFRASTRUCTURE</h4>
-        <h2>About Our Unit</h2>
+    <div class="split-panel panel-light">
+      <div class="inner" data-rv>
+        <span class="eyebrow">Our Infrastructure</span>
+        <h2 class="a-h2">About Our Unit</h2>
+        <p class="a-text">We are equipped with modern machinery and advanced technology to manufacture high-quality plastic granules including LDPE, HDPE, and PP.</p>
+        <p class="a-text">Our infrastructure includes procurement, manufacturing, quality control, packaging, and logistics ensuring the best output for our clients.</p>
 
-        <p>
-            We are equipped with modern machinery and advanced technology to manufacture
-            high-quality plastic granules including LDPE, HDPE, and PP.
-        </p>
-
-        <p>
-            Our infrastructure includes procurement, manufacturing, quality control,
-            packaging, and logistics ensuring the best output for our clients.
-        </p>
+        <ol class="process" data-stagger>
+          <li><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-cart"/></svg></span>Procurement</li>
+          <li><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-factory"/></svg></span>Manufacturing</li>
+          <li><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-shield-check"/></svg></span>Quality Control</li>
+          <li><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg></span>Packaging</li>
+          <li><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg></span>Logistics</li>
+        </ol>
+      </div>
     </div>
+  </section>
 
-</div>
+  <!-- ================= WHY CHOOSE US ================= -->
+  <section class="a-section">
+    <div class="container why-grid">
+      <div class="story-media" data-rv="l">
+        <div class="img-clip">
+          <img src="{% static 'images/factory.jpeg' %}" alt="Jai Durga Plastic manufacturing unit" loading="lazy">
+        </div>
+      </div>
 
+      <div data-rv="r">
+        <span class="eyebrow">Product Quality</span>
+        <h2 class="a-h2">Why Choose Us</h2>
 
-
-
-
-<div class="why-section">
-
-    <!-- LEFT IMAGE -->
-    <div class="why-image">
-        <img src="{% static 'images/factory.jpeg' %}" alt="Factory">
+        <div class="points">
+          <div class="point">
+            <span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-shield-check"/></svg></span>
+            <div>
+              <h3>Strict Quality Policies</h3>
+              <p>Being a quality conscious organization, we follow strict quality policies to manufacture high-quality plastic granules.</p>
+            </div>
+          </div>
+          <div class="point">
+            <span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg></span>
+            <div>
+              <h3>Innovation &amp; Customer Satisfaction</h3>
+              <p>We focus on innovation and customer satisfaction, delivering durable and flexible plastic raw materials across industries.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- RIGHT CONTENT -->
-    <div class="why-content">
-
-        <h4>PRODUCT QUALITY</h4>
-        <h2>Why Choose Us</h2>
-
-        <p>
-            Being a quality conscious organization, we follow strict quality policies
-            to manufacture high-quality plastic granules.
-        </p>
-
-        <h4 class="mt">PRODUCT QUALITY</h4>
-        <h2>Why Choose Us</h2>
-
-        <p>
-            We focus on innovation and customer satisfaction, delivering
-            durable and flexible plastic raw materials across industries.
-        </p>
-
-    </div>
-
-</div>
-
-
-
-
-<div class="info-section">
-
-    <!-- LEFT SIDE (WHITE) -->
-    <div class="left-boxx">
-        <h2>Vision & Mission</h2>
+  <!-- ================= VISION + KEY INDUSTRIES ================= -->
+  <section class="a-section a-section--tight">
+    <div class="container info-grid" data-stagger>
+      <article class="info-card info-card--light">
+        <h3><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-target"/></svg></span>Vision &amp; Mission</h3>
         <ul>
-            <li>Daily work purpose</li>
-            <li>High Quality</li>
-            <li>Customer Satisfaction</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Purpose-driven work, every day</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>High Quality</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Customer Satisfaction</li>
         </ul>
-    </div>
+      </article>
 
-    <!-- RIGHT SIDE (COLORED BOX) -->
-    <div class="right-boxx">
-        <h2>Industries We Serve</h2>
+      <article class="info-card info-card--navy">
+        <h3><span class="ic"><svg class="icon" aria-hidden="true"><use href="#i-factory"/></svg></span>Key Industries</h3>
         <ul>
-            <li>Carry Bag Manufacturers</li>
-            <li>Toy Industries</li>
-            <li>Furniture Industries</li>
-            <li>Packaging Companies</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Carry Bag Manufacturers</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Toy Industries</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Furniture Industries</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Packaging Companies</li>
         </ul>
+      </article>
     </div>
-    
+  </section>
+
+  <!-- ================= INDUSTRIES WE SERVE ================= -->
+  <section class="a-section a-industries" id="industries">
+    <div class="container">
+      <header class="sec-head" data-rv>
+        <span class="eyebrow">Applications</span>
+        <h2 class="a-h2">Industries We Serve</h2>
+        <p class="a-text">We are leaders and trusted suppliers of high-quality plastic granules used across multiple industries, ensuring durability, strength, and performance.</p>
+      </header>
+
+      <div class="industry-grid" data-stagger>
+        <div class="ind-card"><div class="ind-img"><img src="{% static 'images/toy.jpeg' %}" alt="Toy Industry" loading="lazy"></div><p>Toy Industry</p></div>
+        <div class="ind-card"><div class="ind-img"><img src="{% static 'images/carry_bag.jpeg' %}" alt="Carry Bag" loading="lazy"></div><p>Carry Bag</p></div>
+        <div class="ind-card"><div class="ind-img"><img src="{% static 'images/mug.jpeg' %}" alt="Mug Manufacturing" loading="lazy"></div><p>Mug Manufacturing</p></div>
+        <div class="ind-card"><div class="ind-img"><img src="{% static 'images/chair.jpeg' %}" alt="Furniture" loading="lazy"></div><p>Furniture</p></div>
+        <div class="ind-card"><div class="ind-img"><img src="{% static 'images/bucket.jpeg' %}" alt="Bucket Industry" loading="lazy"></div><p>Bucket Industry</p></div>
+        <div class="ind-card"><div class="ind-img"><img src="{% static 'images/tub.jpeg' %}" alt="Tub Products" loading="lazy"></div><p>Tub Products</p></div>
+        <div class="ind-card"><div class="ind-img"><img src="{% static 'images/Storage_box.jpeg' %}" alt="Storage Box" loading="lazy"></div><p>Storage Box</p></div>
+        <div class="ind-card"><div class="ind-img"><img src="{% static 'images/basket.jpeg' %}" alt="Basket Industry" loading="lazy"></div><p>Basket Industry</p></div>
+        <div class="ind-card"><div class="ind-img"><img src="{% static 'images/crate.jpeg' %}" alt="Packaging Crate" loading="lazy"></div><p>Packaging Crate</p></div>
+        <div class="ind-card"><div class="ind-img"><img src="{% static 'images/container.jpeg' %}" alt="Chemical Container" loading="lazy"></div><p>Chemical Container</p></div>
+      </div>
+    </div>
+  </section>
+
 </div>
-
-
-
-
-<section class="industries">
-    <h2 class="section-title">Industries We Serve</h2>
-   <p class="section-subtitle">
-    We are leaders and trusted suppliers of high-quality plastic granules 
-    used across multiple industries, ensuring durability, strength, and performance.
-</p>
-
-    <div class="industry-grid">
-
-        <div class="industry-card">
-            <img src="{% static 'images/toy.jpeg' %}">
-            <p>Toy Industry</p>
-        </div>
-
-        <div class="industry-card">
-            <img src="{% static 'images/carry_bag.jpeg' %}">
-            <p>Carry Bag</p>
-        </div>
-
-        <div class="industry-card">
-            <img src="{% static 'images/mug.jpeg' %}">
-            <p>Mug Manufacturing</p>
-        </div>
-
-        <div class="industry-card">
-            <img src="{% static 'images/chair.jpeg' %}">
-            <p>Furniture</p>
-        </div>
-
-        <div class="industry-card">
-            <img src="{% static 'images/bucket.jpeg' %}">
-            <p>Bucket Industry</p>
-        </div>
-
-        <div class="industry-card">
-            <img src="{% static 'images/tub.jpeg' %}">
-            <p>Tub Products</p>
-        </div>
-
-        <div class="industry-card">
-            <img src="{% static 'images/Storage_box.jpeg' %}">
-            <p>Storage Box</p>
-        </div>
-
-        <div class="industry-card">
-            <img src="{% static 'images/basket.jpeg' %}">
-            <p>Basket Industry</p>
-        </div>
-
-        <div class="industry-card">
-            <img src="{% static 'images/crate.jpeg' %}">
-            <p>Packaging Crate</p>
-        </div>
-
-        <div class="industry-card">
-            <img src="{% static 'images/container.jpeg' %}">
-            <p>Chemical Container</p>
-        </div>
-
-    </div>
-</section>
 {% endblock %}
+

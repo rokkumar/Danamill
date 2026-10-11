@@ -1,0 +1,29 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Delete Event{% endblock %}
+{% block page_title %}Confirm Delete{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/events/events.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="events-page">
+    <div class="form-card" style="max-width: 600px; margin: 40px auto;">
+        <h2 style="color:#fca5a5; margin-bottom:16px;">⚠ Delete this event?</h2>
+        <div class="delete-summary">
+            <p><strong>Event:</strong> {{ event.name }}</p>
+            <p><strong>Items:</strong> {{ event.items.count }}</p>
+            <p><strong>Total Expenses:</strong> ₹{{ event.total_expenses }}</p>
+        </div>
+        <form method="POST" class="form-actions" style="margin-top:24px;">
+            {% csrf_token %}
+            <a href="{% url 'events:event_list' %}" class="btn btn-grey">Cancel</a>
+            <button type="submit" class="btn btn-red">Yes, Delete</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

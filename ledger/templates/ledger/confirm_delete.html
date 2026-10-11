@@ -1,0 +1,39 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Delete Entry — {{ client.name }}{% endblock %}
+{% block page_title %}Confirm Delete{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/client_ledger.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="ledger-page">
+    <div class="ledger-form-card" style="max-width: 600px; margin: 40px auto;">
+        <h2 style="color: #fca5a5; margin-bottom: 16px;">⚠ Delete this entry?</h2>
+
+        <div class="delete-summary">
+            <p><strong>Client:</strong> {{ client.name }}</p>
+            <p><strong>Type:</strong> {{ entry.get_entry_type_display }}</p>
+            <p><strong>Date:</strong> {{ entry.date|date:"d-m-Y" }}</p>
+            {% if entry.entry_type == 'SALE' %}
+            <p><strong>Bill No:</strong> {{ entry.bill_no|default:"—" }}</p>
+            <p><strong>Quantity:</strong> {{ entry.quantity }}</p>
+            <p><strong>Amount:</strong> ₹{{ entry.amount }}</p>
+            {% else %}
+            <p><strong>Payment Amount:</strong> ₹{{ entry.payment_amount }}</p>
+            <p><strong>Payment Type:</strong> {{ entry.get_pay_type_display }}</p>
+            {% endif %}
+        </div>
+
+        <form method="POST" class="form-actions" style="margin-top: 24px;">
+            {% csrf_token %}
+            <a href="{% url 'ledger:client_ledger' client.id %}" class="btn btn-grey">Cancel</a>
+            <button type="submit" class="btn btn-red">Yes, Delete</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

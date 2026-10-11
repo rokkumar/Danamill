@@ -1,0 +1,64 @@
+/* base.css — colors, container, icon, dark mode variables (sirf yahin define) */
+:root {
+  --primary: #1e3a8a;
+  --accent: #f4a261;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+  --bg-light: #ffffff;
+  --bg-gray: #f8fafc;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.10);
+  --card: #ffffff;
+  --surface: #f5f7fb;
+  --field: #f8fafc;
+  --navy-1: #0f2a6b;
+  --navy-2: #1e3a8a;
+  --eyebrow: #b45309;
+}
+body.dark-mode {
+  --text-dark: #f1f5f9;
+  --text-light: #94a3b8;
+  --bg-light: #0f172a;
+  --bg-gray: #1e293b;
+  --border: #334155;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.4);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.5);
+  --card: #1e293b;
+  --surface: #0b1324;
+  --field: #0f172a;
+  --eyebrow: var(--accent);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+}
+.container { width: 94%; max-width: 1400px; margin-inline: auto; }
+
+/* SVG icons: size parent/element se control hota hai */
+.icon {
+  width: 1em; height: 1em;
+  display: block; flex-shrink: 0;
+  fill: none; stroke: currentColor;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* ---------- Scroll reveal (sab pages: data-rv / data-stagger, reveal.js lagata hai) ---------- */
+@keyframes aUp    { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes aLeft  { from { opacity: 0; transform: translateX(-36px); } to { opacity: 1; transform: none; } }
+@keyframes aRight { from { opacity: 0; transform: translateX(36px); } to { opacity: 1; transform: none; } }
+
+.a-js [data-rv]:not(.a-in),
+.a-js [data-stagger] > *:not(.a-in) { opacity: 0; }
+
+.a-in { animation: aUp .75s cubic-bezier(.2,.7,.2,1) backwards; animation-delay: var(--d, 0ms); }
+.a-in[data-rv="l"] { animation-name: aLeft; }
+.a-in[data-rv="r"] { animation-name: aRight; }

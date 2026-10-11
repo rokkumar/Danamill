@@ -1,0 +1,130 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Expense — Jai Durga Plastic{% endblock %}
+{% block page_title %}Expense Management{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/finance/expense.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="finance-wrapper">
+
+    <!-- ================= SUMMARY ================= -->
+    <div class="top-cards">
+
+        <div class="summary-card expense-card">
+            <div class="summary-icon">💸</div>
+            <div class="summary-body">
+                <h4>Total Expense (Completed)</h4>
+                <h2>₹ {{ total_expense }}</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= FORM ================= -->
+    <div class="finance-card">
+
+        <div class="card-header">
+            <h3>Add Expense</h3>
+            <span class="card-hint">Record a new expense entry</span>
+        </div>
+
+        <form method="POST" class="finance-form" autocomplete="off">
+            {% csrf_token %}
+
+            <div class="field">
+                <label for="{{ form.title.id_for_label }}">Title</label>
+                {{ form.title }}
+                {% if form.title.errors %}<span class="field-error">{{ form.title.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.category.id_for_label }}">Category</label>
+                {{ form.category }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.amount.id_for_label }}">Amount (₹)</label>
+                {{ form.amount }}
+                {% if form.amount.errors %}<span class="field-error">{{ form.amount.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.date.id_for_label }}">Date</label>
+                {{ form.date }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.status.id_for_label }}">Status</label>
+                {{ form.status }}
+            </div>
+
+            <div class="field full-width">
+                <label for="{{ form.description.id_for_label }}">Description</label>
+                {{ form.description }}
+            </div>
+
+            {% if form.non_field_errors %}
+            <div class="form-error-box full-width">
+                {{ form.non_field_errors.0 }}
+            </div>
+            {% endif %}
+
+            <div class="submit-row full-width">
+                <button type="submit" class="submit-btn">Add Expense</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- ================= TABLE ================= -->
+    <div class="finance-card">
+
+        <div class="card-header">
+            <h3>Recent Expense</h3>
+            <span class="card-hint">{{ expense_data|length }} record{{ expense_data|length|pluralize }}</span>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in expense_data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.category }}</td>
+                        <td class="expense-text">₹ {{ item.amount }}</td>
+                        <td><span class="status status-{{ item.status|lower }}">{{ item.status }}</span></td>
+                        <td>{{ item.date|date:"d M Y" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="6" class="empty">No expense records yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/finance/expense.js' %}"></script>
+{% endblock %}

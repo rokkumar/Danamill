@@ -1,0 +1,207 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Machines — Jai Durga Plastic{% endblock %}
+{% block page_title %}Machine Monitoring{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/machines/machines.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="machines-wrapper">
+
+    <!-- ================= SUMMARY ================= -->
+    <div class="summary-grid">
+
+        <div class="summary-card card-total">
+            <div class="summary-body">
+                <h4>Total Machines</h4>
+                <h2>{{ total_machines }}</h2>
+            </div>
+        </div>
+
+        <div class="summary-card card-running">
+            <div class="summary-body">
+                <h4>Running</h4>
+                <h2>{{ running_count }}</h2>
+            </div>
+        </div>
+
+        <div class="summary-card card-idle">
+            <div class="summary-body">
+                <h4>Idle</h4>
+                <h2>{{ idle_count }}</h2>
+            </div>
+        </div>
+
+        <div class="summary-card card-breakdown">
+            <div class="summary-body">
+                <h4>Breakdown</h4>
+                <h2>{{ breakdown_count }}</h2>
+            </div>
+        </div>
+
+        <div class="summary-card card-efficiency">
+            <div class="summary-body">
+                <h4>Avg Efficiency</h4>
+                <h2>{{ avg_efficiency }}<small>%</small></h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= FORM ================= -->
+    <div class="machines-card">
+
+        <div class="card-header">
+            <h3>Machine Entry</h3>
+            <span class="card-hint">Record a machine's current status</span>
+        </div>
+
+        <form method="POST" class="machines-form" autocomplete="off">
+            {% csrf_token %}
+
+            <div class="field">
+                <label for="{{ form.machine_id.id_for_label }}">Machine ID</label>
+                {{ form.machine_id }}
+                {% if form.machine_id.errors %}<span class="field-error">{{ form.machine_id.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.status.id_for_label }}">Status</label>
+                {{ form.status }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.temperature.id_for_label }}">Temperature</label>
+                {{ form.temperature }}
+                {% if form.temperature.errors %}<span class="field-error">{{ form.temperature.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.temperature_unit.id_for_label }}">Unit</label>
+                {{ form.temperature_unit }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.pressure.id_for_label }}">Pressure</label>
+                {{ form.pressure }}
+                {% if form.pressure.errors %}<span class="field-error">{{ form.pressure.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.rpm.id_for_label }}">RPM</label>
+                {{ form.rpm }}
+                {% if form.rpm.errors %}<span class="field-error">{{ form.rpm.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.maintenance_date.id_for_label }}">Maintenance Date</label>
+                {{ form.maintenance_date }}
+                {% if form.maintenance_date.errors %}<span class="field-error">{{ form.maintenance_date.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field full-width">
+                <label for="{{ form.downtime_reason.id_for_label }}">Downtime Reason</label>
+                {{ form.downtime_reason }}
+            </div>
+
+            {% if form.non_field_errors %}
+            <div class="form-error-box full-width">
+                {{ form.non_field_errors.0 }}
+            </div>
+            {% endif %}
+
+            <div class="submit-row full-width">
+                <button type="submit" class="submit-btn">Save Machine</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- ================= CHARTS ================= -->
+    <div class="chart-grid">
+
+        <div class="chart-card">
+            <h3>Machine Status</h3>
+            <div class="chart-container">
+                <canvas id="statusChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <h3>RPM Analytics</h3>
+            <div class="chart-container">
+                <canvas id="rpmChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= TABLE ================= -->
+    <div class="machines-card">
+
+        <div class="card-header">
+            <h3>Machine Records</h3>
+            <span class="card-hint">{{ total_machines }} total</span>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S. No.</th>
+                        <th>Machine</th>
+                        <th>Status</th>
+                        <th>Temp</th>
+                        <th>Pressure</th>
+                        <th>RPM</th>
+                        <th>Efficiency</th>
+                        <th>Maintenance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in recent_machines %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="machine-id">{{ item.machine_id }}</td>
+                        <td>
+                            {% if item.status == "Running" %}
+                                <span class="status-badge status-running">Running</span>
+                            {% elif item.status == "Idle" %}
+                                <span class="status-badge status-idle">Idle</span>
+                            {% else %}
+                                <span class="status-badge status-breakdown">Breakdown</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ item.temperature }} {{ item.temperature_unit }}</td>
+                        <td>{{ item.pressure }}</td>
+                        <td>{{ item.rpm }}</td>
+                        <td class="efficiency-text">{{ item.efficiency }}%</td>
+                        <td>{{ item.maintenance_date|date:"d M Y" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="8" class="empty">No machine records yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+{{ status_labels|json_script:"status-labels" }}
+{{ status_data|json_script:"status-data" }}
+{{ rpm_labels|json_script:"rpm-labels" }}
+{{ rpm_data|json_script:"rpm-data" }}
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/machines/machines.js' %}"></script>
+{% endblock %}

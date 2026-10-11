@@ -1,0 +1,51 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block content %}
+
+     <!-- Rohit Kumar Authentication Button -->
+
+  <div style="margin-top: 20px;">
+
+    {% if user.is_authenticated %}
+
+        <p style="color: white; margin-bottom: 10px; font-weight: 600;">
+            Welcome {{ user.username }}
+        </p>
+
+        <form action="/logout/" method="post">
+
+            {% csrf_token %}
+
+            <button type="submit"
+            class="btn btn-outline">
+
+                Logout
+
+            </button>
+
+        </form>
+
+    {% else %}
+
+        <a href="/login/">
+
+            <button class="btn btn-primary">
+
+                Login
+
+            </button>
+
+        </a>
+
+    {% endif %}
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}

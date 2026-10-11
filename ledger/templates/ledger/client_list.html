@@ -1,0 +1,91 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Ledger — Jai Durga Plastic{% endblock %}
+{% block page_title %}Client Ledger{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/client_list.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="ledger-list-wrapper">
+
+    <!-- ================= SUMMARY ================= -->
+    <div class="ledger-list-header">
+        <div>
+            <h2>All Clients</h2>
+            <p>Click a client to view their full ledger</p>
+        </div>
+        <div class="ledger-list-summary">
+            <div class="mini-stat">
+                <span>Total Clients</span>
+                <strong>{{ total_clients }}</strong>
+            </div>
+            <div class="mini-stat">
+                <span>Total Outstanding</span>
+                <strong>₹ {{ total_outstanding|floatformat:2 }}</strong>
+            </div>
+            <a href="{% url 'ledger:add_client' %}" class="btn btn-green add-client-btn">
+                + Add Client
+            </a>
+        </div>
+    </div>
+
+    <!-- ================= SEARCH (client-side) ================= -->
+    <div class="ledger-search-bar">
+        <input type="text" id="clientSearch" placeholder="Search by name or phone…" autocomplete="off">
+    </div>
+
+    <!-- ================= CLIENT TABLE ================= -->
+    <div class="ledger-table-wrapper">
+        <table class="ledger-list-table">
+            <thead>
+                <tr>
+                    <th>S. No.</th>
+                    <th>Client Name</th>
+                    <th>Phone</th>
+                    <th>Opening Balance</th>
+                    <th>Outstanding</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="clientTableBody">
+                {% for c in clients %}
+                <tr data-search="{{ c.name|lower }} {{ c.phone|lower }}">
+                    <td>{{ forloop.counter }}</td>
+                    <td class="client-name">{{ c.name }}</td>
+                    <td>{{ c.phone|default:"—" }}</td>
+                    <td>₹ {{ c.opening_balance }}</td>
+                    <td class="outstanding">₹ {{ c.outstanding|floatformat:2 }}</td>
+                    <td>
+                        {% if c.is_active %}
+                        <span class="badge badge-active">Active</span>
+                        {% else %}
+                        <span class="badge badge-inactive">Inactive</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'ledger:client_ledger' c.id %}" class="btn-view">View Ledger</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="empty">
+                        No clients yet. Add clients from the admin panel.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/ledger/client_list.js' %}"></script>
+{% endblock %}

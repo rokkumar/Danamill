@@ -1,0 +1,161 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}{% if is_edit %}Edit Entry{% else %}Add Entry{% endif %} — {{ client.name }}{% endblock %}
+{% block page_title %}{% if is_edit %}Edit Ledger Entry{% else %}Add Ledger Entry{% endif %}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/client_ledger.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="ledger-page">
+
+    <div class="ledger-topbar">
+        <div>
+            <h2>{% if is_edit %}Edit Entry{% else %}Add Entry{% endif %} — {{ client.name }}</h2>
+            <p>{% if is_edit %}Update the details of this entry{% else %}Record a SALE or PAYMENT for this client{% endif %}</p>
+        </div>
+        <div class="ledger-topbar-actions">
+            <a href="{% url 'ledger:client_ledger' client.id %}" class="btn btn-grey">← Back to Ledger</a>
+        </div>
+    </div>
+
+    <div class="ledger-form-card">
+        <form method="POST" autocomplete="off" id="entryForm">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="form-error-box">
+                {{ form.non_field_errors.0 }}
+            </div>
+            {% endif %}
+
+            <!-- ============ ENTRY TYPE ============ -->
+            <div class="form-section">
+                <h3>Entry Type</h3>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="{{ form.entry_type.id_for_label }}">Type *</label>
+                        {{ form.entry_type }}
+                        {% if form.entry_type.errors %}<span class="field-error">{{ form.entry_type.errors.0 }}</span>{% endif %}
+                    </div>
+
+                    <div class="form-field">
+                        <label for="{{ form.date.id_for_label }}">Date *</label>
+                        {{ form.date }}
+                        {% if form.date.errors %}<span class="field-error">{{ form.date.errors.0 }}</span>{% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ SALE SECTION ============ -->
+            <div class="form-section" id="saleSection">
+                <h3>Sale Details</h3>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="{{ form.bill_no.id_for_label }}">Bill No</label>
+                        {{ form.bill_no }}
+                    </div>
+
+                    <div class="form-field">
+                        <label for="{{ form.description.id_for_label }}">Description</label>
+                        {{ form.description }}
+                    </div>
+
+                    <div class="form-field">
+                        <label for="{{ form.quantity.id_for_label }}">Quantity (kg)</label>
+                        {{ form.quantity }}
+                        {% if form.quantity.errors %}<span class="field-error">{{ form.quantity.errors.0 }}</span>{% endif %}
+                    </div>
+
+                    <div class="form-field">
+                        <label for="{{ form.rate.id_for_label }}">Rate (₹ per kg)</label>
+                        {{ form.rate }}
+                        {% if form.rate.errors %}<span class="field-error">{{ form.rate.errors.0 }}</span>{% endif %}
+                    </div>
+
+                    <div class="form-field full-width">
+                        <label>Auto-calculated Amount</label>
+                        <div class="amount-preview" id="amountPreview">₹ 0.00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ PAYMENT SECTION ============ -->
+            <div class="form-section" id="paymentSection">
+                <h3>Payment Details</h3>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="{{ form.payment_date.id_for_label }}">Payment Date</label>
+                        {{ form.payment_date }}
+                    </div>
+
+                    <div class="form-field">
+                        <label for="{{ form.payment_amount.id_for_label }}">Payment Amount (₹)</label>
+                        {{ form.payment_amount }}
+                        {% if form.payment_amount.errors %}<span class="field-error">{{ form.payment_amount.errors.0 }}</span>{% endif %}
+                    </div>
+
+                    <div class="form-field">
+                        <label for="{{ form.pay_type.id_for_label }}">Payment Type</label>
+                        {{ form.pay_type }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a href="{% url 'ledger:client_ledger' client.id %}" class="btn btn-grey">Cancel</a>
+                <button type="submit" class="btn btn-green">
+                    {% if is_edit %}Update Entry{% else %}Save Entry{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+(function () {
+    'use strict';
+
+    var entryType = document.getElementById('id_entry_type');
+    var saleSection = document.getElementById('saleSection');
+    var paymentSection = document.getElementById('paymentSection');
+    var qtyInput = document.getElementById('id_quantity');
+    var rateInput = document.getElementById('id_rate');
+    var amountPreview = document.getElementById('amountPreview');
+
+    function toggleSections() {
+        if (!entryType) return;
+        var val = entryType.value;
+        if (val === 'SALE') {
+            saleSection.style.display = '';
+            paymentSection.style.display = 'none';
+        } else if (val === 'PAYMENT') {
+            saleSection.style.display = 'none';
+            paymentSection.style.display = '';
+        }
+    }
+
+    function updateAmount() {
+        if (!amountPreview) return;
+        var qty = parseFloat(qtyInput.value) || 0;
+        var rate = parseFloat(rateInput.value) || 0;
+        amountPreview.textContent = '₹ ' + (qty * rate).toFixed(2);
+    }
+
+    if (entryType) {
+        entryType.addEventListener('change', toggleSections);
+        toggleSections();
+    }
+    if (qtyInput) qtyInput.addEventListener('input', updateAmount);
+    if (rateInput) rateInput.addEventListener('input', updateAmount);
+
+    // Initial amount calculate (edit mode ke liye)
+    updateAmount();
+})();
+</script>
+
+{% endblock %}

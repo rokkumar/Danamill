@@ -1,0 +1,186 @@
+{% extends 'erp_base.html' %}
+{% load static %}
+
+{% block title %}Quality Control — Jai Durga Plastic{% endblock %}
+{% block page_title %}Quality Control{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/quality/quality.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="quality-wrapper">
+
+    <!-- ================= SUMMARY ================= -->
+    <div class="summary-grid">
+
+        <div class="summary-card card-total">
+            <div class="summary-body">
+                <h4>Total Tests</h4>
+                <h2>{{ total_tests }}</h2>
+            </div>
+        </div>
+
+        <div class="summary-card card-pass">
+            <div class="summary-body">
+                <h4>Pass</h4>
+                <h2>{{ pass_count }}</h2>
+            </div>
+        </div>
+
+        <div class="summary-card card-fail">
+            <div class="summary-body">
+                <h4>Fail</h4>
+                <h2>{{ fail_count }}</h2>
+            </div>
+        </div>
+
+        <div class="summary-card card-percentage">
+            <div class="summary-body">
+                <h4>Pass Rate</h4>
+                <h2>{{ pass_percentage }}<small>%</small></h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= FORM ================= -->
+    <div class="quality-card">
+
+        <div class="card-header">
+            <h3>Quality Entry</h3>
+            <span class="card-hint">Record a new QC test</span>
+        </div>
+
+        <form method="POST" class="quality-form" autocomplete="off">
+            {% csrf_token %}
+
+            <div class="field">
+                <label for="{{ form.batch_id.id_for_label }}">Batch ID</label>
+                {{ form.batch_id }}
+                {% if form.batch_id.errors %}<span class="field-error">{{ form.batch_id.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.mfi.id_for_label }}">MFI</label>
+                {{ form.mfi }}
+                {% if form.mfi.errors %}<span class="field-error">{{ form.mfi.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.density.id_for_label }}">Density (g/cm³)</label>
+                {{ form.density }}
+                {% if form.density.errors %}<span class="field-error">{{ form.density.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.moisture.id_for_label }}">Moisture (%)</label>
+                {{ form.moisture }}
+                {% if form.moisture.errors %}<span class="field-error">{{ form.moisture.errors.0 }}</span>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.qc_result.id_for_label }}">QC Result</label>
+                {{ form.qc_result }}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.test_date.id_for_label }}">Test Date</label>
+                {{ form.test_date }}
+                {% if form.test_date.errors %}<span class="field-error">{{ form.test_date.errors.0 }}</span>{% endif %}
+            </div>
+
+            {% if form.non_field_errors %}
+            <div class="form-error-box full-width">
+                {{ form.non_field_errors.0 }}
+            </div>
+            {% endif %}
+
+            <div class="submit-row full-width">
+                <button type="submit" class="submit-btn">Save QC Record</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- ================= CHARTS ================= -->
+    <div class="chart-grid">
+
+        <div class="chart-card">
+            <h3>QC Result Analytics</h3>
+            <div class="chart-container">
+                <canvas id="qcChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <h3>MFI Trend</h3>
+            <div class="chart-container">
+                <canvas id="mfiChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= TABLE ================= -->
+    <div class="quality-card">
+
+        <div class="card-header">
+            <h3>Quality Records</h3>
+            <span class="card-hint">{{ total_tests }} total</span>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Batch ID</th>
+                        <th>MFI</th>
+                        <th>Density</th>
+                        <th>Moisture</th>
+                        <th>QC Result</th>
+                        <th>Test Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in recent_records %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="batch-id">{{ item.batch_id }}</td>
+                        <td>{{ item.mfi }}</td>
+                        <td>{{ item.density }}</td>
+                        <td>{{ item.moisture }}</td>
+                        <td>
+                            {% if item.qc_result == "Pass" %}
+                                <span class="status-badge status-pass">Pass</span>
+                            {% else %}
+                                <span class="status-badge status-fail">Fail</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ item.test_date|date:"d M Y" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="7" class="empty">No quality records yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+{{ qc_labels|json_script:"qc-labels" }}
+{{ qc_data|json_script:"qc-data" }}
+{{ mfi_labels|json_script:"mfi-labels" }}
+{{ mfi_data|json_script:"mfi-data" }}
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/quality/quality.js' %}"></script>
+{% endblock %}
